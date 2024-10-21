@@ -1,0 +1,19 @@
+version: '3'
+services:
+  server:
+    container_name: skoda_app
+    hostname: skoda_app
+    restart: always
+    env_file:
+      - .env
+      - .env.local
+    build:
+      args:
+        BUILD_ENV: development
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ./:/app:rw
+    ports:
+      - "8081:8081"
+    privileged: true

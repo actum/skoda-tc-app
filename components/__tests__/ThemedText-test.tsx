@@ -1,10 +1,9 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-
-import { ThemedText } from '../ThemedText';
+import {TabBarIcon} from "@/components/navigation/TabBarIcon";
 
 it(`renders correctly`, () => {
-  const tree = renderer.create(<ThemedText>Snapshot test!</ThemedText>).toJSON();
+  const tree = renderer.create(<TabBarIcon name={ 'home'} color={'red'} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
