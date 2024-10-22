@@ -6,10 +6,8 @@
     "jest": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react-native/all",
-    "airbnb",
     "prettier"
   ],
   "parserOptions": {
@@ -19,7 +17,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-native", "prettier"],
+  "plugins": ["react", "react-native", "prettier", "@typescript-eslint"],
   "rules": {
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
