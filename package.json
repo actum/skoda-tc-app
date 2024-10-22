@@ -3,7 +3,7 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "copy-tokens": "cp node_modules/@skodaflow/web-tokens/src/tokens.json _src/tokens/",
+    "copy-tokens": "cp node_modules/@skodaflow/web-tokens/src/tokens.json src/tokens/",
     "transform-tokens": "node _src/scripts/transformTokens.js",
     "build-styles": "npm run copy-tokens && npm run transform-tokens && style-dictionary build --config ./sd.config.js",
     "start": "expo start",
