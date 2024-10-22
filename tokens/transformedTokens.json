@@ -1,0 +1,787 @@
+{
+  "flow-colors": {
+    "brand-primary": {
+      "value": "#419468FF"
+    },
+    "brand-secondary": {
+      "value": "#78faaeFF"
+    },
+    "brand-tertiary": {
+      "value": "#0e3a2fFF"
+    },
+    "brand-quarternary": {
+      "value": "#e8fff1FF"
+    },
+    "brand-hover-primary": {
+      "value": "#59bc87FF"
+    },
+    "brand-hover-secondary": {
+      "value": "#a8ffccFF"
+    },
+    "background-primary": {
+      "value": "#ffffffFF"
+    },
+    "surface-primary": {
+      "value": "#f1f1f1FF"
+    },
+    "surface-secondary": {
+      "value": "#e4e4e4FF"
+    },
+    "surface-tertiary": {
+      "value": "#ffffffFF"
+    },
+    "surface-quarternary": {
+      "value": "#303132FF"
+    },
+    "transparent-primary": {
+      "value": "#1617180F"
+    },
+    "transparent-secondary": {
+      "value": "#1a1b1c1F"
+    },
+    "transparent-tertiary": {
+      "value": "#f3f3f31f"
+    },
+    "transparent-quarternary": {
+      "value": "#f3f3f32e"
+    },
+    "transparent-backdrop": {
+      "value": "#e4e4e4CC"
+    },
+    "on-surface900": {
+      "value": "#161718FF"
+    },
+    "on-surface800": {
+      "value": "#303132FF"
+    },
+    "on-surface700": {
+      "value": "#464748FF"
+    },
+    "on-surface600": {
+      "value": "#5a5b5cFF"
+    },
+    "on-surface500": {
+      "value": "#7c7d7eFF"
+    },
+    "on-surface300": {
+      "value": "#9e9fa0FF"
+    },
+    "on-surface200": {
+      "value": "#c4c6c7FF"
+    },
+    "on-surface100": {
+      "value": "#d8d8d8FF"
+    },
+    "on-surface0": {
+      "value": "#ffffffFF"
+    },
+    "text-primary": {
+      "value": "#161718FF"
+    },
+    "disabled-primary": {
+      "value": "#c4c6c7FF"
+    },
+    "disabled-secondary": {
+      "value": "#d8d8d8FF"
+    },
+    "disabled-tertiary": {
+      "value": "#9e9fa0FF"
+    },
+    "semantic-alert": {
+      "value": "#DC1111FF"
+    },
+    "semantic-warning": {
+      "value": "#DE7C13FF"
+    },
+    "semantic-positive": {
+      "value": "#419468FF"
+    },
+    "semantic-info": {
+      "value": "#0666EDFF"
+    }
+  },
+  "flow-colors-rgba": {
+    "brand-primary": {
+      "value": "rgba(65, 148, 104, 1.00)"
+    },
+    "brand-secondary": {
+      "value": "rgba(120, 250, 174, 1.00)"
+    },
+    "brand-tertiary": {
+      "value": "rgba(14, 58, 47, 1.00)"
+    },
+    "brand-quarternary": {
+      "value": "rgba(232, 255, 241, 1.00)"
+    },
+    "brand-hover-primary": {
+      "value": "rgba(89, 188, 135, 1.00)"
+    },
+    "brand-hover-secondary": {
+      "value": "rgba(168, 255, 204, 1.00)"
+    },
+    "background-primary": {
+      "value": "rgba(255, 255, 255, 1.00)"
+    },
+    "surface-primary": {
+      "value": "rgba(241, 241, 241, 1.00)"
+    },
+    "surface-secondary": {
+      "value": "rgba(228, 228, 228, 1.00)"
+    },
+    "surface-tertiary": {
+      "value": "rgba(255, 255, 255, 1.00)"
+    },
+    "surface-quarternary": {
+      "value": "rgba(48, 49, 50, 1.00)"
+    },
+    "transparent-primary": {
+      "value": "rgba(22, 23, 24, 0.06)"
+    },
+    "transparent-secondary": {
+      "value": "rgba(26, 27, 28, 0.12)"
+    },
+    "transparent-tertiary": {
+      "value": "rgba(243, 243, 243, 0.12)"
+    },
+    "transparent-quarternary": {
+      "value": "rgba(243, 243, 243, 0.18)"
+    },
+    "transparent-backdrop": {
+      "value": "rgba(228, 228, 228, 0.80)"
+    },
+    "on-surface900": {
+      "value": "rgba(22, 23, 24, 1.00)"
+    },
+    "on-surface800": {
+      "value": "rgba(48, 49, 50, 1.00)"
+    },
+    "on-surface700": {
+      "value": "rgba(70, 71, 72, 1.00)"
+    },
+    "on-surface600": {
+      "value": "rgba(90, 91, 92, 1.00)"
+    },
+    "on-surface500": {
+      "value": "rgba(124, 125, 126, 1.00)"
+    },
+    "on-surface300": {
+      "value": "rgba(158, 159, 160, 1.00)"
+    },
+    "on-surface200": {
+      "value": "rgba(196, 198, 199, 1.00)"
+    },
+    "on-surface100": {
+      "value": "rgba(216, 216, 216, 1.00)"
+    },
+    "on-surface0": {
+      "value": "rgba(255, 255, 255, 1.00)"
+    },
+    "text-primary": {
+      "value": "rgba(22, 23, 24, 1.00)"
+    },
+    "disabled-primary": {
+      "value": "rgba(196, 198, 199, 1.00)"
+    },
+    "disabled-secondary": {
+      "value": "rgba(216, 216, 216, 1.00)"
+    },
+    "disabled-tertiary": {
+      "value": "rgba(158, 159, 160, 1.00)"
+    },
+    "semantic-alert": {
+      "value": "rgba(220, 17, 17, 1.00)"
+    },
+    "semantic-warning": {
+      "value": "rgba(222, 124, 19, 1.00)"
+    },
+    "semantic-positive": {
+      "value": "rgba(65, 148, 104, 1.00)"
+    },
+    "semantic-info": {
+      "value": "rgba(6, 102, 237, 1.00)"
+    }
+  },
+  "flow-grid": {
+    "default": {
+      "value": [
+        {
+          "media": "mobile",
+          "breakpoint": "360",
+          "style": {
+            "gutterSize": 12,
+            "alignment": "STRETCH",
+            "count": 4,
+            "offset": 16
+          }
+        },
+        {
+          "media": "tablet",
+          "breakpoint": "720",
+          "style": {
+            "gutterSize": 24,
+            "alignment": "STRETCH",
+            "count": 6,
+            "offset": 48
+          }
+        },
+        {
+          "media": "desktop",
+          "breakpoint": "1080",
+          "style": {
+            "gutterSize": 24,
+            "alignment": "STRETCH",
+            "count": 12,
+            "offset": 96
+          }
+        },
+        {
+          "media": "desktop-xl",
+          "breakpoint": "1440",
+          "style": {
+            "gutterSize": 24,
+            "alignment": "CENTER",
+            "count": 12,
+            "sectionSize": 82
+          }
+        }
+      ]
+    },
+    "narrow": {
+      "value": [
+        {
+          "media": "mobile",
+          "breakpoint": "360",
+          "style": {
+            "gutterSize": 12,
+            "alignment": "STRETCH",
+            "count": 4,
+            "offset": 36
+          }
+        },
+        {
+          "media": "tablet",
+          "breakpoint": "720",
+          "style": {
+            "gutterSize": 12,
+            "alignment": "STRETCH",
+            "count": 6,
+            "offset": 48
+          }
+        },
+        {
+          "media": "desktop",
+          "breakpoint": "1080",
+          "style": {
+            "gutterSize": 12,
+            "alignment": "STRETCH",
+            "count": 12,
+            "offset": 96
+          }
+        },
+        {
+          "media": "desktop-xl",
+          "breakpoint": "1440",
+          "style": {
+            "gutterSize": 12,
+            "alignment": "CENTER",
+            "count": 12,
+            "sectionSize": 93
+          }
+        }
+      ]
+    }
+  },
+  "flow-effects": {
+    "XS": {
+      "value": {
+        "type": "DROP_SHADOW",
+        "color": "rgba(0, 0, 0, 0.15)",
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "radius": 8,
+        "spread": 0
+      }
+    },
+    "S": {
+      "value": {
+        "type": "DROP_SHADOW",
+        "color": "rgba(0, 0, 0, 0.15)",
+        "offset": {
+          "x": 0,
+          "y": 0
+        },
+        "radius": 8,
+        "spread": 0
+      }
+    },
+    "M": {
+      "value": {
+        "type": "DROP_SHADOW",
+        "color": "rgba(0, 0, 0, 0.15)",
+        "offset": {
+          "x": 0,
+          "y": 8
+        },
+        "radius": 32,
+        "spread": 0
+      }
+    },
+    "L": {
+      "value": {
+        "type": "DROP_SHADOW",
+        "color": "rgba(0, 0, 0, 0.15)",
+        "offset": {
+          "x": 0,
+          "y": 8
+        },
+        "radius": 32,
+        "spread": 0
+      }
+    },
+    "XL": {
+      "value": {
+        "type": "DROP_SHADOW",
+        "color": "rgba(0, 0, 0, 0.15)",
+        "offset": {
+          "x": 0,
+          "y": 24
+        },
+        "radius": 64,
+        "spread": 0
+      }
+    }
+  },
+  "flow-typography": {
+    "large-display": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "72px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "72px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "large-h1": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "52px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "44px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "large-h2": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "44px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "36px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "large-h3": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "36px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "30px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "large-h4": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "28px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "24px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "large-subheadline": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "28px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "18px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "large-body": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "28px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "300",
+        "fontSize": "18px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "large-list": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "24px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "300",
+        "fontSize": "16px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "large-disclaimer": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "20px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "300",
+        "fontSize": "14px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "large-caption1": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "24px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "16px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "large-caption2": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "20px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "14px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "medium-display": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "64px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "56px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "medium-h1": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "48px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "38px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "medium-h2": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "38px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "32px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "medium-h3": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "32px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "27px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "medium-h4": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "28px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "23px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "medium-subheadline": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "24px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "16px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "medium-body": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "24px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "300",
+        "fontSize": "16px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "medium-list": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "20px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "300",
+        "fontSize": "14px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "medium-disclaimer": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "16px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "300",
+        "fontSize": "12px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "medium-caption1": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "20px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "14px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "medium-caption2": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "16px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "12px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "small-display": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "56px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "40px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "small-h1": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "40px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "33px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "small-h2": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "36px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "28px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "small-h3": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "28px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "23px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "small-h4": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "24px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "20px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "small-subheadline": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "24px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "16px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "small-body": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "24px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "300",
+        "fontSize": "16px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "small-list": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "20px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "300",
+        "fontSize": "14px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "small-disclaimer": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "16px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "300",
+        "fontSize": "12px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "small-caption1": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "20px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "14px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    },
+    "small-caption2": {
+      "value": {
+        "description": "",
+        "letterSpacing": "0.02em",
+        "lineHeight": "16px",
+        "fontFamily": "SKODA Next",
+        "fontStyle": "normal",
+        "fontWeight": "700",
+        "fontSize": "12px",
+        "textTransform": "none",
+        "textDecoration": "none"
+      }
+    }
+  }
+}
