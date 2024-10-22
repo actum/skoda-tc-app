@@ -14,7 +14,7 @@
     "test": "jest --watchAll",
     "lint": "expo lint",
     "prebuild": "expo prebuild",
-    "lint:fix": "eslint . --ext .js,.jsx --fix",
+    "lint:fix": "eslint . --ext .js,.jsx --fix,.tsx --fix,.ts --fix",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
   },
   "jest": {
