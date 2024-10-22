@@ -1,10 +1,9 @@
 # Welcome to your Škoda - app 👋
 
-
-
 ## Get started
 
 1. HOW TO BUILD AND RUN SERVER
+
    ```bash
    make up
    ```
