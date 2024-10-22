@@ -11,7 +11,7 @@ StyleDictionary.registerTransformGroup({
 });
 
 export default {
-  source: ['tokens/transformedTokens.json'],
+  source: ['_src/tokens/transformedTokens.json'],
   platforms: {
     'react-native': {
       transformGroup: 'custom/react-native',
