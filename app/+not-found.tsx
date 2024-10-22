@@ -1,11 +1,11 @@
-import {Stack} from 'expo-router';
-import {Text} from 'react-native';
+import { Stack } from 'expo-router';
+import { Text } from 'react-native';
 
 export default function NotFoundScreen() {
   return (
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />
-      <Text style={{fontSize: 30}}> NOT FOUND PAGE </Text>
+      <Text style={{ fontSize: 30 }}> NOT FOUND PAGE </Text>
     </>
   );
 }

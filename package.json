@@ -14,8 +14,8 @@
     "test": "jest --watchAll",
     "lint": "expo lint",
     "prebuild": "expo prebuild",
-    "lint:fix": "eslint . --ext .js,.jsx --fix",
-    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
+    "lint:fix": "eslint . --ext .js,.jsx --fix,.tsx --fix,.ts --fix",
+    "format": "prettier --write \"**/*.+(js|jsx|tsx|ts|json|css|md)\""
   },
   "jest": {
     "preset": "jest-expo"
@@ -52,6 +52,7 @@
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.1",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.1",
