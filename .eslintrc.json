@@ -26,7 +26,9 @@
     "react-native/no-inline-styles": 0,
     "react/prop-types": 0,
     "no-unused-vars": ["warn"],
-    "no-console": ["warn", { "allow": ["warn", "error"] }]
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "import/extensions": ["off"],
+    "import/no-unresolved": ["off"]
   },
   "settings": {
     "react": {
