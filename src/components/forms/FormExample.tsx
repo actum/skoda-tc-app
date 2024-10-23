@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import { Input, Value } from '@/src/components/forms/Input';
 import { useForm } from 'react-hook-form';
 import StyledButton from '@/src/components/button/StyledButton';
+import Checkbox from '@/src/components/forms/Checkbox';
 
 interface IFormData extends Value {
   firstName: string;
@@ -28,6 +29,12 @@ export default function FormExample() {
         name={'lastName'}
         control={control}
         rules={{ required: 'Required message' }}
+      />
+      <Checkbox
+        name="agreeToTerms"
+        control={control}
+        label="I agree to the terms and conditions"
+        rules={{ required: 'You must agree before submitting.' }}
       />
       <StyledButton
         title="TEST"

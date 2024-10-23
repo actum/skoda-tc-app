@@ -17,11 +17,14 @@ import {
 } from '@/src/assets/styles';
 import Badge from '@/src/components/badge/Badge';
 import TextParagraph from '@/src/components/text/TextParagraph';
+import Checkbox from '@/src/components/forms/Checkbox';
+import FormExample from '@/src/components/forms/FormExample';
 
 export default function DetailPage() {
   const userCtx = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
+
   console.log('location', location);
   return (
     <BaseContainer>
@@ -37,6 +40,7 @@ export default function DetailPage() {
         <Badge text="Aktualizace" color={flowColorsRgbaSemanticWarning} />
         <Badge text="Dokončeno" color={flowColorsRgbaSemanticPositive} />
         <TextParagraph text="Toto je odstavec s výchozími styly." />
+        <FormExample></FormExample>
         <StyledButton
           title={'HOME'}
           onPress={() => {
