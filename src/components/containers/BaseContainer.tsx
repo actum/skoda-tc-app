@@ -16,11 +16,9 @@ export default function BaseContainer({ children }: { children: ReactNode }) {
 const styles = StyleSheet.create({
   children: {
     height: '100%',
-    paddingTop: 40,
   },
   container: {
     backgroundColor: 'rgba(22, 23, 24, 1)',
-    paddingTop: 20,
     position: 'relative',
   },
   navigation: {
