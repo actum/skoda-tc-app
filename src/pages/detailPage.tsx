@@ -6,18 +6,16 @@ import StyledButton from '@/src/components/button/StyledButton';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { useLocation, useNavigate } from 'react-router-native';
 import {
-  flowColorsBackgroundPrimary,
   flowColorsRgbaSemanticAlert,
   flowColorsRgbaSemanticInfo,
   flowColorsRgbaSemanticPositive,
   flowColorsRgbaSemanticWarning,
-  flowColorsTextPrimary,
+  flowColorsRgbaTextPrimary,
   flowTypographyLargeBody,
   flowTypographyLargeH1,
 } from '@/src/assets/styles';
 import Badge from '@/src/components/badge/Badge';
 import TextParagraph from '@/src/components/text/TextParagraph';
-import Checkbox from '@/src/components/forms/Checkbox';
 import FormExample from '@/src/components/forms/FormExample';
 
 export default function DetailPage() {
@@ -55,12 +53,11 @@ export default function DetailPage() {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: flowColorsBackgroundPrimary,
     flex: 1,
     justifyContent: 'center',
   },
   text: {
-    color: flowColorsTextPrimary,
+    color: flowColorsRgbaTextPrimary,
     fontFamily: flowTypographyLargeBody.fontFamily,
     fontSize: parseFloat(flowTypographyLargeBody.fontSize),
     fontWeight: flowTypographyLargeBody.fontWeight as TextStyle['fontWeight'],
@@ -74,7 +71,7 @@ const styles = StyleSheet.create({
       flowTypographyLargeBody.textTransform as TextStyle['textTransform'],
   },
   title: {
-    color: flowColorsTextPrimary,
+    color: flowColorsRgbaTextPrimary,
     fontFamily: flowTypographyLargeH1.fontFamily,
     fontSize: parseFloat(flowTypographyLargeH1.fontSize),
     fontWeight: flowTypographyLargeH1.fontWeight as TextStyle['fontWeight'],

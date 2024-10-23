@@ -5,6 +5,11 @@ import Router from './router/Router';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
+import {
+    flowColorsRgbaBrandPrimary, flowColorsRgbaSurfaceSecondary,
+    flowColorsRgbaTransparentPrimary,
+    flowColorsRgbaTransparentTertiary
+} from "@/src/assets/styles";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -43,10 +48,10 @@ export default function App() {
       value={{
         dark: true,
         colors: {
-          primary: 'rgb(10, 132, 255)',
-          background: 'rgb(1, 1, 1)',
-          card: 'rgb(18, 18, 18)',
-          text: 'rgb(229, 229, 231)',
+          primary: flowColorsRgbaBrandPrimary,
+          background: flowColorsRgbaTransparentPrimary,
+          card: flowColorsRgbaTransparentTertiary,
+          text: flowColorsRgbaSurfaceSecondary,
           border: 'rgb(39, 39, 41)',
           notification: 'rgb(255, 69, 58)',
         },

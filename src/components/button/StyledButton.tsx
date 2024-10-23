@@ -4,11 +4,10 @@ import {
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
-  View,
 } from 'react-native';
 import {
   flowColorsRgbaBrandSecondary,
-  flowColorsTextPrimary,
+  flowColorsRgbaTextPrimary,
 } from '@/src/assets/styles';
 
 interface IButton extends TouchableOpacityProps {
@@ -66,6 +65,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   textPrimary: {
-    color: flowColorsTextPrimary,
+    color: flowColorsRgbaTextPrimary,
   },
 });

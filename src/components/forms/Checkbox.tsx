@@ -18,8 +18,11 @@ import {
 } from 'react-hook-form';
 import {
   flowColorsRgbaBrandSecondary,
+  flowColorsRgbaDisabledPrimary,
+  flowColorsRgbaDisabledSecondary,
+  flowColorsRgbaDisabledTertiary,
   flowColorsRgbaTextPrimary,
-  flowColorsSemanticAlert,
+  flowColorsRgbaSemanticAlert,
 } from '@/src/assets/styles';
 
 interface CheckboxProps<T extends FieldValues> {
@@ -37,67 +40,88 @@ interface CheckboxProps<T extends FieldValues> {
   size?: number;
   style?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<TextStyle>;
+  checked?: boolean;
   disabled?: boolean;
 }
 
 function Checkbox<T extends FieldValues>({
   name,
   control,
+  disabled = false,
   rules,
   label,
   labelPosition = 'right',
-  color = flowColorsRgbaTextPrimary,
-  borderColor = flowColorsRgbaBrandSecondary,
-  backgroundColor = flowColorsRgbaBrandSecondary,
   size = 20,
   style = {},
   labelStyle = {},
-  disabled = false,
 }: CheckboxProps<T>) {
-  const {
-    field: { value, onChange },
-    fieldState: { error },
-  } = useController({
-    control,
-    name,
-    rules,
-  });
+    const {
+        field: { value, onChange },
+        fieldState: { error },
+    } = useController({
+        control,
+        name,
+        rules,
+    });
 
-  const handlePress = () => {
-    if (!disabled) {
-      onChange(!value);
-    }
-  };
+    // Dynamické styly na základě stavu
+    const isChecked = !!value;
 
-  return (
-    <TouchableOpacity
-      style={[styles.container, style]}
-      onPress={handlePress}
-      activeOpacity={0.8}
-      disabled={disabled}
-    >
-      {label && labelPosition === 'left' && (
-        <Text style={[styles.label, labelStyle]}>{label}</Text>
-      )}
-      <View
-        style={[
-          styles.checkbox,
-          {
-            width: size,
-            height: size,
-            borderColor: borderColor,
-            backgroundColor: backgroundColor,
-          },
-        ]}
-      >
-        {value && <View style={[styles.checkmark, { borderColor: color }]} />}
-      </View>
-      {label && labelPosition === 'right' && (
-        <Text style={[styles.label, labelStyle]}>{label}</Text>
-      )}
-      {error && <Text style={styles.errorText}>{error.message}</Text>}
-    </TouchableOpacity>
-  );
+    const color = disabled ? flowColorsRgbaDisabledPrimary : flowColorsRgbaTextPrimary;
+
+    const checkboxColor = disabled
+        ? flowColorsRgbaDisabledPrimary
+        : flowColorsRgbaTextPrimary;
+
+    const borderColor = disabled
+        ? flowColorsRgbaDisabledTertiary
+        : isChecked
+            ? flowColorsRgbaBrandSecondary
+            : flowColorsRgbaDisabledPrimary;
+
+    const backgroundColor = disabled
+        ? flowColorsRgbaDisabledSecondary
+        : isChecked
+            ? flowColorsRgbaBrandSecondary
+            : 'transparent';
+
+    const handlePress = () => {
+        if (!disabled) {
+            onChange(!value);
+        }
+    };
+
+    return (
+        <TouchableOpacity
+            style={[styles.container, style]}
+            onPress={handlePress}
+            activeOpacity={0.8}
+            disabled={disabled}
+        >
+            {label && labelPosition === 'left' && (
+                <Text style={[styles.label, labelStyle]}>{label}</Text>
+            )}
+            <View
+                style={[
+                    styles.checkbox,
+                    {
+                        width: size,
+                        height: size,
+                        borderColor: borderColor,
+                        backgroundColor: backgroundColor,
+                    },
+                ]}
+            >
+                {isChecked && (
+                    <View style={[styles.checkmark, { borderColor: checkboxColor }]} />
+                )}
+            </View>
+            {label && labelPosition === 'right' && (
+                <Text style={[styles.label, labelStyle]}>{label}</Text>
+            )}
+            {error && <Text style={styles.errorText}>{error.message}</Text>}
+        </TouchableOpacity>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -126,7 +150,7 @@ const styles = StyleSheet.create({
     fontFamily: 'SKODANext-Light',
   },
   errorText: {
-    color: flowColorsSemanticAlert,
+    color: flowColorsRgbaSemanticAlert,
     fontFamily: 'SKODANext-Light',
     marginTop: 5,
   },

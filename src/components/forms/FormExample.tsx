@@ -7,13 +7,14 @@ import Checkbox from '@/src/components/forms/Checkbox';
 interface IFormData extends Value {
   firstName: string;
   lastName: string;
+    agreeToTerms: boolean;
 }
 
 export default function FormExample() {
   const { control, handleSubmit } = useForm<IFormData>();
 
   function onSubmit(data: IFormData) {
-    alert(`firstName: ${data.firstName}, lastName: ${data.lastName}`);
+    alert(`firstName: ${data.firstName}, lastName: ${data.lastName}, checkbox: ${data.agreeToTerms}`);
   }
 
   return (
@@ -34,7 +35,8 @@ export default function FormExample() {
         name="agreeToTerms"
         control={control}
         label="I agree to the terms and conditions"
-        rules={{ required: 'You must agree before submitting.' }}
+        rules={{  }}
+        checked={true}
       />
       <StyledButton
         title="TEST"

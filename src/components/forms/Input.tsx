@@ -5,7 +5,7 @@ import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import {
   flowColorsRgbaSurfaceSecondary,
-  flowColorsSemanticAlert,
+  flowColorsRgbaSemanticAlert,
 } from '@/src/assets/styles';
 import { TextInputProps } from 'react-native/Libraries/Components/TextInput/TextInput';
 
@@ -51,7 +51,7 @@ export function Input<T extends Value>(props: Props<T>) {
 
 const styles = StyleSheet.create({
   errorText: {
-    color: flowColorsSemanticAlert,
+    color: flowColorsRgbaSemanticAlert,
     fontFamily: 'SKODANext-Light',
     marginTop: 5,
   },

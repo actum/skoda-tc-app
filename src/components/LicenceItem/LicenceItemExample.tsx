@@ -1,8 +1,4 @@
 import { StyleSheet, View } from 'react-native';
-import {
-  flowColorsRgbaBrandSecondary,
-  flowColorsTextPrimary,
-} from '@/src/assets/styles';
 
 export default function LicenceItemExample() {
   return (
