@@ -6,7 +6,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import {
   flowColorsRgbaSurfaceSecondary,
   flowColorsSemanticAlert,
-} from '@/_src/assets/styles';
+} from '@/src/assets/styles';
 import { TextInputProps } from 'react-native/Libraries/Components/TextInput/TextInput';
 
 export type Value = Record<string, unknown>;
