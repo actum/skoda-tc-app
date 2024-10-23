@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
+import Icon, { IconType } from '@/src/components/icon';
 
 interface MNavigationButtonProps {
-  icon: string;
+  icon: IconType;
   title: string;
   onPress?: () => void;
   isActive?: boolean; // Pro zvýraznění aktivní položky
@@ -17,13 +17,7 @@ export default function NavigationButton({
 }: MNavigationButtonProps) {
   return (
     <TouchableOpacity onPress={onPress} style={styles.menuItem}>
-      <MaterialIcons
-        /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-        // @ts-expect-error
-        name={icon}
-        size={32}
-        color={isActive ? '#7FFFB0' : '#fff'} // Zelená barva pro aktivní položku
-      />
+      <Icon type={icon} size={32} color={isActive ? '#7FFFB0' : '#fff'} />
       <Text style={[styles.menuText, isActive && styles.activeText]}>
         {title}
       </Text>
