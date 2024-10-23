@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 
-const inputPath = '_src/tokens/tokens.json';
-const outputPath = '_src/tokens/transformedTokens.json';
+const inputPath = 'src/tokens/tokens.json';
+const outputPath = 'src/tokens/transformedTokens.json';
 
 // Načtení původních tokenů
 const rawTokens = JSON.parse(fs.readFileSync(inputPath, 'utf8'));

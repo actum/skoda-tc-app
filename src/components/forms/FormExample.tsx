@@ -1,7 +1,7 @@
 import { View } from 'react-native';
-import { Input, Value } from '@/_src/components/forms/Input';
-import Button from '@/_src/components/button/Button';
+import { Input, Value } from '@/src/components/forms/Input';
 import { useForm } from 'react-hook-form';
+import StyledButton from '@/src/components/button/StyledButton';
 
 interface IFormData extends Value {
   firstName: string;
@@ -29,7 +29,7 @@ export default function FormExample() {
         control={control}
         rules={{ required: 'Required message' }}
       />
-      <Button
+      <StyledButton
         title="TEST"
         onPress={(e) => {
           handleSubmit(onSubmit)(e);

@@ -1,5 +1,10 @@
 import { Image, StyleSheet, Text, TextStyle, View } from 'react-native';
-import Badge from '../../components/badge';
+import { useContext } from 'react';
+import { UserContext } from '@/src/providers/UserContext';
+import BaseContainer from '@/src/components/containers/BaseContainer';
+import StyledButton from '@/src/components/button/StyledButton';
+import { RouteKey } from '@/src/components/navigation/Navigation';
+import { useLocation, useNavigate } from 'react-router-native';
 import {
   flowColorsBackgroundPrimary,
   flowColorsRgbaSemanticAlert,
@@ -9,23 +14,37 @@ import {
   flowColorsTextPrimary,
   flowTypographyLargeBody,
   flowTypographyLargeH1,
-} from '@/src/app/styles';
+} from '@/src/assets/styles';
+import Badge from '@/src/components/badge/Badge';
+import TextParagraph from '@/src/components/text/TextParagraph';
 
-export default function TabTwoScreen() {
+export default function DetailPage() {
+  const userCtx = useContext(UserContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log('location', location);
   return (
-    <View style={styles.container}>
-      <Image src="@skodaflow/web-tokens/src/assets/logo/horizontalWider.svg" />
-      <Text
-        style={[styles.text, { fontSize: 30, fontFamily: 'SKODANext-Light' }]}
-      >
-        {' '}
-        List of products{' '}
-      </Text>
-      <Badge text="Nový" color={flowColorsRgbaSemanticInfo} />
-      <Badge text="Chyba" color={flowColorsRgbaSemanticAlert} />
-      <Badge text="Aktualizace" color={flowColorsRgbaSemanticWarning} />
-      <Badge text="Dokončeno" color={flowColorsRgbaSemanticPositive} />
-    </View>
+    <BaseContainer>
+      <View style={styles.container}>
+        <Text style={{ fontSize: 30 }}> DETAIL</Text>
+        <Text style={{ fontSize: 20, padding: 20 }}>
+          {' '}
+          USER: {userCtx.userData?.firstName} {userCtx.userData?.lastName}
+        </Text>
+        <Image src="@skodaflow/web-tokens/src/assets/logo/horizontalWider.svg" />
+        <Badge text="Nový" color={flowColorsRgbaSemanticInfo} />
+        <Badge text="Chyba" color={flowColorsRgbaSemanticAlert} />
+        <Badge text="Aktualizace" color={flowColorsRgbaSemanticWarning} />
+        <Badge text="Dokončeno" color={flowColorsRgbaSemanticPositive} />
+        <TextParagraph text="Toto je odstavec s výchozími styly." />
+        <StyledButton
+          title={'HOME'}
+          onPress={() => {
+            navigate(RouteKey.home);
+          }}
+        />
+      </View>
+    </BaseContainer>
   );
 }
 

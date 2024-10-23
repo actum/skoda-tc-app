@@ -12,7 +12,7 @@ import {
   flowColorsRgbaSemanticInfo,
   flowColorsRgbaSurfacePrimary,
   flowTypographyMediumBody,
-} from '@/src/app/styles';
+} from '@/src/assets/styles';
 
 interface BadgeProps {
   text: string;
@@ -40,9 +40,9 @@ const Badge: React.FC<BadgeProps> = ({
 
 const styles = StyleSheet.create({
   badge: {
-    borderRadius: 12,
     paddingHorizontal: 8,
     paddingVertical: 4,
+    borderRadius: 12,
     // `backgroundColor` je nastaven přes props
   },
   badgeText: {
