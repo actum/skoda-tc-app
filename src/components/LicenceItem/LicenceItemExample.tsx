@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   categoryText: {
     color: '#fff',
     fontFamily: 'SKODA Next',
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     paddingHorizontal: 10,
   },

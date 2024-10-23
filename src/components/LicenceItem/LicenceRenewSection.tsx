@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   icon: {
-    paddingTop: 10,
+    paddingTop: 5,
   },
   iconWrapped: {
     backgroundColor: 'rgba(253, 88, 88, 1)',
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   title: {
     color: '#fff',
     fontFamily: 'SKODA Next',
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 18,
+    // fontWeight: 'bold',
   },
 });
