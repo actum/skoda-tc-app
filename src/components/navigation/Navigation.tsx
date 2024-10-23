@@ -11,19 +11,19 @@ export function Navigation() {
   return (
     <View style={styles.root}>
       <View style={styles.item}>
-        <NavigationButton title={'Car'} icon={'directions-car'} />
+        <NavigationButton title={'Car'} icon={'car'} />
       </View>
       <View style={styles.item}>
-        <NavigationButton title={'Maps'} icon={'place'} />
+        <NavigationButton title={'Maps'} icon={'map'} />
       </View>
       <View style={styles.item}>
-        <NavigationButton title={'Tour'} icon={'camera-alt'} />
+        <NavigationButton title={'Tour'} icon={'tour'} />
       </View>
       <View style={styles.item}>
-        <NavigationButton title={'Discover'} icon={'explore'} />
+        <NavigationButton title={'Discover'} icon={'discover'} />
       </View>
       <View style={styles.item}>
-        <NavigationButton title={'Profile'} icon={'person'} isActive />
+        <NavigationButton title={'Profile'} icon={'profile'} isActive />
       </View>
     </View>
   );

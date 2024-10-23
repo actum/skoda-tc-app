@@ -19,6 +19,7 @@
   },
   "plugins": ["react", "react-native", "prettier", "@typescript-eslint"],
   "rules": {
+    "react-native/no-color-literals": ["off"],
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react-native/no-inline-styles": 0,
