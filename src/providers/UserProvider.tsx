@@ -3,7 +3,7 @@ import { IUserContext, localStorageUserKey, UserContext } from './UserContext';
 import { User } from '../connections/request/Data';
 import { asyncFetch } from '@/src/connections/fetch/asyncFetch';
 import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
-import SyncStorage from 'sync-storage';
+// import SyncStorage from 'sync-storage';
 import { USER_TOKEN } from '@env';
 
 export const UserProvider = ({ children }: { children: JSX.Element }) => {
@@ -20,18 +20,18 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
   };
 
   useEffect(() => {
-    storeData(initialData);
+    // storeData(initialData);
     loadUserData();
   }, []);
 
-  async function storeData(value: IUserContext) {
-    try {
-      await SyncStorage.set(localStorageUserKey, JSON.stringify(value));
-    } catch (e) {
-      console.error(e.message);
-      // saving error
-    }
-  }
+  // async function storeData(value: IUserContext) {
+  //   try {
+  //     await SyncStorage.set(localStorageUserKey, JSON.stringify(value));
+  //   } catch (e) {
+  //     console.error(e.message);
+  //     // saving error
+  //   }
+  // }
 
   async function loadUserData() {
     try {
@@ -42,7 +42,7 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
         ...ctx,
         userData: user,
       };
-      storeData(newState);
+      // storeData(newState);
       setCtx(newState);
     } catch (e) {
       const error = e as HttpApiCallError;

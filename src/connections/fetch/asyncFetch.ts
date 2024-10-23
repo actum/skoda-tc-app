@@ -1,5 +1,5 @@
 import HttpApiCallError from './HttpApiCallError';
-import SyncStorage from 'sync-storage';
+// import SyncStorage from 'sync-storage';
 import { localStorageUserKey } from '@/src/providers/UserContext';
 import { API_URL } from '@env';
 
@@ -62,7 +62,7 @@ export async function asyncFetch<T>(
 }
 
 function getBaseRequestConfig(overrideConfig: RequestInit): RequestInit {
-  let config: RequestInit = {
+  const config: RequestInit = {
     method: 'GET',
     mode: 'cors',
     headers: {
@@ -70,19 +70,19 @@ function getBaseRequestConfig(overrideConfig: RequestInit): RequestInit {
     },
     ...overrideConfig,
   };
-  const data = SyncStorage.get(localStorageUserKey);
-  console.log('data', data);
-  if (data) {
-    const parsedData = JSON.parse(data);
-
-    config = {
-      ...config,
-      headers: {
-        ...config.headers,
-        Authorization: `Bearer ${String(parsedData.token)}`,
-      },
-    };
-  }
+  // const data = SyncStorage.get(localStorageUserKey);
+  // console.log('data', data);
+  // if (data) {
+  //   const parsedData = JSON.parse(data);
+  //
+  //   config = {
+  //     ...config,
+  //     headers: {
+  //       ...config.headers,
+  //       Authorization: `Bearer ${String(parsedData.token)}`,
+  //     },
+  //   };
+  // }
 
   console.log('REQ.CONFIG', config);
 

@@ -15,7 +15,7 @@ import {
   flowColorsTextPrimary,
   flowTypographyLargeBody,
   flowTypographyLargeH1,
-} from '@/src/app/styles';
+} from '@/src/assets/styles';
 
 export default function DetailPage() {
   const userCtx = useContext(UserContext);

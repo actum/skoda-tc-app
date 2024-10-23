@@ -12,7 +12,7 @@ import {
   flowColorsRgbaSemanticInfo,
   flowColorsRgbaSurfacePrimary,
   flowTypographyMediumBody,
-} from '@/src/app/styles';
+} from '@/src/assets/styles';
 
 interface BadgeProps {
   text: string;
