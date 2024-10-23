@@ -17,12 +17,13 @@ import {
   FieldPath,
 } from 'react-hook-form';
 import {
-    flowColorsRgbaBrandSecondary,
-    flowColorsRgbaDisabledPrimary,
-    flowColorsRgbaDisabledSecondary,
-    flowColorsRgbaDisabledTertiary,
-    flowColorsRgbaTextPrimary,
-    flowColorsRgbaSemanticAlert, flowColorsRgbaOnSurface0,
+  flowColorsRgbaBrandSecondary,
+  flowColorsRgbaDisabledPrimary,
+  flowColorsRgbaDisabledSecondary,
+  flowColorsRgbaDisabledTertiary,
+  flowColorsRgbaTextPrimary,
+  flowColorsRgbaSemanticAlert,
+  flowColorsRgbaOnSurface0,
 } from '@/src/assets/styles';
 
 interface CheckboxProps<T extends FieldValues> {
@@ -147,8 +148,8 @@ const styles = StyleSheet.create({
   label: {
     marginHorizontal: 8,
     fontSize: 16,
-      color: flowColorsRgbaOnSurface0,
-      fontFamily: 'SKODANext-Light',
+    color: flowColorsRgbaOnSurface0,
+    fontFamily: 'SKODANext-Light',
   },
   errorText: {
     color: flowColorsRgbaSemanticAlert,

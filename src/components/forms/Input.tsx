@@ -4,8 +4,9 @@ import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import {
-    flowColorsRgbaSurfaceSecondary,
-    flowColorsRgbaSemanticAlert, flowColorsRgbaOnSurface0,
+  flowColorsRgbaSurfaceSecondary,
+  flowColorsRgbaSemanticAlert,
+  flowColorsRgbaOnSurface0,
 } from '@/src/assets/styles';
 import { TextInputProps } from 'react-native/Libraries/Components/TextInput/TextInput';
 
@@ -56,8 +57,8 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   label: {
-      color: flowColorsRgbaOnSurface0,
-      fontFamily: 'SKODANext-Light',
+    color: flowColorsRgbaOnSurface0,
+    fontFamily: 'SKODANext-Light',
   },
   root: {
     alignItems: 'center',

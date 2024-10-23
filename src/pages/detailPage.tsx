@@ -6,14 +6,14 @@ import StyledButton from '@/src/components/button/StyledButton';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { useLocation, useNavigate } from 'react-router-native';
 import {
-    flowColorsRgbaOnSurface0,
-    flowColorsRgbaSemanticAlert,
-    flowColorsRgbaSemanticInfo,
-    flowColorsRgbaSemanticPositive,
-    flowColorsRgbaSemanticWarning,
-    flowColorsRgbaTextPrimary,
-    flowTypographyLargeBody,
-    flowTypographyLargeH1,
+  flowColorsRgbaOnSurface0,
+  flowColorsRgbaSemanticAlert,
+  flowColorsRgbaSemanticInfo,
+  flowColorsRgbaSemanticPositive,
+  flowColorsRgbaSemanticWarning,
+  flowColorsRgbaTextPrimary,
+  flowTypographyLargeBody,
+  flowTypographyLargeH1,
 } from '@/src/assets/styles';
 import Badge from '@/src/components/badge/Badge';
 import TextParagraph from '@/src/components/text/TextParagraph';
@@ -29,9 +29,20 @@ export default function DetailPage() {
   console.log('location', location);
   return (
     <BaseContainer>
+      <View style={styles.headerContainer}>
+        <CustomImage
+          source={require('../assets/images/products/1.png')}
+          placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
+          errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
+          style={styles.imageFullWidth}
+          loadingIndicatorColor="#ff0000"
+          onLoad={() => console.log('Obrázek načten!')}
+          onError={() => console.log('Chyba při načítání obrázku!')}
+        />
+      </View>
       <View style={styles.container}>
         <Text style={[styles.title, { fontSize: 30 }]}> DETAIL</Text>
-        <Text style={[styles.text,{ fontSize: 20, padding: 20 }]}>
+        <Text style={[styles.text, { fontSize: 20, padding: 20 }]}>
           {' '}
           USER: {userCtx.userData?.firstName} {userCtx.userData?.lastName}
         </Text>
@@ -42,15 +53,6 @@ export default function DetailPage() {
         <Badge text="Dokončeno" color={flowColorsRgbaSemanticPositive} />
         <TextParagraph text="Toto je odstavec s výchozími styly." />
         <FormExample></FormExample>
-        <CustomImage
-          source={require('../assets/images/products/1.png')}
-          placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
-          errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
-          style={styles.imageFullWidth}
-          loadingIndicatorColor="#ff0000"
-          onLoad={() => console.log('Obrázek načten!')}
-          onError={() => console.log('Chyba při načítání obrázku!')}
-        />
         <Card
           title="Rastrový Obrázek"
           subtitle="Podtitulek karty"
@@ -77,6 +79,11 @@ export default function DetailPage() {
 }
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
   container: {
     alignItems: 'center',
     flex: 1,
