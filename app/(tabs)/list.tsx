@@ -13,6 +13,7 @@ import TextParagraph from '@/_src/components/TextParagraph';
 import Badge from '@/_src/components/Badge';
 import Checkbox from '@/_src/components/Checkbox';
 import { useState } from 'react';
+import Icon from "@/_src/components/Icon";
 
 export default function TabTwoScreen() {
   const [isChecked, setIsChecked] = useState(false);
@@ -36,6 +37,7 @@ export default function TabTwoScreen() {
         onChange={setIsChecked}
         label="Přijímat novinky emailem"
       />
+        <Icon name="car" size={24} color="#000" />
     </View>
   );
 }
