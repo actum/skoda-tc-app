@@ -1,4 +1,4 @@
-FROM node:19.7.0-alpine3.17
+FROM node:20.9.0-alpine3.18
 
 ARG BUILD_ENV
 ENV BUILD_ENV=$BUILD_ENV

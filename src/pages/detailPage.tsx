@@ -5,7 +5,6 @@ import BaseContainer from '@/src/components/containers/BaseContainer';
 import StyledButton from '@/src/components/button/StyledButton';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { useLocation, useNavigate } from 'react-router-native';
-import Badge from '@/src/components/badge';
 import {
   flowColorsBackgroundPrimary,
   flowColorsRgbaSemanticAlert,
@@ -16,6 +15,8 @@ import {
   flowTypographyLargeBody,
   flowTypographyLargeH1,
 } from '@/src/assets/styles';
+import Badge from '@/src/components/badge/Badge';
+import TextParagraph from '@/src/components/text/TextParagraph';
 
 export default function DetailPage() {
   const userCtx = useContext(UserContext);
@@ -35,6 +36,7 @@ export default function DetailPage() {
         <Badge text="Chyba" color={flowColorsRgbaSemanticAlert} />
         <Badge text="Aktualizace" color={flowColorsRgbaSemanticWarning} />
         <Badge text="Dokončeno" color={flowColorsRgbaSemanticPositive} />
+        <TextParagraph text="Toto je odstavec s výchozími styly." />
         <StyledButton
           title={'HOME'}
           onPress={() => {
