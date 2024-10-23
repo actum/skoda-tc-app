@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
     paddingHorizontal: 30,
-    paddingVertical: 12,
+    paddingVertical: 14,
   },
   secondary: {
     alignItems: 'center',
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     paddingHorizontal: 30,
-    paddingVertical: 12,
+    paddingVertical: 14,
   },
   text: {
     color: '#fff',

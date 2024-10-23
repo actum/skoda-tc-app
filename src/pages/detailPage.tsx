@@ -1,4 +1,11 @@
-import { Image, StyleSheet, Text, TextStyle, View } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+} from 'react-native';
 import { useContext } from 'react';
 import { UserContext } from '@/src/providers/UserContext';
 import BaseContainer from '@/src/components/containers/BaseContainer';
@@ -6,14 +13,14 @@ import StyledButton from '@/src/components/button/StyledButton';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { useLocation, useNavigate } from 'react-router-native';
 import {
-    flowColorsRgbaOnSurface0,
-    flowColorsRgbaSemanticAlert,
-    flowColorsRgbaSemanticInfo,
-    flowColorsRgbaSemanticPositive,
-    flowColorsRgbaSemanticWarning,
-    flowColorsRgbaTextPrimary,
-    flowTypographyLargeBody,
-    flowTypographyLargeH1,
+  flowColorsRgbaOnSurface0,
+  flowColorsRgbaSemanticAlert,
+  flowColorsRgbaSemanticInfo,
+  flowColorsRgbaSemanticPositive,
+  flowColorsRgbaSemanticWarning,
+  flowColorsRgbaTextPrimary,
+  flowTypographyLargeBody,
+  flowTypographyLargeH1,
 } from '@/src/assets/styles';
 import Badge from '@/src/components/badge/Badge';
 import TextParagraph from '@/src/components/text/TextParagraph';
@@ -29,82 +36,83 @@ export default function DetailPage() {
   console.log('location', location);
   return (
     <BaseContainer>
-      <View style={styles.container}>
-        <Text style={[styles.title, { fontSize: 30 }]}> DETAIL</Text>
-        <Text style={[styles.text,{ fontSize: 20, padding: 20 }]}>
-          {' '}
-          USER: {userCtx.userData?.firstname} {userCtx.userData?.lastname}
-        </Text>
-        <Image src="@skodaflow/web-tokens/src/assets/logo/horizontalWider.svg" />
-        <Badge text="Nový" color={flowColorsRgbaSemanticInfo} />
-        <Badge text="Chyba" color={flowColorsRgbaSemanticAlert} />
-        <Badge text="Aktualizace" color={flowColorsRgbaSemanticWarning} />
-        <Badge text="Dokončeno" color={flowColorsRgbaSemanticPositive} />
-        <TextParagraph text="Toto je odstavec s výchozími styly." />
-        <FormExample></FormExample>
-        <CustomImage
-          source={require('../assets/images/products/1.png')}
-          placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
-          errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
-          style={styles.imageFullWidth}
-          loadingIndicatorColor="#ff0000"
-          onLoad={() => console.log('Obrázek načten!')}
-          onError={() => console.log('Chyba při načítání obrázku!')}
-        />
-        <Card
-          title="Rastrový Obrázek"
-          subtitle="Podtitulek karty"
-          description="Toto je popis karty s rastrovým obrázkem."
-          image={require('../assets/images/placeholder.webp')} // Rastrový obrázek
-          actions={
-            <StyledButton
-              title="Akce"
-              onPress={() => console.log('Akce stisknuta!')}
-            />
-          }
-          onPress={() => console.log('Karta stisknuta!')}
-          style={styles.card}
-        />
-        <StyledButton
-          title={'HOME'}
-          onPress={() => {
-            navigate(RouteKey.home);
-          }}
-        />
-      </View>
+      <ScrollView
+        style={{
+          marginBottom: 80,
+        }}
+      >
+        <View style={styles.container}>
+          <Text style={[styles.title, { fontSize: 30 }]}> DETAIL</Text>
+          <Text style={[styles.text, { fontSize: 20, padding: 20 }]}>
+            {' '}
+            USER: {userCtx.userData?.firstname} {userCtx.userData?.lastname}
+          </Text>
+          <Image src="@skodaflow/web-tokens/src/assets/logo/horizontalWider.svg" />
+          <Badge text="Nový" color={flowColorsRgbaSemanticInfo} />
+          <Badge text="Chyba" color={flowColorsRgbaSemanticAlert} />
+          <Badge text="Aktualizace" color={flowColorsRgbaSemanticWarning} />
+          <Badge text="Dokončeno" color={flowColorsRgbaSemanticPositive} />
+          <TextParagraph text="Toto je odstavec s výchozími styly." />
+          <FormExample></FormExample>
+          <CustomImage
+            source={require('../assets/images/products/1.png')}
+            placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
+            errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
+            style={styles.imageFullWidth}
+            loadingIndicatorColor="#ff0000"
+            onLoad={() => console.log('Obrázek načten!')}
+            onError={() => console.log('Chyba při načítání obrázku!')}
+          />
+          <Card
+            title="Rastrový Obrázek"
+            subtitle="Podtitulek karty"
+            description="Toto je popis karty s rastrovým obrázkem."
+            image={require('../assets/images/placeholder.webp')} // Rastrový obrázek
+            actions={
+              <StyledButton
+                title="Akce"
+                onPress={() => console.log('Akce stisknuta!')}
+              />
+            }
+            onPress={() => console.log('Karta stisknuta!')}
+            style={styles.card}
+          />
+          <StyledButton
+            title={'HOME'}
+            onPress={() => {
+              navigate(RouteKey.home);
+            }}
+          />
+        </View>
+      </ScrollView>
     </BaseContainer>
   );
 }
 
 const styles = StyleSheet.create({
+  card: {
+    marginBottom: 20,
+  },
+  cardFullWidth: {
+    marginBottom: 20,
+    width: '100%',
+  },
   container: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
   },
   header: {
+    color: flowColorsRgbaTextPrimary,
     fontSize: 30,
     fontWeight: 'bold',
-    color: flowColorsRgbaTextPrimary,
     marginBottom: 10,
   },
-  userInfo: {
-    fontSize: 20,
-    padding: 20,
-    color: flowColorsRgbaTextPrimary,
-  },
-  card: {
-    marginBottom: 20,
-  },
-  cardFullWidth: {
-    width: '100%',
-    marginBottom: 20,
-  },
   image: {
-    width: 200,
+    borderRadius: 10,
     height: 200,
     marginBottom: 20,
-    borderRadius: 10,
+    width: 200,
   },
   imageFullWidth: {
     width: '100%', // Nastavení šířky na 100%
@@ -139,5 +147,10 @@ const styles = StyleSheet.create({
       flowTypographyLargeH1.textDecoration as TextStyle['textDecorationLine'],
     textTransform:
       flowTypographyLargeH1.textTransform as TextStyle['textTransform'],
+  },
+  userInfo: {
+    color: flowColorsRgbaTextPrimary,
+    fontSize: 20,
+    padding: 20,
   },
 });

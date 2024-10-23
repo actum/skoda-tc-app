@@ -4,6 +4,7 @@ import NavigationButton from '@/src/components/navigation/NavigationButton';
 
 export const RouteKey = {
   home: '/',
+  renew: '/renew',
   detail: '/detail/:id',
 };
 
