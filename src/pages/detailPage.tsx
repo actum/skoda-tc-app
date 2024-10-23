@@ -30,7 +30,7 @@ export default function DetailPage() {
         <Text style={{ fontSize: 30 }}> DETAIL</Text>
         <Text style={{ fontSize: 20, padding: 20 }}>
           {' '}
-          USER: {userCtx.userData?.firstName} {userCtx.userData?.lastName}
+          USER: {userCtx.userData?.firstname} {userCtx.userData?.lastname}
         </Text>
         <Image src="@skodaflow/web-tokens/src/assets/logo/horizontalWider.svg" />
         <Badge text="Nový" color={flowColorsRgbaSemanticInfo} />

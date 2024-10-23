@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(22, 23, 24, 1)',
     display: 'flex',
     flexGrow: 1,
+    paddingTop: 20,
     position: 'relative',
   },
   navigation: {

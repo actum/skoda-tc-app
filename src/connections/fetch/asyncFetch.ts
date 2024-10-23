@@ -1,7 +1,5 @@
 import HttpApiCallError from './HttpApiCallError';
-// import SyncStorage from 'sync-storage';
-import { localStorageUserKey } from '@/src/providers/UserContext';
-import { API_URL } from '@env';
+import { API_URL, USER_TOKEN } from '@env';
 
 export async function asyncFetch<T>(
   path: string,
@@ -12,6 +10,7 @@ export async function asyncFetch<T>(
   let response: Response;
   try {
     response = await fetch(url, getBaseRequestConfig(requestConfig));
+    console.log('response', response);
   } catch (e) {
     const error = e as Error;
     const httpError = new HttpApiCallError(`Failed to Fetch: ${url}`, 500);
@@ -19,6 +18,7 @@ export async function asyncFetch<T>(
     throw httpError;
   }
   const isSuccess = response.status >= 200 && response.status < 300;
+  console.log('response.status', response.status);
   const contentType = response.headers.get('content-type');
 
   if (isSuccess) {
@@ -67,22 +67,10 @@ function getBaseRequestConfig(overrideConfig: RequestInit): RequestInit {
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Basic ${USER_TOKEN}`,
     },
     ...overrideConfig,
   };
-  // const data = SyncStorage.get(localStorageUserKey);
-  // console.log('data', data);
-  // if (data) {
-  //   const parsedData = JSON.parse(data);
-  //
-  //   config = {
-  //     ...config,
-  //     headers: {
-  //       ...config.headers,
-  //       Authorization: `Bearer ${String(parsedData.token)}`,
-  //     },
-  //   };
-  // }
 
   console.log('REQ.CONFIG', config);
 

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { IUserContext, localStorageUserKey, UserContext } from './UserContext';
+import { IUserContext, UserContext } from './UserContext';
 import { User } from '../connections/request/Data';
 import { asyncFetch } from '@/src/connections/fetch/asyncFetch';
 import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
-// import SyncStorage from 'sync-storage';
 import { USER_TOKEN } from '@env';
 
 export const UserProvider = ({ children }: { children: JSX.Element }) => {
@@ -12,32 +11,23 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
     token: token,
     isAuthenticated: true,
     userData: {
-      token: token,
-      email: 'email@email.com',
-      firstName: 'Josef',
-      lastName: 'Novák',
+      firstname: 'Josef',
+      lastname: 'Novák',
+      phoneNumber: '+42001003006',
+      id: 'XXX',
     },
   };
 
   useEffect(() => {
-    // storeData(initialData);
     loadUserData();
   }, []);
 
-  // async function storeData(value: IUserContext) {
-  //   try {
-  //     await SyncStorage.set(localStorageUserKey, JSON.stringify(value));
-  //   } catch (e) {
-  //     console.error(e.message);
-  //     // saving error
-  //   }
-  // }
-
   async function loadUserData() {
     try {
-      const user = await asyncFetch<User>('/api/v1/users', {
+      const user = await asyncFetch<User>('/api/v1/users/current', {
         method: 'GET',
       });
+      console.log('user', user);
       const newState = {
         ...ctx,
         userData: user,

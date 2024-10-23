@@ -1,7 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
-import { flowTypographyMediumBody } from '@/src/assets/styles';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from '@/src/components/icon';
 
 interface ILicenceItem {
@@ -41,7 +39,7 @@ export default function LicenceItem(props: ILicenceItem) {
         >
           <Icon
             type={isWarning ? 'warning' : 'check'}
-            size={isLarge ? 42 : 24}
+            size={isLarge ? 42 : 18}
             color={'black'}
           />
         </View>
@@ -55,11 +53,7 @@ export default function LicenceItem(props: ILicenceItem) {
         </Text>
       </View>
       <View style={styles.action}>
-        <MaterialIcons
-          name="chevron-right"
-          size={isLarge ? 64 : 38}
-          color="#ffffff"
-        />
+        <Icon type="chevron-right" size={isLarge ? 64 : 24} color="#ffffff" />
       </View>
     </TouchableOpacity>
   );
@@ -67,6 +61,7 @@ export default function LicenceItem(props: ILicenceItem) {
 
 const styles = StyleSheet.create({
   action: {
+    justifyContent: 'center',
     paddingLeft: 10,
   },
   description: {
@@ -75,11 +70,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     paddingRight: 10,
+    paddingTop: 5,
   },
   root: {
-    alignItems: 'center',
-    borderBottomColor: '#333',
-    borderBottomWidth: 1,
     flexDirection: 'row',
     paddingHorizontal: 10,
     paddingVertical: 15,
@@ -89,8 +82,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#ffffff',
-    fontFamily: flowTypographyMediumBody.fontFamily,
+    fontFamily: 'SKODANext-Regular',
     fontSize: 18,
-    fontWeight: 'bold',
   },
 });
