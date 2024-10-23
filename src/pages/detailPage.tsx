@@ -6,13 +6,14 @@ import StyledButton from '@/src/components/button/StyledButton';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { useLocation, useNavigate } from 'react-router-native';
 import {
-  flowColorsRgbaSemanticAlert,
-  flowColorsRgbaSemanticInfo,
-  flowColorsRgbaSemanticPositive,
-  flowColorsRgbaSemanticWarning,
-  flowColorsRgbaTextPrimary,
-  flowTypographyLargeBody,
-  flowTypographyLargeH1,
+    flowColorsRgbaOnSurface0,
+    flowColorsRgbaSemanticAlert,
+    flowColorsRgbaSemanticInfo,
+    flowColorsRgbaSemanticPositive,
+    flowColorsRgbaSemanticWarning,
+    flowColorsRgbaTextPrimary,
+    flowTypographyLargeBody,
+    flowTypographyLargeH1,
 } from '@/src/assets/styles';
 import Badge from '@/src/components/badge/Badge';
 import TextParagraph from '@/src/components/text/TextParagraph';
@@ -29,8 +30,8 @@ export default function DetailPage() {
   return (
     <BaseContainer>
       <View style={styles.container}>
-        <Text style={{ fontSize: 30 }}> DETAIL</Text>
-        <Text style={{ fontSize: 20, padding: 20 }}>
+        <Text style={[styles.title, { fontSize: 30 }]}> DETAIL</Text>
+        <Text style={[styles.text,{ fontSize: 20, padding: 20 }]}>
           {' '}
           USER: {userCtx.userData?.firstName} {userCtx.userData?.lastName}
         </Text>
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   text: {
-    color: flowColorsRgbaTextPrimary,
+    color: flowColorsRgbaOnSurface0,
     fontFamily: flowTypographyLargeBody.fontFamily,
     fontSize: parseFloat(flowTypographyLargeBody.fontSize),
     fontWeight: flowTypographyLargeBody.fontWeight as TextStyle['fontWeight'],
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
       flowTypographyLargeBody.textTransform as TextStyle['textTransform'],
   },
   title: {
-    color: flowColorsRgbaTextPrimary,
+    color: flowColorsRgbaOnSurface0,
     fontFamily: flowTypographyLargeH1.fontFamily,
     fontSize: parseFloat(flowTypographyLargeH1.fontSize),
     fontWeight: flowTypographyLargeH1.fontWeight as TextStyle['fontWeight'],
