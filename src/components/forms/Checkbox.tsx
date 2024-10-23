@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     borderColor: flowColorsRgbaBrandSecondary,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 2, // Optional: Makes the checkbox slightly rounded
+    borderRadius: 2,
   },
   checkmark: {
     width: 6,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '45deg' }],
     borderRightWidth: 2,
     borderBottomWidth: 2,
-    borderColor: flowColorsRgbaTextPrimary, // Bude přepsáno inline stylem
+    borderColor: flowColorsRgbaTextPrimary,
   },
   label: {
     marginHorizontal: 8,

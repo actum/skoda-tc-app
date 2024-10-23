@@ -4,9 +4,9 @@ StyleDictionary.registerTransformGroup({
   name: 'custom/react-native',
   transforms: [
     'attribute/cti',
-    'name/camel', // Použijeme camelCase pro názvy proměnných
-    'color/hex8android', // Pro podporu hex s alfa kanálem
-    'size/remToSp', // Pokud máte velikosti v rem
+    'name/camel',
+    'color/hex8android',
+    'size/remToSp',
   ],
 });
 
