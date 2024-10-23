@@ -4,11 +4,11 @@ import useCarState from '@/src/components/carState';
 import RenewItem from '@/src/components/RenewComponent/RenewItem';
 import { useForm } from 'react-hook-form';
 import StyledButton from '@/src/components/button/StyledButton';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { CardItemsContext } from '@/src/providers/CardItemsProvider';
 
-export interface RenewFormData {
-  agreeToTerms: string;
+export interface RenewFormData extends Record<string, boolean> {
+  // agreeToTerms: string;
 }
 
 export default function RenewComponent() {
@@ -45,14 +45,22 @@ export default function RenewComponent() {
   ];
   const { car } = useCarState();
 
-  const { control, handleSubmit, watch } = useForm<RenewFormData>();
+  function getDefaultValues(): RenewFormData {
+    const values: Record<string, boolean> = {};
+    licences.forEach((licence) => {
+      values[licence.code] = true;
+    });
+    return values;
+  }
+
+  const { control, handleSubmit, watch } = useForm<RenewFormData>({
+    defaultValues: getDefaultValues(),
+  });
   const formValues = watch();
 
   const calculateTotalPrice = () => {
     let total = 0;
     licences.forEach((licence) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       if (formValues[licence.code]) {
         total += licence.price;
       }
@@ -67,8 +75,6 @@ export default function RenewComponent() {
   function onSubmit(data: RenewFormData) {
     const newLicences: Licence[] = [];
     licences.forEach((licence) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       if (formValues[licence.code]) {
         newLicences.push(licence);
       }
