@@ -55,73 +55,73 @@ function Checkbox<T extends FieldValues>({
   style = {},
   labelStyle = {},
 }: CheckboxProps<T>) {
-    const {
-        field: { value, onChange },
-        fieldState: { error },
-    } = useController({
-        control,
-        name,
-        rules,
-    });
+  const {
+    field: { value, onChange },
+    fieldState: { error },
+  } = useController({
+    control,
+    name,
+    rules,
+  });
 
-    // Dynamické styly na základě stavu
-    const isChecked = !!value;
+  // Dynamické styly na základě stavu
+  const isChecked = !!value;
 
-    const color = disabled ? flowColorsRgbaDisabledPrimary : flowColorsRgbaTextPrimary;
+  const checkboxColor = disabled
+    ? flowColorsRgbaDisabledPrimary
+    : flowColorsRgbaTextPrimary;
 
-    const checkboxColor = disabled
-        ? flowColorsRgbaDisabledPrimary
-        : flowColorsRgbaTextPrimary;
+  const borderColor = disabled
+    ? flowColorsRgbaDisabledTertiary
+    : isChecked
+      ? flowColorsRgbaBrandSecondary
+      : flowColorsRgbaDisabledPrimary;
 
-    const borderColor = disabled
-        ? flowColorsRgbaDisabledTertiary
-        : isChecked
-            ? flowColorsRgbaBrandSecondary
-            : flowColorsRgbaDisabledPrimary;
+  const backgroundColor = disabled
+    ? flowColorsRgbaDisabledSecondary
+    : isChecked
+      ? flowColorsRgbaBrandSecondary
+      : 'transparent';
 
-    const backgroundColor = disabled
-        ? flowColorsRgbaDisabledSecondary
-        : isChecked
-            ? flowColorsRgbaBrandSecondary
-            : 'transparent';
+  const handlePress = () => {
+    if (!disabled) {
+      onChange(!value);
+    }
+  };
 
-    const handlePress = () => {
-        if (!disabled) {
-            onChange(!value);
-        }
-    };
-
-    return (
-        <TouchableOpacity
-            style={[styles.container, style]}
-            onPress={handlePress}
-            activeOpacity={0.8}
-            disabled={disabled}
+  return (
+    <View>
+      <TouchableOpacity
+        style={[styles.container, style]}
+        onPress={handlePress}
+        activeOpacity={0.8}
+        disabled={disabled}
+      >
+        {label && labelPosition === 'left' && (
+          <Text style={[styles.label, labelStyle]}>{label}</Text>
+        )}
+        <View
+          style={[
+            styles.checkbox,
+            {
+              width: size,
+              height: size,
+              borderColor: borderColor,
+              backgroundColor: backgroundColor,
+            },
+          ]}
         >
-            {label && labelPosition === 'left' && (
-                <Text style={[styles.label, labelStyle]}>{label}</Text>
-            )}
-            <View
-                style={[
-                    styles.checkbox,
-                    {
-                        width: size,
-                        height: size,
-                        borderColor: borderColor,
-                        backgroundColor: backgroundColor,
-                    },
-                ]}
-            >
-                {isChecked && (
-                    <View style={[styles.checkmark, { borderColor: checkboxColor }]} />
-                )}
-            </View>
-            {label && labelPosition === 'right' && (
-                <Text style={[styles.label, labelStyle]}>{label}</Text>
-            )}
-            {error && <Text style={styles.errorText}>{error.message}</Text>}
-        </TouchableOpacity>
-    );
+          {isChecked && (
+            <View style={[styles.checkmark, { borderColor: checkboxColor }]} />
+          )}
+        </View>
+        {label && labelPosition === 'right' && (
+          <Text style={[styles.label, labelStyle]}>{label}</Text>
+        )}
+      </TouchableOpacity>
+      {error && <Text style={styles.errorText}>{error.message}</Text>}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

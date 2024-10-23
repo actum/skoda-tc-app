@@ -6,10 +6,11 @@ import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import {
-    flowColorsRgbaBrandPrimary, flowColorsRgbaSurfaceSecondary,
-    flowColorsRgbaTransparentPrimary,
-    flowColorsRgbaTransparentTertiary
-} from "@/src/assets/styles";
+  flowColorsRgbaBrandPrimary,
+  flowColorsRgbaSurfaceSecondary,
+  flowColorsRgbaTransparentPrimary,
+  flowColorsRgbaTransparentTertiary,
+} from '@/src/assets/styles';
 
 SplashScreen.preventAutoHideAsync();
 
