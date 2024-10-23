@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, TextStyle, View} from 'react-native';
+import { Image, StyleSheet, Text, TextStyle, View } from 'react-native';
 import {
   flowColorsBackgroundPrimary,
   flowColorsRgbaSemanticAlert,
@@ -10,9 +10,13 @@ import {
   flowTypographyLargeH1,
 } from '@/app/styles';
 import TextParagraph from '@/_src/components/TextParagraph';
-import Badge from "@/_src/components/Badge";
+import Badge from '@/_src/components/Badge';
+import Checkbox from '@/_src/components/Checkbox';
+import { useState } from 'react';
 
 export default function TabTwoScreen() {
+  const [isChecked, setIsChecked] = useState(false);
+
   return (
     <View style={[styles.container]}>
       <Image src="@skodaflow/web-tokens/src/assets/logo/horizontalWider.svg" />
@@ -27,6 +31,11 @@ export default function TabTwoScreen() {
       <Badge text="Aktualizace" color={flowColorsRgbaSemanticWarning} />
       <Badge text="Dokončeno" color={flowColorsRgbaSemanticPositive} />
       <TextParagraph text="Toto je odstavec s výchozími styly." />
+      <Checkbox
+        isChecked={isChecked}
+        onChange={setIsChecked}
+        label="Přijímat novinky emailem"
+      />
     </View>
   );
 }
