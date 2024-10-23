@@ -2,7 +2,6 @@
   "name": "skoda-app",
   "main": "src/App.tsx",
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "copy-tokens": "cp node_modules/@skodaflow/web-tokens/src/tokens.json src/tokens/",
     "transform-tokens": "node src/scripts/transformTokens.js",
