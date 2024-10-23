@@ -1,0 +1,84 @@
+import { Image, StyleSheet, Text, TextStyle, View } from 'react-native';
+import { useContext } from 'react';
+import { UserContext } from '@/src/providers/UserContext';
+import BaseContainer from '@/src/components/containers/BaseContainer';
+import StyledButton from '@/src/components/button/StyledButton';
+import { RouteKey } from '@/src/components/navigation/Navigation';
+import { useLocation, useNavigate } from 'react-router-native';
+import Badge from '@/src/components/badge';
+import {
+  flowColorsBackgroundPrimary,
+  flowColorsRgbaSemanticAlert,
+  flowColorsRgbaSemanticInfo,
+  flowColorsRgbaSemanticPositive,
+  flowColorsRgbaSemanticWarning,
+  flowColorsTextPrimary,
+  flowTypographyLargeBody,
+  flowTypographyLargeH1,
+} from '@/src/assets/styles';
+
+export default function DetailPage() {
+  const userCtx = useContext(UserContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log('location', location);
+  return (
+    <BaseContainer>
+      <View style={styles.container}>
+        <Text style={{ fontSize: 30 }}> DETAIL</Text>
+        <Text style={{ fontSize: 20, padding: 20 }}>
+          {' '}
+          USER: {userCtx.userData?.firstName} {userCtx.userData?.lastName}
+        </Text>
+        <Image src="@skodaflow/web-tokens/src/assets/logo/horizontalWider.svg" />
+        <Badge text="Nový" color={flowColorsRgbaSemanticInfo} />
+        <Badge text="Chyba" color={flowColorsRgbaSemanticAlert} />
+        <Badge text="Aktualizace" color={flowColorsRgbaSemanticWarning} />
+        <Badge text="Dokončeno" color={flowColorsRgbaSemanticPositive} />
+        <StyledButton
+          title={'HOME'}
+          onPress={() => {
+            navigate(RouteKey.home);
+          }}
+        />
+      </View>
+    </BaseContainer>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    backgroundColor: flowColorsBackgroundPrimary,
+    flex: 1,
+    justifyContent: 'center',
+  },
+  text: {
+    color: flowColorsTextPrimary,
+    fontFamily: flowTypographyLargeBody.fontFamily,
+    fontSize: parseFloat(flowTypographyLargeBody.fontSize),
+    fontWeight: flowTypographyLargeBody.fontWeight as TextStyle['fontWeight'],
+    letterSpacing:
+      parseFloat(flowTypographyLargeBody.letterSpacing) *
+      parseFloat(flowTypographyLargeBody.fontSize),
+    lineHeight: parseFloat(flowTypographyLargeBody.lineHeight),
+    textDecorationLine:
+      flowTypographyLargeBody.textDecoration as TextStyle['textDecorationLine'],
+    textTransform:
+      flowTypographyLargeBody.textTransform as TextStyle['textTransform'],
+  },
+  title: {
+    color: flowColorsTextPrimary,
+    fontFamily: flowTypographyLargeH1.fontFamily,
+    fontSize: parseFloat(flowTypographyLargeH1.fontSize),
+    fontWeight: flowTypographyLargeH1.fontWeight as TextStyle['fontWeight'],
+    letterSpacing:
+      parseFloat(flowTypographyLargeH1.letterSpacing) *
+      parseFloat(flowTypographyLargeH1.fontSize),
+    lineHeight: parseFloat(flowTypographyLargeH1.lineHeight),
+    textDecorationLine:
+      flowTypographyLargeH1.textDecoration as TextStyle['textDecorationLine'],
+    textTransform:
+      flowTypographyLargeH1.textTransform as TextStyle['textTransform'],
+  },
+});

@@ -1,24 +1,19 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from '@react-navigation/native';
+import { registerRootComponent } from 'expo';
+import { UserProvider } from './providers/UserProvider';
+import { ThemeProvider } from '@react-navigation/native';
+import Router from './router/Router';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import 'react-native-reanimated';
-import { useColorScheme } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+export default function App() {
   const [loaded] = useFonts({
-    SpaceMono: require('@/_src/assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: require('./assets/fonts/SpaceMono-Regular.ttf'),
     'SKODANext-Black': require('@skodaflow/web-tokens/src/fonts/SKODANext-Black.ttf'),
     'SKODANext-Bold': require('@skodaflow/web-tokens/src/fonts/SKODANext-Bold.ttf'),
+    'SKODA Next': require('@skodaflow/web-tokens/src/fonts/SKODANext-Light.ttf'),
     'SKODANext-Light': require('@skodaflow/web-tokens/src/fonts/SKODANext-Light.ttf'),
     'SKODANext-Regular': require('@skodaflow/web-tokens/src/fonts/SKODANext-Regular.ttf'),
 
@@ -44,11 +39,24 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
+    <ThemeProvider
+      value={{
+        dark: true,
+        colors: {
+          primary: 'rgb(10, 132, 255)',
+          background: 'rgb(1, 1, 1)',
+          card: 'rgb(18, 18, 18)',
+          text: 'rgb(229, 229, 231)',
+          border: 'rgb(39, 39, 41)',
+          notification: 'rgb(255, 69, 58)',
+        },
+      }}
+    >
+      <UserProvider>
+        <Router />
+      </UserProvider>
     </ThemeProvider>
   );
 }
+
+registerRootComponent(App);
