@@ -59,30 +59,3 @@ class MainActivity : ReactActivity() {
       super.invokeDefaultOnBackPressed()
   }
 }
-
-
-//package com.tvojeaplikace;
-//
-//import android.os.Bundle;
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//public class MainActivity extends AppCompatActivity {
-//    private CarMovementListener carMovementListener;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        carMovementListener = new CarMovementListener();
-//        carMovementListener.init(this);
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        if (carMovementListener != null) {
-//            carMovementListener.release();
-//        }
-//    }
-//}

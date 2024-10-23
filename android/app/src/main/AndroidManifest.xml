@@ -1,10 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-  <!-- Permission for Android Automotive and Car APIs -->
   <uses-permission android:name="android.permission.INTERNET"/>
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+  <uses-permission android:name="android.car.permission.CAR_UX_RESTRICTIONS" />
 
   <queries>
     <intent>
@@ -19,7 +17,7 @@
       android:icon="@mipmap/ic_launcher"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="true"
-      android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+      android:theme="@style/AppTheme">
 
     <!-- Meta-data for app updates -->
     <meta-data android:name="expo.modules.updates.ENABLED" android:value="false"/>
@@ -37,21 +35,16 @@
         android:exported="true"
         android:screenOrientation="landscape"
         android:windowFullscreen="true">
-
+<!--      <meta-data android:name="distractionOptimized" android:value="true"/>-->
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
-
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW"/>
-        <category android:name="android.intent.category.DEFAULT"/>
-        <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="myapp"/>
-        <data android:scheme="skoda.app"/>
-      </intent-filter>
-
     </activity>
 
   </application>
+
+  <uses-feature
+      android:name="android.hardware.type.automotive"
+      android:required="true" />
 </manifest>
