@@ -2,17 +2,29 @@ import { StyleSheet, View } from 'react-native';
 import React, { ReactNode } from 'react';
 import { Navigation } from '../navigation/Navigation';
 import { ScrollViewProvider } from '../scrollView/ScrollViewProvider';
+import useCarState from "@/src/components/carState";
+import { CarNavigation } from "@/src/components/car-navigation/CarNavigation";
 
 export default function BaseContainer({ children }: { children: ReactNode }) {
+  const catState = useCarState()
   return (
-    <View style={styles.container}>
-      <View style={styles.children}>
-        <ScrollViewProvider>{children}</ScrollViewProvider>
+      <View style={styles.container}>
+        {catState.car && (
+            <View style={styles.menu}>
+              <CarNavigation />
+            </View>
+        )}
+
+        <View style={styles.children}>
+          <ScrollViewProvider>{children}</ScrollViewProvider>
+        </View>
+
+        {!catState.car && (
+            <View style={styles.navigation}>
+              <Navigation />
+            </View>
+        )}
       </View>
-      <View style={styles.navigation}>
-        <Navigation />
-      </View>
-    </View>
   );
 }
 
@@ -35,4 +47,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
   },
+  menu: {
+    width: '100%',
+  }
 });
