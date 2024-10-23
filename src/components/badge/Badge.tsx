@@ -43,10 +43,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 12,
-    // `backgroundColor` je nastaven přes props
   },
   badgeText: {
-    // `color` a `fontSize` jsou nastaveny přes props
     fontWeight: flowTypographyMediumBody.fontWeight as TextStyle['fontWeight'],
     fontFamily: flowTypographyMediumBody.fontFamily,
     fontSize: parseFloat(flowTypographyMediumBody.fontSize),

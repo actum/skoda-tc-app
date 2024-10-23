@@ -6,22 +6,23 @@ import StyledButton from '@/src/components/button/StyledButton';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { useLocation, useNavigate } from 'react-router-native';
 import {
-  flowColorsBackgroundPrimary,
   flowColorsRgbaSemanticAlert,
   flowColorsRgbaSemanticInfo,
   flowColorsRgbaSemanticPositive,
   flowColorsRgbaSemanticWarning,
-  flowColorsTextPrimary,
+  flowColorsRgbaTextPrimary,
   flowTypographyLargeBody,
   flowTypographyLargeH1,
 } from '@/src/assets/styles';
 import Badge from '@/src/components/badge/Badge';
 import TextParagraph from '@/src/components/text/TextParagraph';
+import FormExample from '@/src/components/forms/FormExample';
 
 export default function DetailPage() {
   const userCtx = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
+
   console.log('location', location);
   return (
     <BaseContainer>
@@ -37,6 +38,7 @@ export default function DetailPage() {
         <Badge text="Aktualizace" color={flowColorsRgbaSemanticWarning} />
         <Badge text="Dokončeno" color={flowColorsRgbaSemanticPositive} />
         <TextParagraph text="Toto je odstavec s výchozími styly." />
+        <FormExample></FormExample>
         <StyledButton
           title={'HOME'}
           onPress={() => {
@@ -51,12 +53,11 @@ export default function DetailPage() {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: flowColorsBackgroundPrimary,
     flex: 1,
     justifyContent: 'center',
   },
   text: {
-    color: flowColorsTextPrimary,
+    color: flowColorsRgbaTextPrimary,
     fontFamily: flowTypographyLargeBody.fontFamily,
     fontSize: parseFloat(flowTypographyLargeBody.fontSize),
     fontWeight: flowTypographyLargeBody.fontWeight as TextStyle['fontWeight'],
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
       flowTypographyLargeBody.textTransform as TextStyle['textTransform'],
   },
   title: {
-    color: flowColorsTextPrimary,
+    color: flowColorsRgbaTextPrimary,
     fontFamily: flowTypographyLargeH1.fontFamily,
     fontSize: parseFloat(flowTypographyLargeH1.fontSize),
     fontWeight: flowTypographyLargeH1.fontWeight as TextStyle['fontWeight'],
