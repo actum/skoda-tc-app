@@ -17,6 +17,7 @@ import {
 import Badge from '@/src/components/badge/Badge';
 import TextParagraph from '@/src/components/text/TextParagraph';
 import FormExample from '@/src/components/forms/FormExample';
+import CustomImage from '@/src/components/image/Image';
 
 export default function DetailPage() {
   const userCtx = useContext(UserContext);
@@ -39,6 +40,15 @@ export default function DetailPage() {
         <Badge text="Dokončeno" color={flowColorsRgbaSemanticPositive} />
         <TextParagraph text="Toto je odstavec s výchozími styly." />
         <FormExample></FormExample>
+        <CustomImage
+          source={require('../assets/images/products/1.png')}
+          placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
+          errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
+          style={styles.imageFullWidth}
+          loadingIndicatorColor="#ff0000"
+          onLoad={() => console.log('Obrázek načten!')}
+          onError={() => console.log('Chyba při načítání obrázku!')}
+        />
         <StyledButton
           title={'HOME'}
           onPress={() => {
@@ -55,6 +65,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
+  },
+  image: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
+    borderRadius: 10,
+  },
+  imageFullWidth: {
+    width: '100%', // Nastavení šířky na 100%
+    aspectRatio: 16 / 9, // Udržuje poměr stran 16:9
+    marginBottom: 20,
+    borderRadius: 10,
   },
   text: {
     color: flowColorsRgbaTextPrimary,

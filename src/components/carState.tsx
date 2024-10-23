@@ -4,17 +4,16 @@ import { useState } from 'react';
 const { CarState } = NativeModules;
 
 export default function useCarState() {
-
   const [isCarStopped, setIsCarStopped] = useState(false);
 
   if (!CarState) {
     CarState.getDrivingState((state: boolean) => {
-      setIsCarStopped(state)
+      setIsCarStopped(state);
     });
   }
 
   return {
     car: !!CarState,
-    isCarStopped
-  }
+    isCarStopped,
+  };
 }
