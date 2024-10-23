@@ -18,6 +18,7 @@ import Badge from '@/src/components/badge/Badge';
 import TextParagraph from '@/src/components/text/TextParagraph';
 import FormExample from '@/src/components/forms/FormExample';
 import CustomImage from '@/src/components/image/Image';
+import Card from '@/src/components/card/Card';
 
 export default function DetailPage() {
   const userCtx = useContext(UserContext);
@@ -49,6 +50,20 @@ export default function DetailPage() {
           onLoad={() => console.log('Obrázek načten!')}
           onError={() => console.log('Chyba při načítání obrázku!')}
         />
+        <Card
+          title="Rastrový Obrázek"
+          subtitle="Podtitulek karty"
+          description="Toto je popis karty s rastrovým obrázkem."
+          image={require('../assets/images/placeholder.webp')} // Rastrový obrázek
+          actions={
+            <StyledButton
+              title="Akce"
+              onPress={() => console.log('Akce stisknuta!')}
+            />
+          }
+          onPress={() => console.log('Karta stisknuta!')}
+          style={styles.card}
+        />
         <StyledButton
           title={'HOME'}
           onPress={() => {
@@ -65,6 +80,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
+  },
+  header: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: flowColorsRgbaTextPrimary,
+    marginBottom: 10,
+  },
+  userInfo: {
+    fontSize: 20,
+    padding: 20,
+    color: flowColorsRgbaTextPrimary,
+  },
+  card: {
+    marginBottom: 20,
+  },
+  cardFullWidth: {
+    width: '100%',
+    marginBottom: 20,
   },
   image: {
     width: 200,
