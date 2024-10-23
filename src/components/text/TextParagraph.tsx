@@ -4,7 +4,7 @@ import { Text, StyleSheet, TextStyle, StyleProp } from 'react-native';
 import {
   flowTypographyMediumBody,
   flowColorsRgbaTextPrimary,
-} from '@/app/styles';
+} from '@/src/assets/styles';
 
 interface TextParagraphProps {
   text: string;

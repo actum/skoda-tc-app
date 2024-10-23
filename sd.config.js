@@ -11,14 +11,14 @@ StyleDictionary.registerTransformGroup({
 });
 
 export default {
-  source: ['_src/tokens/transformedTokens.json'],
+  source: ['src/tokens/transformedTokens.json'],
   platforms: {
     'react-native': {
       transformGroup: 'custom/react-native',
-      buildPath: 'app/',
+      buildPath: 'src/assets/',
       files: [
         {
-          destination: 'styles.js',
+          destination: 'styles.tsx',
           format: 'javascript/es6',
         },
       ],
