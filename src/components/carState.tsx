@@ -6,7 +6,7 @@ const { CarState } = NativeModules;
 export default function useCarState() {
   const [isCarStopped, setIsCarStopped] = useState(false);
 
-  if (!CarState) {
+  if (!!CarState) {
     CarState.getDrivingState((state: boolean) => {
       setIsCarStopped(state);
     });

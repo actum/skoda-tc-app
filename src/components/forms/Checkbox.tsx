@@ -17,13 +17,12 @@ import {
   FieldPath,
 } from 'react-hook-form';
 import {
-  flowColorsRgbaBrandSecondary,
-  flowColorsRgbaDisabledPrimary,
-  flowColorsRgbaDisabledSecondary,
-  flowColorsRgbaDisabledTertiary,
-  flowColorsRgbaTextPrimary,
-  flowColorsRgbaSemanticAlert,
-  flowColorsRgbaOnSurface0,
+    flowColorsRgbaBrandSecondary,
+    flowColorsRgbaDisabledPrimary,
+    flowColorsRgbaDisabledSecondary,
+    flowColorsRgbaDisabledTertiary,
+    flowColorsRgbaTextPrimary,
+    flowColorsRgbaSemanticAlert, flowColorsRgbaOnSurface0,
 } from '@/src/assets/styles';
 
 interface CheckboxProps<T extends FieldValues> {
@@ -86,7 +85,7 @@ function Checkbox<T extends FieldValues>({
 
   const handlePress = () => {
     if (!disabled) {
-      onChange(!value);
+      onChange(!isChecked);
     }
   };
 
@@ -126,35 +125,35 @@ function Checkbox<T extends FieldValues>({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   checkbox: {
-    borderWidth: 2,
-    borderColor: flowColorsRgbaBrandSecondary,
-    justifyContent: 'center',
     alignItems: 'center',
+    borderColor: flowColorsRgbaBrandSecondary,
     borderRadius: 2,
+    borderWidth: 2,
+    justifyContent: 'center',
   },
   checkmark: {
-    width: 6,
-    height: 7.5,
-    transform: [{ rotate: '45deg' }],
-    borderRightWidth: 2,
     borderBottomWidth: 2,
     borderColor: flowColorsRgbaTextPrimary,
+    borderRightWidth: 2,
+    height: 7.5,
+    transform: [{ rotate: '45deg' }],
+    width: 6,
   },
-  label: {
-    marginHorizontal: 8,
-    fontSize: 16,
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: 'SKODANext-Light',
+  container: {
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   errorText: {
     color: flowColorsRgbaSemanticAlert,
     fontFamily: 'SKODANext-Light',
     marginTop: 5,
+  },
+  label: {
+    color: flowColorsRgbaOnSurface0,
+    fontFamily: 'SKODANext-Light',
+    fontSize: 16,
+    marginHorizontal: 8,
   },
 });
 

@@ -1,25 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
-import { flowTypographyMediumBody } from '@/src/assets/styles';
-import Icon from '@/src/components/icon';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Icon, { IconType } from '@/src/components/icon';
 
 interface ILicenceItem {
   size?: 'normal' | 'large';
-  icon: 'success' | 'warning'; // Typ ikony, kterou chcete zobrazit
+  icon: 'success' | 'warning' | 'normal';
   text: {
     title: string;
     description: string;
   };
-  action: () => void; // Akce na stisknutí položky
+  action: () => void;
 }
 
 export default function LicenceItem(props: ILicenceItem) {
-  const isWarning = props.icon === 'warning';
+  let iconColor = 'unset';
+  let type: IconType = 'bag';
+  if (props.icon === 'warning') {
+    iconColor = 'rgba(253, 88, 88, 1)';
+    type = 'warning';
+  }
 
-  const iconColor = isWarning
-    ? 'rgba(253, 88, 88, 1)'
-    : 'rgba(120, 250, 174, 1)'; // Červená pro warning, zelená pro success
+  if (props.icon === 'success') {
+    iconColor = 'rgba(120, 250, 174, 1)';
+    type = 'check';
+  }
 
   const isLarge = props.size === 'large';
 
@@ -40,9 +44,9 @@ export default function LicenceItem(props: ILicenceItem) {
           }}
         >
           <Icon
-            type={isWarning ? 'warning' : 'check'}
-            size={isLarge ? 42 : 24}
-            color={'black'}
+            type={type}
+            size={isLarge ? 42 : 18}
+            color={props.icon === 'normal' ? '#fff' : 'black'}
           />
         </View>
       </View>
@@ -55,11 +59,7 @@ export default function LicenceItem(props: ILicenceItem) {
         </Text>
       </View>
       <View style={styles.action}>
-        <MaterialIcons
-          name="chevron-right"
-          size={isLarge ? 64 : 38}
-          color="#ffffff"
-        />
+        <Icon type="chevron-right" size={isLarge ? 64 : 24} color="#ffffff" />
       </View>
     </TouchableOpacity>
   );
@@ -67,19 +67,18 @@ export default function LicenceItem(props: ILicenceItem) {
 
 const styles = StyleSheet.create({
   action: {
+    justifyContent: 'center',
     paddingLeft: 10,
   },
   description: {
-    color: '#aaa', // Šedý text pro popis
+    color: '#aaa',
     fontSize: 14,
   },
   icon: {
     paddingRight: 10,
+    paddingTop: 5,
   },
   root: {
-    alignItems: 'center',
-    borderBottomColor: '#333',
-    borderBottomWidth: 1,
     flexDirection: 'row',
     paddingHorizontal: 10,
     paddingVertical: 15,
@@ -89,8 +88,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#ffffff',
-    fontFamily: flowTypographyMediumBody.fontFamily,
+    fontFamily: 'SKODANext-Regular',
     fontSize: 18,
-    fontWeight: 'bold',
   },
 });

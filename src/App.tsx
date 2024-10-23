@@ -1,16 +1,10 @@
 import { registerRootComponent } from 'expo';
 import { UserProvider } from './providers/UserProvider';
-import { ThemeProvider } from '@react-navigation/native';
 import Router from './router/Router';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import {
-  flowColorsRgbaBrandPrimary,
-  flowColorsRgbaSurfaceSecondary,
-  flowColorsRgbaTransparentPrimary,
-  flowColorsRgbaTransparentTertiary,
-} from '@/src/assets/styles';
+import CardItemsProvider from '@/src/providers/CardItemsProvider';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,23 +39,11 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider
-      value={{
-        dark: true,
-        colors: {
-          primary: flowColorsRgbaBrandPrimary,
-          background: flowColorsRgbaTransparentPrimary,
-          card: flowColorsRgbaTransparentTertiary,
-          text: flowColorsRgbaSurfaceSecondary,
-          border: 'rgb(39, 39, 41)',
-          notification: 'rgb(255, 69, 58)',
-        },
-      }}
-    >
-      <UserProvider>
+    <UserProvider>
+      <CardItemsProvider>
         <Router />
-      </UserProvider>
-    </ThemeProvider>
+      </CardItemsProvider>
+    </UserProvider>
   );
 }
 
