@@ -21,10 +21,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     height: '100%',
     paddingTop: 40,
-    padding: 5,
   },
   container: {
-    backgroundColor: '#e7eaff',
+    backgroundColor: 'rgba(22, 23, 24, 1)',
     display: 'flex',
     flexGrow: 1,
     position: 'relative',
@@ -34,8 +33,5 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
     width: '100%',
-  },
-  scrollContainer: {
-    marginBottom: 80,
   },
 });

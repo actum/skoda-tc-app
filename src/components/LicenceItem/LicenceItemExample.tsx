@@ -1,24 +1,40 @@
 import { StyleSheet, View } from 'react-native';
-import {
-  flowColorsRgbaBrandSecondary,
-  flowColorsTextPrimary,
-} from '@/src/assets/styles';
+import LicenceItem from '@/src/components/LicenceItem/index';
 
 export default function LicenceItemExample() {
   return (
     <View style={styles.root}>
-      <View style={styles.icon}>ICON</View>
-      <View style={styles.text}>TEXT</View>
-      <View style={styles.action}>ACTION</View>
+      <LicenceItem
+        icon={'success'}
+        text={{
+          description: 'Description',
+          title: 'Test',
+        }}
+        action={() => {}}
+      />
+      <LicenceItem
+        icon={'warning'}
+        text={{
+          description: 'Description',
+          title: 'Test',
+        }}
+        action={() => {}}
+      />
+      <LicenceItem
+        size={'large'}
+        icon={'success'}
+        text={{
+          description: 'Description',
+          title: 'Test',
+        }}
+        action={() => {}}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  action: {},
-  icon: {},
   root: {
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
-  text: {},
 });
