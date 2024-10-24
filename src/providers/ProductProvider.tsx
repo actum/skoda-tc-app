@@ -1,7 +1,7 @@
 // ProductProvider.tsx
-import React, {createContext, useEffect, useState} from 'react';
-import {Licence} from '../connections/request/Data';
-import {asyncFetch} from '@/src/connections/fetch/asyncFetch';
+import React, { createContext, useEffect, useState } from 'react';
+import { Licence } from '../connections/request/Data';
+import { asyncFetch } from '@/src/connections/fetch/asyncFetch';
 import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
 
 interface IProductContext {
@@ -40,8 +40,8 @@ export const ProductProvider = ({ children }: { children: JSX.Element }) => {
     id: string | number,
   ): Promise<Licence | null> => {
     try {
-        return await asyncFetch<Licence>(`/api/v1/products/${id}`, {
-          method: 'GET',
+      return await asyncFetch<Licence>(`/api/v1/products/${id}`, {
+        method: 'GET',
       });
     } catch (e) {
       const error = e as HttpApiCallError;
