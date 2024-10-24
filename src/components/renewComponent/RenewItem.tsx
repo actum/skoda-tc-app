@@ -34,8 +34,8 @@ export default function RenewItem(props: IRenewItem) {
       paddingTop: 5,
     },
     price: {
+      color: '#fff',
       fontFamily: 'SKODA Next',
-      color: '#fff', // Šedý text pro popis
       fontSize: isLarge ? 24 : 16,
       fontWeight: isLarge ? 'normal' : 'bold',
     },
@@ -60,7 +60,7 @@ export default function RenewItem(props: IRenewItem) {
     <View
       style={[
         styles.root,
-        isLarge && { paddingVertical: 10, paddingHorizontal: 20 },
+        isLarge && { paddingVertical: 10, paddingHorizontal: 85 },
       ]}
     >
       <View style={[styles.icon, isLarge && { paddingRight: 20 }]}>

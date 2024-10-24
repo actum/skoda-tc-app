@@ -12,8 +12,10 @@ import {
 import { asyncFetch } from '@/src/connections/fetch/asyncFetch';
 import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
 import ErrorIcon from '@/src/components/icon/ErrorIcon';
+import useCarState from '@/src/components/carState';
 
 export default function PaymentProcessPage() {
+  const { car } = useCarState();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -38,13 +40,30 @@ export default function PaymentProcessPage() {
     }
   }
 
+  const styles = StyleSheet.create({
+    root: {
+      alignItems: 'center',
+      gap: 20,
+      justifyContent: 'center',
+      margin: car ? 70 : 'auto',
+    },
+    text: {
+      color: flowColorsRgbaOnSurface0,
+      fontFamily: 'SKODA Next',
+      fontSize: car ? 30 : 20,
+      fontWeight: car ? 'normal' : 'bold',
+      paddingHorizontal: 50,
+      textAlign: 'center',
+    },
+  });
+
   const navigate = useNavigate();
 
   if (loading) {
     return (
       <BaseContainer>
         <View style={styles.root}>
-          <ActivityIndicator size="large" color={flowColorsRgbaBrandPrimary} />
+          <ActivityIndicator size={70} color={flowColorsRgbaBrandPrimary} />
         </View>
       </BaseContainer>
     );
@@ -55,13 +74,14 @@ export default function PaymentProcessPage() {
       <BaseContainer>
         <View style={styles.root}>
           <View>
-            <ErrorIcon size={60} />
+            <ErrorIcon size={car ? 90 : 60} />
           </View>
           <View>
             <Text style={styles.text}>Internal server error</Text>
           </View>
           <View>
             <StyledButton
+              fontSize={22}
               title={'Services overview'}
               variant={'secondary'}
               onPress={() => {
@@ -78,13 +98,14 @@ export default function PaymentProcessPage() {
     <BaseContainer>
       <View style={styles.root}>
         <View>
-          <CheckIcon size={60} />
+          <CheckIcon size={car ? 90 : 60} />
         </View>
         <View>
           <Text style={styles.text}>Services were successfully renewed</Text>
         </View>
         <View>
           <StyledButton
+            fontSize={22}
             title={'Services overview'}
             variant={'secondary'}
             onPress={() => {
@@ -96,20 +117,3 @@ export default function PaymentProcessPage() {
     </BaseContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    alignItems: 'center',
-    gap: 20,
-    justifyContent: 'center',
-    margin: 'auto',
-  },
-  text: {
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: 'SKODA Next',
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingHorizontal: 50,
-    textAlign: 'center',
-  },
-});

@@ -133,7 +133,7 @@ export default function RenewComponent() {
       color: '#C4C6C7',
       fontFamily: 'SKODA Next',
       fontSize: car ? 22 : 16,
-      paddingLeft: 16,
+      paddingLeft: car ? 16 : 0,
     },
   });
 
