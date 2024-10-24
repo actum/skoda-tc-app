@@ -158,19 +158,19 @@ export default function DetailPage() {
             </View>
           )}
           <View style={styles.bodyContainer}>
-              <Card
-                  title="Rastrový Obrázek"
-                  subtitle="Podtitulek karty"
-                  description="Toto je popis karty s rastrovým obrázkem."
-                  actions={
-                      <StyledButton
-                          title="Akce"
-                          onPress={() => console.log('Akce stisknuta!')}
-                      />
-                  }
-                  onPress={() => console.log('Karta stisknuta!')}
-                  style={styles.cardFullWidth}
-              />
+            <Card
+              title="Rastrový Obrázek"
+              subtitle="Podtitulek karty"
+              description="Toto je popis karty s rastrovým obrázkem."
+              actions={
+                <StyledButton
+                  title="Akce"
+                  onPress={() => console.log('Akce stisknuta!')}
+                />
+              }
+              onPress={() => console.log('Karta stisknuta!')}
+              style={styles.cardFullWidth}
+            />
             <TextParagraph text="Toto je odstavec s výchozími styly." />
             <StyledButton
               title={'HOME'}
@@ -188,8 +188,8 @@ export default function DetailPage() {
 const styles = StyleSheet.create({
   mainWrapper: {
     gap: 24,
-      paddingTop: 50,
-      display: 'flex',
+    paddingTop: 50,
+    display: 'flex',
     flexDirection: 'column',
   },
   headerContainer: {
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   },
   imageFullWidth: {
     width: '100%', // Nastavení šířky na 100%
-      height: 250,
+    height: 250,
     aspectRatio: 16 / 9, // Udržuje poměr stran 16:9
     marginBottom: 20,
     borderRadius: 10,
