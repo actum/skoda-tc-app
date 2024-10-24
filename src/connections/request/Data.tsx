@@ -1,3 +1,8 @@
+export interface Category {
+  name: string;
+  licences: Licence[];
+}
+
 export interface Licence {
   code: string;
   name: string;

@@ -1,23 +1,29 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Icon from '@/src/components/icon';
+import Icon, { IconType } from '@/src/components/icon';
 
 interface ILicenceItem {
   size?: 'normal' | 'large';
-  icon: 'success' | 'warning'; // Typ ikony, kterou chcete zobrazit
+  icon: 'success' | 'warning' | 'normal';
   text: {
     title: string;
     description: string;
   };
-  action: () => void; // Akce na stisknutí položky
+  action: () => void;
 }
 
 export default function LicenceItem(props: ILicenceItem) {
-  const isWarning = props.icon === 'warning';
+  let iconColor = 'unset';
+  let type: IconType = 'bag';
+  if (props.icon === 'warning') {
+    iconColor = 'rgba(253, 88, 88, 1)';
+    type = 'warning';
+  }
 
-  const iconColor = isWarning
-    ? 'rgba(253, 88, 88, 1)'
-    : 'rgba(120, 250, 174, 1)'; // Červená pro warning, zelená pro success
+  if (props.icon === 'success') {
+    iconColor = 'rgba(120, 250, 174, 1)';
+    type = 'check';
+  }
 
   const isLarge = props.size === 'large';
 
@@ -38,9 +44,9 @@ export default function LicenceItem(props: ILicenceItem) {
           }}
         >
           <Icon
-            type={isWarning ? 'warning' : 'check'}
+            type={type}
             size={isLarge ? 42 : 18}
-            color={'black'}
+            color={props.icon === 'normal' ? '#fff' : 'black'}
           />
         </View>
       </View>
@@ -65,7 +71,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   description: {
-    color: '#aaa', // Šedý text pro popis
+    color: '#aaa',
     fontSize: 14,
   },
   icon: {

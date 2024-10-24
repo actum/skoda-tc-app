@@ -4,6 +4,7 @@ import Router from './router/Router';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
+import CardItemsProvider from '@/src/providers/CardItemsProvider';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -39,7 +40,9 @@ export default function App() {
 
   return (
     <UserProvider>
-      <Router />
+      <CardItemsProvider>
+        <Router />
+      </CardItemsProvider>
     </UserProvider>
   );
 }
