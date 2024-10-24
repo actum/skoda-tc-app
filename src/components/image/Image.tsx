@@ -10,15 +10,14 @@ import {
   StyleSheet,
   ImageSourcePropType,
   ImageResizeMode,
-  ImageURISource,
 } from 'react-native';
 
 interface CustomImageProps {
   source: ImageSourcePropType;
   style?: StyleProp<ImageStyle>;
   resizeMode?: ImageResizeMode;
-  placeholder?: ImageSourcePropType | React.ReactNode;
-  errorPlaceholder?: ImageSourcePropType | React.ReactNode;
+  placeholder?: ImageSourcePropType;
+  errorPlaceholder?: ImageSourcePropType;
   onLoad?: () => void;
   onError?: () => void;
   containerStyle?: StyleProp<ViewStyle>;
@@ -54,16 +53,8 @@ const CustomImage: React.FC<CustomImageProps> = ({
     }
   };
 
-  let displaySource:
-    | ImageURISource
-    | ImageURISource[]
-    | number
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-    | string
-    | Iterable<React.ReactNode>
-    | React.ReactPortal
-    | boolean = source;
-
+  // Vyberte správný zdroj obrázku
+  let displaySource: ImageSourcePropType = source;
   if (error && errorPlaceholder) {
     displaySource = errorPlaceholder;
   } else if (loading && placeholder) {
@@ -72,25 +63,35 @@ const CustomImage: React.FC<CustomImageProps> = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
+      {loading && placeholder && (
+        <Image
+          source={placeholder}
+          style={[style, styles.image]}
+          resizeMode={resizeMode}
+        />
+      )}
+      {error && errorPlaceholder && (
+        <Image
+          source={errorPlaceholder}
+          style={[style, styles.image]}
+          resizeMode={resizeMode}
+        />
+      )}
+      {!error && (
+        <Image
+          source={displaySource}
+          style={style}
+          resizeMode={resizeMode}
+          onLoad={handleLoad}
+          onError={handleError}
+        />
+      )}
       {loading && !placeholder && (
         <ActivityIndicator
           style={styles.activityIndicator}
           color={loadingIndicatorColor}
           size="small"
         />
-      )}
-      <Image
-        // @ts-ignore
-        source={displaySource}
-        style={style}
-        resizeMode={resizeMode}
-        onLoad={handleLoad}
-        onError={handleError}
-      />
-      {error && errorPlaceholder && typeof errorPlaceholder !== 'number' && (
-        <View style={[styles.placeholderContainer, style]}>
-          {errorPlaceholder}
-        </View>
       )}
     </View>
   );
@@ -105,10 +106,9 @@ const styles = StyleSheet.create({
   activityIndicator: {
     position: 'absolute',
   },
-  placeholderContainer: {
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
+  image: {
+    width: '100%',
+    height: '100%',
   },
 });
 

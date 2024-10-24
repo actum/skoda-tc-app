@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, StyleSheet, TextStyle, StyleProp } from 'react-native';
 import {
   flowTypographyMediumBody,
-  flowColorsRgbaTextPrimary,
+  flowColorsRgbaOnSurface0,
 } from '@/src/assets/styles';
 
 interface TextParagraphProps {
@@ -19,7 +19,7 @@ interface TextParagraphProps {
 
 const TextParagraph: React.FC<TextParagraphProps> = ({
   text,
-  color = flowColorsRgbaTextPrimary,
+  color = flowColorsRgbaOnSurface0,
   fontSize = parseFloat(flowTypographyMediumBody.fontSize),
   fontWeight = flowTypographyMediumBody.fontWeight as TextStyle['fontWeight'],
   fontStyle = flowTypographyMediumBody.fontStyle as TextStyle['fontStyle'],
@@ -49,7 +49,7 @@ const TextParagraph: React.FC<TextParagraphProps> = ({
 
 const styles = StyleSheet.create({
   text: {
-    color: flowColorsRgbaTextPrimary,
+    color: flowColorsRgbaOnSurface0,
     fontSize: parseFloat(flowTypographyMediumBody.fontSize),
     fontWeight: flowTypographyMediumBody.fontWeight as TextStyle['fontWeight'],
     fontStyle: flowTypographyMediumBody.fontStyle as TextStyle['fontStyle'],

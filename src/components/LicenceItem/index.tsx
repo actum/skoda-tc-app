@@ -3,8 +3,6 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon, { IconType } from '@/src/components/icon';
 import {
   flowColorsRgbaOnSurface0,
-  flowColorsRgbaSemanticAlert,
-  flowColorsRgbaSemanticPositive,
   flowColorsRgbaTextPrimary,
 } from '@/src/assets/styles';
 import CheckIcon from '@/src/components/icon/CheckIcon';
