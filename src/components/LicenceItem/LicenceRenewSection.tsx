@@ -5,7 +5,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import useCarState from '@/src/components/carState';
-import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
 
 interface ILicenceRenewSection {
   size?: 'large' | 'normal';
@@ -33,6 +32,7 @@ export default function LicenceRenewSection(props: ILicenceRenewSection) {
       padding: 0,
     },
     root: {
+      alignItems: car ? 'flex-start' : 'center',
       backgroundColor: '#303132',
       flexDirection: car ? 'row' : 'column',
       gap: car ? 0 : 10,
@@ -51,7 +51,7 @@ export default function LicenceRenewSection(props: ILicenceRenewSection) {
   });
 
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, car && { height: 100 }]}>
       <View style={styles.descriptionRow}>
         {car && (
           <TouchableOpacity
@@ -75,13 +75,26 @@ export default function LicenceRenewSection(props: ILicenceRenewSection) {
           </Text>
         </View>
       </View>
-      <StyledButton
-        fontSize={car ? 24 : undefined}
-        title={'Renew expired services'}
-        onPress={() => {
-          navigate(RouteKey.renew);
-        }}
-      />
+      <View
+        style={
+          car
+            ? {
+                paddingTop: 10,
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }
+            : undefined
+        }
+      >
+        <StyledButton
+          fontSize={car ? 24 : undefined}
+          title={'Renew expired services'}
+          onPress={() => {
+            navigate(RouteKey.renew);
+          }}
+        />
+      </View>
     </View>
   );
 }

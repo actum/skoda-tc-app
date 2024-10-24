@@ -41,7 +41,7 @@ export default function StyledButton(props: IButton) {
       borderRadius: 50,
       justifyContent: 'center',
       marginBottom: 10,
-      paddingBottom: car ? 18 : 12,
+      paddingBottom: 12,
       paddingHorizontal: 30,
       paddingTop: 12,
     },

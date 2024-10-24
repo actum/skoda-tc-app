@@ -11,14 +11,14 @@ export default function HomePage() {
 
   return (
     <BaseContainer>
-      <View style={{ flex: 1 }}>
+      <View style={car ? { height: '51%' } : { flex: 1 }}>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <PageHeader title={'Paid services'} backAction={() => {}} />
           <Licences />
         </ScrollView>
       </View>
       {car && (
-        <View style={{ flex: 1 }}>
+        <View style={car ? { height: '20%' } : { flex: 1 }}>
           <LicenceRenewSection />
         </View>
       )}

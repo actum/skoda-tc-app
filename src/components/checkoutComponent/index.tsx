@@ -1,4 +1,10 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Licence } from '@/src/connections/request/Data';
 import StyledButton from '@/src/components/button/StyledButton';
 import React, { useContext, useState } from 'react';
@@ -6,7 +12,6 @@ import { useNavigate } from 'react-router-native';
 import { CardItemsContext } from '@/src/providers/CardItemsProvider';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { UserContext } from '@/src/providers/UserContext';
-import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
 import useCarState from '@/src/components/carState';
 import Icon from '@/src/components/icon';
 
@@ -16,29 +21,6 @@ export default function CheckoutComponent() {
   const [data, setData] = useState<Licence[]>([]);
   const navigate = useNavigate();
   const cardContext = useContext(CardItemsContext);
-  console.log('userCtx---------------', userCtx);
-  //
-  // async function loadData() {
-  //   try {
-  //     const response = await asyncFetch<Licence[]>(
-  //       '/api/v1/products/inactive',
-  //       {
-  //         method: 'GET',
-  //       },
-  //     );
-  //     setData(response);
-  //     setTimeout(() => {
-  //       reset(getDefaultValues(response));
-  //     }, 100);
-  //   } catch (e) {
-  //     const error = e as HttpApiCallError;
-  //     alert(`ERROR WHEN GET CATEGORY: ${error.message}`);
-  //   }
-  // }
-  //
-  // useEffect(() => {
-  //   loadData();
-  // }, []);
 
   const calculateTotalPrice = () => {
     let total = 0;
@@ -49,7 +31,6 @@ export default function CheckoutComponent() {
     return total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   };
 
-  console.log('userCtx.userData', userCtx.userData);
   const formatCardNumber = (number: string) => {
     if (!number) return '';
     return `${number.slice(0, 4)} **** **** ${number.slice(-4)}`;
@@ -67,7 +48,7 @@ export default function CheckoutComponent() {
 
   const styles = StyleSheet.create({
     buttonArea: {
-      alignItems: 'center',
+      alignItems: car ? 'flex-start' : 'center',
       justifyContent: 'center',
       paddingHorizontal: car ? 0 : 40,
       paddingTop: 20,
@@ -96,7 +77,7 @@ export default function CheckoutComponent() {
       paddingBottom: car ? 15 : 0,
     },
     items: {
-      height: car ? '45%' : '80%',
+      height: car ? '46%' : '80%',
     },
     price: {
       color: '#fff',
@@ -254,9 +235,14 @@ export default function CheckoutComponent() {
               alignItems: 'center',
             }}
           >
-            <View style={{ paddingTop: car ? 5 : 5 }}>
+            <TouchableOpacity
+              style={{ paddingTop: 5 }}
+              onPressOut={() => {
+                navigate(RouteKey.renew);
+              }}
+            >
               <Icon type={'arrow'} size={32} color={'white'} />
-            </View>
+            </TouchableOpacity>
             <View
               style={{
                 flexDirection: 'row',

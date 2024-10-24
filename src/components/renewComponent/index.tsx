@@ -174,13 +174,16 @@ export default function RenewComponent() {
             backgroundColor: '#303132',
             flexDirection: 'row',
             justifyContent: 'space-between',
+            alignItems: 'center',
             paddingHorizontal: 30,
+            paddingTop: 5,
+            height: 100,
             paddingVertical: 10,
           }}
         >
-          <View style={{ flexDirection: 'row', gap: car ? 25 : 10 }}>
+          <View style={{ flexDirection: 'row', gap: 25 }}>
             <TouchableOpacity
-              style={{ paddingTop: car ? 20 : 5 }}
+              style={{ paddingTop: 5 }}
               onPressOut={() => {
                 navigate(RouteKey.home);
               }}
@@ -204,13 +207,17 @@ export default function RenewComponent() {
               <Text style={styles.vat}>including VAT</Text>
             </View>
           </View>
-          <StyledButton
-            fontSize={car ? 24 : undefined}
-            title={'Continue to Checkout'}
-            onPress={(e) => {
-              handleSubmit(onSubmit)(e);
-            }}
-          />
+          <View
+            style={car ? { alignItems: 'center', paddingTop: 10 } : undefined}
+          >
+            <StyledButton
+              fontSize={car ? 24 : undefined}
+              title={'Continue to Checkout'}
+              onPress={(e) => {
+                handleSubmit(onSubmit)(e);
+              }}
+            />
+          </View>
         </View>
       ) : (
         <View style={styles.summary}>

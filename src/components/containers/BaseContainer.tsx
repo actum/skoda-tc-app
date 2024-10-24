@@ -3,10 +3,7 @@ import React, { ReactNode } from 'react';
 import { Navigation } from '../navigation/Navigation';
 import { CarNavigation } from '@/src/components/car-navigation/CarNavigation';
 import useCarState from '@/src/components/carState';
-import {
-  flowColorsRgbaOnSurface900,
-  flowColorsRgbaTransparentPrimary,
-} from '@/src/assets/styles';
+import { flowColorsRgbaOnSurface900 } from '@/src/assets/styles';
 
 export default function BaseContainer({ children }: { children: ReactNode }) {
   const { car } = useCarState();
