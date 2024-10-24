@@ -52,8 +52,10 @@ const styles = StyleSheet.create({
   },
   secondary: {
     alignItems: 'center',
-    backgroundColor: '#333',
+    backgroundColor: 'rgba(35, 36, 37, 1)',
+    borderColor: 'rgba(70, 71, 72, 1)',
     borderRadius: 50,
+    borderWidth: 1,
     justifyContent: 'center',
     paddingHorizontal: 30,
     paddingVertical: 14,

@@ -4,9 +4,12 @@ import PageHeader from '@/src/components/pageHeader';
 import { View } from 'react-native';
 import { Input } from '@/src/components/forms/Input';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-native';
+import { RouteKey } from '@/src/components/navigation/Navigation';
 
 export default function ChangeBillingAddress() {
   const { control, handleSubmit } = useForm<any>();
+  const navigate = useNavigate();
 
   function onSubmit(data: any) {
     alert(
@@ -16,7 +19,12 @@ export default function ChangeBillingAddress() {
 
   return (
     <BaseContainer>
-      <PageHeader title={'Change Billing Address'} backAction={() => {}} />
+      <PageHeader
+        title={'Change Billing Address'}
+        backAction={() => {
+          navigate(RouteKey.checkout);
+        }}
+      />
       <View style={{ flexDirection: 'column', gap: 20, padding: 20 }}>
         <Input
           label={'First name *'}

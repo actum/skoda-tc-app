@@ -39,6 +39,7 @@ export async function asyncFetch<T>(
 
   if (isJsonResponse) {
     jsonResponse = await response.json();
+    console.log('JSON RESPONSE', jsonResponse);
   } else {
     textResponse = 'Server Error';
     // textResponse = await response.text()
@@ -46,8 +47,8 @@ export async function asyncFetch<T>(
 
   let errorMessage = response.statusText;
   if (!errorMessage) {
-    if (isJsonResponse && jsonResponse.message) {
-      errorMessage = jsonResponse.message;
+    if (isJsonResponse && jsonResponse.error) {
+      errorMessage = jsonResponse.error;
     }
     if (!isJsonResponse && textResponse) {
       errorMessage = textResponse;

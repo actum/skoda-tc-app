@@ -1,15 +1,20 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import NavigationButton from '@/src/components/navigation/NavigationButton';
+import { useNavigate } from 'react-router-native';
 
 export const RouteKey = {
   home: '/',
   renew: '/renew',
+  checkout: '/checkout',
+  paymentProcess: '/paymentProcess',
   detail: '/detail/:id',
   changeBillingAddress: '/changeBillingAddress',
 };
 
 export function Navigation() {
+  const navigate = useNavigate();
+
   return (
     <View style={styles.root}>
       <View style={styles.item}>
@@ -25,7 +30,12 @@ export function Navigation() {
         <NavigationButton title={'Discover'} icon={'discover'} />
       </View>
       <View style={styles.item}>
-        <NavigationButton title={'Profile'} icon={'profile'} isActive />
+        <NavigationButton
+          title={'Profile'}
+          icon={'profile'}
+          isActive
+          onPress={() => navigate(RouteKey.home)}
+        />
       </View>
     </View>
   );

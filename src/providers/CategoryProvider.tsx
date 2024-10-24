@@ -6,30 +6,23 @@ import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
 interface ICategoryContext {
   items: Category[];
   setItems: (items: Category[]) => void;
+  loadCategories: () => void;
 }
 
 export const CategoryContext = createContext<ICategoryContext>({
   items: [],
   setItems: () => null,
+  loadCategories: () => null,
 });
 
 export const CategoryProvider = ({ children }: { children: JSX.Element }) => {
-  useEffect(() => {
-    loadCategoryData();
-  }, []);
-
   async function loadCategoryData() {
     try {
-      const category = await asyncFetch<Category[]>('/api/v1/categories', {
+      const categories = await asyncFetch<Category[]>('/api/v1/categories', {
         method: 'GET',
       });
-      console.log('category', category);
-      const newState = {
-        ...items,
-        categoryData: category,
-      };
-      // storeData(newState);
-      setItems(newState);
+      console.log('categories', categories);
+      setItems(categories);
     } catch (e) {
       const error = e as HttpApiCallError;
       alert(`ERROR WHEN GET CATEGORY: ${error.message}`);
@@ -43,6 +36,7 @@ export const CategoryProvider = ({ children }: { children: JSX.Element }) => {
       value={{
         items: items,
         setItems: setItems,
+        loadCategories: loadCategoryData,
       }}
     >
       {children}
