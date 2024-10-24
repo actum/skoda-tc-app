@@ -18,9 +18,11 @@ export interface User {
   firstname: string;
   lastname: string;
   phoneNumber: string;
+  email: string;
   address?: {
     id: string;
     street: string;
+    houseNumber: number;
     city: string;
     postalCode: string;
     addressType: string;
