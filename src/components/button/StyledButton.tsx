@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {
   flowColorsRgbaBrandSecondary,
+  flowColorsRgbaOnSurface0,
   flowColorsRgbaTextPrimary,
 } from '@/src/assets/styles';
 
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
   },
   text: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODANext-Bold',
     fontSize: 16,
     fontWeight: 'bold',

@@ -1,13 +1,17 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Icon, { IconType } from '@/src/components/icon';
+import {
+  flowColorsRgbaBrandSecondary,
+  flowColorsRgbaOnSurface0,
+} from '@/src/assets/styles';
 
 interface MNavigationButtonProps {
   icon: IconType;
   title?: string;
   onPress?: () => void;
   size?: 'small' | 'large';
-  isActive?: boolean; // Pro zvýraznění aktivní položky
+  isActive?: boolean;
 }
 
 export default function NavigationButton({
@@ -32,7 +36,7 @@ export default function NavigationButton({
       <Icon
         type={icon}
         size={getSize()}
-        color={isActive ? '#7FFFB0' : '#fff'}
+        color={isActive ? '#7fffb0' : '#fff'}
       />
       {title && (
         <Text
@@ -51,13 +55,13 @@ export default function NavigationButton({
 
 const styles = StyleSheet.create({
   activeText: {
-    color: '#7FFFB0', // Zelená barva pro aktivní text
+    color: flowColorsRgbaBrandSecondary,
   },
   menuItem: {
     alignItems: 'center',
   },
   menuText: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontSize: 16,
   },
   largeText: {

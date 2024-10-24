@@ -1,16 +1,25 @@
 // PageHeader.tsx
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import Icon from '@/src/components/icon';
+import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
 
+// Interface for properties
 interface IPageHeader {
-  title?: string; // Změněno na volitelný
+  title?: string;
   backAction: () => void;
+  style?: StyleProp<ViewStyle>;
 }
 
 export default function PageHeader(props: IPageHeader) {
   return (
-    <View style={styles.root}>
-      {/* Levá část s ikonou pro akci zpět */}
+    <View style={[props.style, styles.root]}>
       <TouchableOpacity
         onPress={props.backAction}
         style={styles.iconContainer}
@@ -20,7 +29,6 @@ export default function PageHeader(props: IPageHeader) {
         <Icon type={'chevron-left'} size={32} color={'#fff'} />
       </TouchableOpacity>
 
-      {/* Střední část s nadpisem, která se zobrazí pouze pokud je title poskytnut */}
       {props.title && (
         <View style={styles.titleContainer}>
           <Text style={styles.text}>{props.title}</Text>
@@ -33,22 +41,21 @@ export default function PageHeader(props: IPageHeader) {
 const styles = StyleSheet.create({
   iconContainer: {
     left: 10,
-    position: 'absolute', // Nastavení pozice ikony vlevo
+    position: 'absolute',
   },
   root: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center', // Vycentrování obsahu ve středu
-    height: 60, // Nastavení výšky pro správné zarovnání
-    // backgroundColor: '#000', // Přidání pozadí pro lepší viditelnost
+    justifyContent: 'center',
+    height: 60,
   },
   text: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontSize: 20,
     fontWeight: 'bold',
   },
   titleContainer: {
-    alignItems: 'center', // Zarovná text na střed
+    alignItems: 'center',
     justifyContent: 'center',
   },
 });

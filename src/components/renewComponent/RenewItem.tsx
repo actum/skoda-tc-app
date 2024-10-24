@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Checkbox from '@/src/components/forms/Checkbox';
 import { Control, FieldPath } from 'react-hook-form';
-import { RenewFormData } from '@/src/components/renewComponent/index';
+import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
+import { RenewFormData } from '@/src/components/RenewComponent/index';
 
 interface IRenewItem {
   identifier: string;
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODA Next',
     fontSize: 18,
     fontWeight: 'bold',

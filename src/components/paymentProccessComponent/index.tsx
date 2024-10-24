@@ -4,7 +4,10 @@ import StyledButton from '@/src/components/button/StyledButton';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-native';
 import { CardItemsContext } from '@/src/providers/CardItemsProvider';
-import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
+import {
+  flowColorsRgbaOnSurface0,
+  flowColorsRgbaSurfaceQuarternary,
+} from '@/src/assets/styles';
 
 export default function PaymentProccessComponent() {
   const [data, setData] = useState<Licence[]>([]);
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
     height: '80%',
   },
   price: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODA Next',
     fontSize: 24,
     fontWeight: 'bold',
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
     marginBottom: 80,
   },
   summary: {
-    backgroundColor: '#303132',
+    backgroundColor: flowColorsRgbaSurfaceQuarternary,
     bottom: 0,
     justifyContent: 'center',
     left: 0,
@@ -114,7 +117,7 @@ const styles = StyleSheet.create({
     width: '100%', // Vertikálně centrované tlačítko
   },
   total: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODA Next',
     fontSize: 16,
     fontWeight: 'bold',
@@ -125,7 +128,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   vat: {
-    color: '#C4C6C7',
+    color: '#c4c6c7',
     fontFamily: 'SKODA Next',
     fontSize: 16,
   },

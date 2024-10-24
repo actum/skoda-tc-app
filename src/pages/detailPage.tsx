@@ -11,7 +11,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import BaseContainer from '@/src/components/containers/BaseContainer';
 import StyledButton from '@/src/components/button/StyledButton';
 import { RouteKey } from '@/src/components/navigation/Navigation';
-import { useLocation, useNavigate, useParams } from 'react-router-native';
+import { useNavigate, useParams } from 'react-router-native';
 import {
   flowColorsRgbaBrandPrimary,
   flowColorsRgbaOnSurface0,
@@ -37,11 +37,8 @@ export default function DetailPage() {
   let isExpired = false;
   let licenceStateText = '';
   const navigate = useNavigate();
-  const location = useLocation();
   const { id } = useParams<{ id: string }>();
 
-  console.log('location', location);
-  console.log('id', id);
   const { getProductById } = useContext(ProductContext);
   const [product, setProduct] = useState<Licence | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -114,7 +111,6 @@ export default function DetailPage() {
 
     setLoading(true);
     const fetchedProduct = await getProductById(id);
-    console.log('Fetched product:', fetchedProduct);
     if (fetchedProduct) {
       setProduct(fetchedProduct);
       setError(null);
@@ -141,9 +137,6 @@ export default function DetailPage() {
     )}`;
   }
 
-  console.log('Icon Type:', iconType);
-
-  // Zobrazit Loader
   if (loading) {
     return (
       <BaseContainer>
@@ -166,9 +159,7 @@ export default function DetailPage() {
             placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
             errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
             style={styles.image}
-            loadingIndicatorColor="#ff0000"
-            onLoad={() => console.log('Obrázek načten!')}
-            onError={() => console.log('Chyba při načítání obrázku!')}
+            loadingIndicatorColor={flowColorsRgbaBrandPrimary}
           />
           <Text style={styles.errorText}>{error}</Text>
           <StyledButton
@@ -196,9 +187,7 @@ export default function DetailPage() {
               placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
               errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
               style={styles.imageFullWidth}
-              loadingIndicatorColor="#ff0000"
-              onLoad={() => console.log('Obrázek načten!')}
-              onError={() => console.log('Chyba při načítání obrázku!')}
+              loadingIndicatorColor={flowColorsRgbaBrandPrimary}
             />
           </View>
 
@@ -236,7 +225,6 @@ export default function DetailPage() {
                   />
                 )
               }
-              onPress={() => console.log('Karta stisknuta!')}
               style={styles.cardFullWidth}
             />
             {product.description && (
@@ -354,5 +342,5 @@ const styles = StyleSheet.create({
       flowTypographyLargeBody.textDecoration as TextStyle['textDecorationLine'],
     textTransform:
       flowTypographyLargeBody.textTransform as TextStyle['textTransform'],
-  }
+  },
 });
