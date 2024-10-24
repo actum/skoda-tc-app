@@ -15,27 +15,24 @@ import { useLocation, useNavigate, useParams } from 'react-router-native';
 import {
   flowColorsRgbaBrandPrimary,
   flowColorsRgbaOnSurface0,
+  flowColorsRgbaOnSurface800,
   flowColorsRgbaSemanticAlert,
-  flowColorsRgbaSemanticInfo,
-  flowColorsRgbaSemanticPositive,
-  flowColorsRgbaSemanticWarning,
-  flowColorsRgbaTextPrimary,
   flowTypographyLargeBody,
   flowTypographyLargeH1,
 } from '@/src/assets/styles';
-import Badge from '@/src/components/badge/Badge';
 import TextParagraph from '@/src/components/text/TextParagraph';
-import FormExample from '@/src/components/forms/FormExample';
 import CustomImage from '@/src/components/image/Image';
 import Card from '@/src/components/card/Card';
 import { ProductContext } from '@/src/providers/ProductProvider';
 import { Licence } from '@/src/connections/request/Data';
 import Icon, { IconType } from '@/src/components/icon';
-import { formatDate } from 'tough-cookie';
+import PageHeader from '@/src/components/pageHeader';
 
 export default function DetailPage() {
   let iconType;
   let iconColor;
+  let isExpired = false;
+  let licenceStateText = '';
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams<{ id: string }>();
@@ -47,14 +44,26 @@ export default function DetailPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  function formatDate(date: string): string {
+    return new Date(date).toLocaleDateString('cs-CZ', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    });
+  }
+
   if (product && product.purchasedLicense?.endDate) {
     if (new Date(product.purchasedLicense?.endDate) > new Date()) {
       iconType = 'check';
       iconColor = 'rgba(120, 250, 174, 1)';
+      isExpired = false;
     } else {
       iconType = 'warning';
       iconColor = 'rgba(253, 88, 88, 1)';
+      isExpired = true;
     }
+
+      licenceStateText = `${isExpired ? 'Expired on':'Active until'} ${formatDate(new Date(product.purchasedLicense.endDate).toString())}`;
   }
 
   console.log(iconType);
@@ -94,6 +103,7 @@ export default function DetailPage() {
   if (loading) {
     return (
       <BaseContainer>
+        <PageHeader title={'Paid services'} backAction={() => {}} />
         <View style={styles.loader}>
           <ActivityIndicator size="large" color={flowColorsRgbaBrandPrimary} />
         </View>
@@ -104,6 +114,7 @@ export default function DetailPage() {
   if (error || !product || !id) {
     return (
       <BaseContainer>
+        <PageHeader title={'Paid services'} backAction={() => {}} />
         <View style={styles.mainWrapper}>
           <CustomImage
             source={require('../assets/images/404.png')}
@@ -126,6 +137,7 @@ export default function DetailPage() {
 
   return (
     <BaseContainer>
+      <PageHeader title={'Paid services'} backAction={() => {}} />
       <ScrollView style={{ marginBottom: 80 }}>
         <View style={styles.mainWrapper}>
           <View style={styles.headerContainer}>
@@ -151,27 +163,31 @@ export default function DetailPage() {
                   color={flowColorsRgbaOnSurface0}
                 />
               </View>
-              <Text style={styles.text}>
-                Active until{' '}
-                {formatDate(new Date(product.purchasedLicense.endDate))}
-              </Text>
+              {licenceStateText && (
+                <TextParagraph style={styles.text} text={licenceStateText} />
+              )}
             </View>
           )}
           <View style={styles.bodyContainer}>
             <Card
-              title="Rastrový Obrázek"
-              subtitle="Podtitulek karty"
-              description="Toto je popis karty s rastrovým obrázkem."
+              title="Price total"
+              description="Including VAT"
+              priceValue={product.price}
               actions={
-                <StyledButton
-                  title="Akce"
-                  onPress={() => console.log('Akce stisknuta!')}
-                />
+                isExpired && (
+                  <StyledButton
+                    title="Renew service"
+                    onPress={() => console.log('Akce stisknuta!')}
+                    style={{ width: '100%' }}
+                  />
+                )
               }
               onPress={() => console.log('Karta stisknuta!')}
               style={styles.cardFullWidth}
             />
-            <TextParagraph text="Toto je odstavec s výchozími styly." />
+            {product.description && (
+              <TextParagraph text={product.description} />
+            )}
             <StyledButton
               title={'HOME'}
               onPress={() => {
@@ -203,9 +219,11 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'flex-start',
+    flexDirection: 'row',
     paddingHorizontal: 16,
+    gap: 8,
   },
   icon: {
     borderRadius: 50,
@@ -215,6 +233,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 16,
+    gap: 16,
   },
   card: {
     marginBottom: 20,
@@ -222,6 +241,7 @@ const styles = StyleSheet.create({
   cardFullWidth: {
     width: '100%',
     marginBottom: 20,
+    backgroundColor: flowColorsRgbaOnSurface800,
   },
   image: {
     borderRadius: 10,
