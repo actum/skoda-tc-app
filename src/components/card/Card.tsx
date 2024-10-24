@@ -1,16 +1,20 @@
 // components/Card.tsx
 import React from 'react';
 import {
-  View,
-  StyleSheet,
-  StyleProp,
-  ViewStyle,
+  ImageSourcePropType,
   ImageStyle,
+  StyleProp,
+  StyleSheet,
   TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
-import { ImageSourcePropType } from 'react-native';
 import CustomImage from '@/src/components/image/Image';
-import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
+import {
+  flowColorsRgbaOnSurface0,
+  flowColorsRgbaOnSurface800,
+  flowColorsRgbaOnSurface900,
+} from '@/src/assets/styles';
 import TextParagraph from '@/src/components/text/TextParagraph';
 
 // Typování props pro Card komponentu
@@ -119,9 +123,9 @@ const Card: React.FC<CardProps> = ({
 // Styly pro Card komponentu
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: flowColorsRgbaOnSurface0,
+    backgroundColor: flowColorsRgbaOnSurface800,
     borderRadius: 12,
-    shadowColor: '#000',
+    shadowColor: flowColorsRgbaOnSurface900,
     shadowOffset: {
       width: 0,
       height: 2,

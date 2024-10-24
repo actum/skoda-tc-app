@@ -19,8 +19,6 @@ import {
   flowColorsRgbaSemanticAlert,
   flowColorsRgbaTextPrimary,
   flowTypographyLargeBody,
-  flowTypographyLargeH1,
-  flowTypographyMediumH1,
   flowTypographySmallH1,
 } from '@/src/assets/styles';
 import TextParagraph from '@/src/components/text/TextParagraph';
@@ -31,6 +29,7 @@ import { Licence } from '@/src/connections/request/Data';
 import Icon, { IconType } from '@/src/components/icon';
 import PageHeader from '@/src/components/pageHeader';
 import { CardItemsContext } from '@/src/providers/CardItemsProvider';
+import Accordion from '@/src/components/accordion/Accordion';
 
 export default function DetailPage() {
   let iconType;
@@ -49,6 +48,43 @@ export default function DetailPage() {
   const [error, setError] = useState<string | null>(null);
 
   const ctxCard = useContext(CardItemsContext);
+
+  const mockAccordionData = [
+    {
+      id: 1,
+      title: 'Informace o produktu',
+      content:
+        'Toto je podrobný popis produktu, který obsahuje všechny důležité informace a specifikace.',
+    },
+    {
+      id: 2,
+      title: 'Recenze zákazníků',
+      content:
+        'Zde najdete recenze a hodnocení od našich spokojených zákazníků.',
+    },
+    {
+      id: 3,
+      title: 'Specifikace',
+      content:
+        'Detailní technické specifikace produktu, včetně materiálů a rozměrů.',
+    },
+    {
+      id: 4,
+      title: 'Často kladené otázky',
+      content: 'Odpovědi na nejčastější otázky týkající se našeho produktu.',
+    },
+    {
+      id: 5,
+      title: 'Záruka a podpora',
+      content: 'Informace o zárukách, servisu a podpoře pro náš produkt.',
+    },
+    {
+      id: 6,
+      title: 'Návody a příručky',
+      content:
+        'Přístup k návodům a uživatelským příručkám pro efektivní využití produktu.',
+    },
+  ];
 
   function formatDate(date: string): string {
     return new Date(date).toLocaleDateString('cs-CZ', {
@@ -200,6 +236,15 @@ export default function DetailPage() {
             {product.description && (
               <TextParagraph text={product.description} />
             )}
+            {mockAccordionData.map((item) => (
+              <Accordion
+                key={item.id}
+                title={item.title}
+                initiallyExpanded={false}
+              >
+                <TextParagraph text={item.content} />
+              </Accordion>
+            ))}
             <StyledButton
               title={'HOME'}
               onPress={() => {
