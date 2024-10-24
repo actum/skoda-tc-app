@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Checkbox from '@/src/components/forms/Checkbox';
 import { Control, FieldPath, useForm } from 'react-hook-form';
-import { RenewFormData } from '@/src/components/RenewComponent/index';
+import {RenewFormData} from "@/src/components/RenewComponent/index";
 
 interface IRenewItem {
   identifier: string;
