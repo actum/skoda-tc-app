@@ -21,7 +21,6 @@ export const CategoryProvider = ({ children }: { children: JSX.Element }) => {
       const categories = await asyncFetch<Category[]>('/api/v1/categories', {
         method: 'GET',
       });
-      console.log('categories', categories);
       setItems(categories);
     } catch (e) {
       const error = e as HttpApiCallError;

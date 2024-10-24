@@ -5,6 +5,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import useCarState from '@/src/components/carState';
+import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
 
 interface ILicenceRenewSection {
   size?: 'large' | 'normal';

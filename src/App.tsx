@@ -7,6 +7,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import CardItemsProvider from '@/src/providers/CardItemsProvider';
 import { CategoryProvider } from '@/src/providers/CategoryProvider';
 import { ProductProvider } from '@/src/providers/ProductProvider';
+import BackLinkProvider from '@/src/providers/BackLinkProvider';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -15,7 +16,7 @@ export default function App() {
     // SKODA Next Fonts
     'SKODANext-Black': require('@skodaflow/web-tokens/src/fonts/SKODANext-Black.ttf'),
     'SKODANext-Bold': require('@skodaflow/web-tokens/src/fonts/SKODANext-Bold.ttf'),
-    'SKODA Next': require('@skodaflow/web-tokens/src/fonts/SKODANext-Light.ttf'),
+    'SKODA Next': require('@skodaflow/web-tokens/src/fonts/SKODANext-Regular.ttf'),
     'SKODANext-Light': require('@skodaflow/web-tokens/src/fonts/SKODANext-Light.ttf'),
     'SKODANext-Regular': require('@skodaflow/web-tokens/src/fonts/SKODANext-Regular.ttf'),
 
@@ -45,7 +46,9 @@ export default function App() {
       <CategoryProvider>
         <ProductProvider>
           <CardItemsProvider>
-            <Router />
+            <BackLinkProvider>
+              <Router />
+            </BackLinkProvider>
           </CardItemsProvider>
         </ProductProvider>
       </CategoryProvider>

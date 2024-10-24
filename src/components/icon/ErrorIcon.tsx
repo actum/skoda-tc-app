@@ -22,7 +22,7 @@ export default function ErrorIcon(props: ICheckBoxIcon) {
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: "'rgba(253, 88, 88, 1)'",
+    backgroundColor: 'rgba(253, 88, 88, 1)',
     borderRadius: 50,
     padding: 0,
   },

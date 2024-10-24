@@ -1,11 +1,21 @@
 // PageHeader.tsx
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import Icon from '@/src/components/icon';
 import useCarState from '@/src/components/carState';
+import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
 
+// Interface for properties
 interface IPageHeader {
-  title?: string; // Změněno na volitelný
+  title?: string;
   backAction: () => void;
+  style?: StyleProp<ViewStyle>;
 }
 
 export default function PageHeader(props: IPageHeader) {
@@ -30,7 +40,7 @@ export default function PageHeader(props: IPageHeader) {
       // backgroundColor: '#000', // Přidání pozadí pro lepší viditelnost
     },
     text: {
-      color: '#fff',
+      color: flowColorsRgbaOnSurface0,
       fontSize: 20,
       fontWeight: 'bold',
     },
@@ -57,13 +67,21 @@ export default function PageHeader(props: IPageHeader) {
   }
 
   return (
-    <View style={styles.root}>
-      <TouchableOpacity onPress={props.backAction} style={styles.iconContainer}>
+    <View style={[props.style, styles.root]}>
+      <TouchableOpacity
+        onPress={props.backAction}
+        style={styles.iconContainer}
+        accessibilityRole="button"
+        accessibilityLabel="Go back"
+      >
         <Icon type={'chevron-left'} size={32} color={'#fff'} />
       </TouchableOpacity>
-      <View style={styles.titleContainer}>
-        <Text style={styles.text}>{props.title}</Text>
-      </View>
+
+      {props.title && (
+        <View style={styles.titleContainer}>
+          <Text style={styles.text}>{props.title}</Text>
+        </View>
+      )}
     </View>
   );
 }

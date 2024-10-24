@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-native';
 import { CardItemsContext } from '@/src/providers/CardItemsProvider';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { UserContext } from '@/src/providers/UserContext';
+import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
 import useCarState from '@/src/components/carState';
 import Icon from '@/src/components/icon';
 
@@ -186,9 +187,9 @@ export default function CheckoutComponent() {
               </View>
               <View style={styles.buttonArea}>
                 <StyledButton
+                  title={'Change billing address'}
                   style={car ? { width: '70%' } : undefined}
                   fontSize={car ? 22 : undefined}
-                  title={'ChangeEvent billing address'}
                   variant={'secondary'}
                   onPress={() => {
                     navigate(RouteKey.changeBillingAddress);
@@ -225,6 +226,9 @@ export default function CheckoutComponent() {
                   fontSize={car ? 22 : undefined}
                   title={'Change payment method'}
                   variant={'secondary'}
+                  onPress={() => {
+                    navigate(RouteKey.changePayment);
+                  }}
                 />
               </View>
             </View>

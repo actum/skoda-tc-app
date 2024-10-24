@@ -11,7 +11,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import BaseContainer from '@/src/components/containers/BaseContainer';
 import StyledButton from '@/src/components/button/StyledButton';
 import { RouteKey } from '@/src/components/navigation/Navigation';
-import { useLocation, useNavigate, useParams } from 'react-router-native';
+import { useNavigate, useParams } from 'react-router-native';
 import {
   flowColorsRgbaBrandPrimary,
   flowColorsRgbaOnSurface0,
@@ -30,18 +30,17 @@ import Icon, { IconType } from '@/src/components/icon';
 import PageHeader from '@/src/components/pageHeader';
 import { CardItemsContext } from '@/src/providers/CardItemsProvider';
 import Accordion from '@/src/components/accordion/Accordion';
+import { BackLinkContext } from '@/src/providers/BackLinkProvider';
 
 export default function DetailPage() {
+  const ctxBackLink = useContext(BackLinkContext);
   let iconType: IconType | null = null;
   let iconColor: string = '';
   let isExpired = false;
   let licenceStateText = '';
   const navigate = useNavigate();
-  const location = useLocation();
   const { id } = useParams<{ id: string }>();
 
-  console.log('location', location);
-  console.log('id', id);
   const { getProductById } = useContext(ProductContext);
   const [product, setProduct] = useState<Licence | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -114,7 +113,6 @@ export default function DetailPage() {
 
     setLoading(true);
     const fetchedProduct = await getProductById(id);
-    console.log('Fetched product:', fetchedProduct);
     if (fetchedProduct) {
       setProduct(fetchedProduct);
       setError(null);
@@ -141,13 +139,9 @@ export default function DetailPage() {
     )}`;
   }
 
-  console.log('Icon Type:', iconType);
-
-  // Zobrazit Loader
   if (loading) {
     return (
       <BaseContainer>
-        <PageHeader title={'Paid services'} backAction={() => {}} />
         <View style={styles.loader}>
           <ActivityIndicator size="large" color={flowColorsRgbaBrandPrimary} />
         </View>
@@ -166,9 +160,7 @@ export default function DetailPage() {
             placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
             errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
             style={styles.image}
-            loadingIndicatorColor="#ff0000"
-            onLoad={() => console.log('Obrázek načten!')}
-            onError={() => console.log('Chyba při načítání obrázku!')}
+            loadingIndicatorColor={flowColorsRgbaBrandPrimary}
           />
           <Text style={styles.errorText}>{error}</Text>
           <StyledButton
@@ -196,9 +188,7 @@ export default function DetailPage() {
               placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
               errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
               style={styles.imageFullWidth}
-              loadingIndicatorColor="#ff0000"
-              onLoad={() => console.log('Obrázek načten!')}
-              onError={() => console.log('Chyba při načítání obrázku!')}
+              loadingIndicatorColor={flowColorsRgbaBrandPrimary}
             />
           </View>
 
@@ -230,13 +220,15 @@ export default function DetailPage() {
                     title="Renew service"
                     onPress={() => {
                       ctxCard.setItems([product]);
+                      ctxBackLink.setBackLink(
+                        RouteKey.detail.replace(':id', product.code),
+                      );
                       navigate(RouteKey.checkout);
                     }}
                     style={{ width: '100%' }}
                   />
                 )
               }
-              onPress={() => console.log('Karta stisknuta!')}
               style={styles.cardFullWidth}
             />
             {product.description && (
@@ -266,46 +258,6 @@ export default function DetailPage() {
 }
 
 const styles = StyleSheet.create({
-  imageContainer: {
-    position: 'relative',
-    width: '100%',
-    height: 250, // Musí odpovídat výšce obrázku
-  },
-  mainWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 24,
-  },
-  titleContainer: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    paddingHorizontal: 16,
-  },
-  title: {
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: flowTypographySmallH1.fontFamily,
-    fontSize: parseFloat(flowTypographySmallH1.fontSize),
-    fontWeight: flowTypographySmallH1.fontWeight as TextStyle['fontWeight'],
-    letterSpacing:
-      parseFloat(flowTypographySmallH1.letterSpacing) *
-      parseFloat(flowTypographySmallH1.fontSize),
-    lineHeight: parseFloat(flowTypographySmallH1.lineHeight),
-    textDecorationLine:
-      flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
-    textTransform:
-      flowTypographySmallH1.textTransform as TextStyle['textTransform'],
-  },
-  iconContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 8,
-    justifyContent: 'flex-start',
-    paddingHorizontal: 16,
-  },
-  icon: {
-    borderRadius: 50,
-    padding: 0,
-  },
   bodyContainer: {
     alignItems: 'center',
     gap: 16,
@@ -325,10 +277,26 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
   },
+  icon: {
+    borderRadius: 50,
+    padding: 0,
+  },
+  iconContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 8,
+    justifyContent: 'flex-start',
+    paddingHorizontal: 16,
+  },
   image: {
-    width: '100%',
-    height: '100%',
     borderRadius: 10,
+    height: '100%',
+    width: '100%',
+  },
+  imageContainer: {
+    height: 250,
+    position: 'relative',
+    width: '100%', // Musí odpovídat výšce obrázku
   },
   imageFullWidth: {
     width: '100%', // Nastavení šířky na 100%
@@ -340,6 +308,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
+  },
+  mainWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 24,
   },
   text: {
     color: flowColorsRgbaOnSurface0,
@@ -354,5 +327,24 @@ const styles = StyleSheet.create({
       flowTypographyLargeBody.textDecoration as TextStyle['textDecorationLine'],
     textTransform:
       flowTypographyLargeBody.textTransform as TextStyle['textTransform'],
-  }
+  },
+  title: {
+    color: flowColorsRgbaOnSurface0,
+    fontFamily: flowTypographySmallH1.fontFamily,
+    fontSize: parseFloat(flowTypographySmallH1.fontSize),
+    fontWeight: flowTypographySmallH1.fontWeight as TextStyle['fontWeight'],
+    letterSpacing:
+      parseFloat(flowTypographySmallH1.letterSpacing) *
+      parseFloat(flowTypographySmallH1.fontSize),
+    lineHeight: parseFloat(flowTypographySmallH1.lineHeight),
+    textDecorationLine:
+      flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
+    textTransform:
+      flowTypographySmallH1.textTransform as TextStyle['textTransform'],
+  },
+  titleContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 16,
+  },
 });
