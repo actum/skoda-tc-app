@@ -17,12 +17,13 @@ import {
   FieldPath,
 } from 'react-hook-form';
 import {
-    flowColorsRgbaBrandSecondary,
-    flowColorsRgbaDisabledPrimary,
-    flowColorsRgbaDisabledSecondary,
-    flowColorsRgbaDisabledTertiary,
-    flowColorsRgbaTextPrimary,
-    flowColorsRgbaSemanticAlert, flowColorsRgbaOnSurface0,
+  flowColorsRgbaBrandSecondary,
+  flowColorsRgbaDisabledPrimary,
+  flowColorsRgbaDisabledSecondary,
+  flowColorsRgbaDisabledTertiary,
+  flowColorsRgbaTextPrimary,
+  flowColorsRgbaSemanticAlert,
+  flowColorsRgbaOnSurface0,
 } from '@/src/assets/styles';
 
 interface CheckboxProps<T extends FieldValues> {

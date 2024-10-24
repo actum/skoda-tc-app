@@ -8,6 +8,9 @@ export interface Licence {
   name: string;
   price: number;
   purchasedLicense?: { endDate: string };
+  description?: string;
+  categoryName?: string;
+  productType?: string;
 }
 
 export interface User {

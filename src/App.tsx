@@ -5,25 +5,27 @@ import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import CardItemsProvider from '@/src/providers/CardItemsProvider';
+import { CategoryProvider } from '@/src/providers/CategoryProvider';
+import { ProductProvider } from '@/src/providers/ProductProvider';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [loaded] = useFonts({
-    SpaceMono: require('./assets/fonts/SpaceMono-Regular.ttf'),
+    // SKODA Next Fonts
     'SKODANext-Black': require('@skodaflow/web-tokens/src/fonts/SKODANext-Black.ttf'),
     'SKODANext-Bold': require('@skodaflow/web-tokens/src/fonts/SKODANext-Bold.ttf'),
     'SKODA Next': require('@skodaflow/web-tokens/src/fonts/SKODANext-Light.ttf'),
     'SKODANext-Light': require('@skodaflow/web-tokens/src/fonts/SKODANext-Light.ttf'),
     'SKODANext-Regular': require('@skodaflow/web-tokens/src/fonts/SKODANext-Regular.ttf'),
 
-    // NextArabic Fonts
+    // SKODA NextArabic Fonts
     'SKODANextArabic-Black': require('@skodaflow/web-tokens/src/fonts/SKODANextArabic-Black.ttf'),
     'SKODANextArabic-Bold': require('@skodaflow/web-tokens/src/fonts/SKODANextArabic-Bold.ttf'),
     'SKODANextArabic-Light': require('@skodaflow/web-tokens/src/fonts/SKODANextArabic-Light.ttf'),
     'SKODANextArabic-Regular': require('@skodaflow/web-tokens/src/fonts/SKODANextArabic-Regular.ttf'),
 
-    // NextIcons Fonts
+    // SKODA NextIcons Fonts
     'SKODANextIcons-Filled': require('@skodaflow/web-tokens/src/fonts/SKODANextIcons-Filled.otf'),
     'SKODANextIcons-Regular': require('@skodaflow/web-tokens/src/fonts/SKODANextIcons-Regular.otf'),
   });
@@ -40,9 +42,13 @@ export default function App() {
 
   return (
     <UserProvider>
-      <CardItemsProvider>
-        <Router />
-      </CardItemsProvider>
+      <CategoryProvider>
+        <ProductProvider>
+          <CardItemsProvider>
+            <Router />
+          </CardItemsProvider>
+        </ProductProvider>
+      </CategoryProvider>
     </UserProvider>
   );
 }
