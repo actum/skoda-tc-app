@@ -30,6 +30,7 @@ import { ProductContext } from '@/src/providers/ProductProvider';
 import { Licence } from '@/src/connections/request/Data';
 import Icon, { IconType } from '@/src/components/icon';
 import PageHeader from '@/src/components/pageHeader';
+import { CardItemsContext } from '@/src/providers/CardItemsProvider';
 
 export default function DetailPage() {
   let iconType;
@@ -46,6 +47,8 @@ export default function DetailPage() {
   const [product, setProduct] = useState<Licence | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  const ctxCard = useContext(CardItemsContext);
 
   function formatDate(date: string): string {
     return new Date(date).toLocaleDateString('cs-CZ', {
@@ -183,7 +186,10 @@ export default function DetailPage() {
                 isExpired && (
                   <StyledButton
                     title="Renew service"
-                    onPress={() => console.log('Akce stisknuta!')}
+                    onPress={() => {
+                      ctxCard.setItems([product]);
+                      navigate(RouteKey.checkout);
+                    }}
                     style={{ width: '100%' }}
                   />
                 )
@@ -208,46 +214,41 @@ export default function DetailPage() {
 }
 
 const styles = StyleSheet.create({
-  mainWrapper: {
-    gap: 24,
-    paddingTop: 50,
-    display: 'flex',
-    flexDirection: 'column',
+  bodyContainer: {
+    alignItems: 'center',
+    gap: 16,
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+  },
+  card: {
+    marginBottom: 20,
+  },
+  cardFullWidth: {
+    backgroundColor: flowColorsRgbaOnSurface800,
+    marginBottom: 20,
+    width: '100%',
+  },
+  errorText: {
+    color: flowColorsRgbaSemanticAlert,
+    fontSize: 18,
+    textAlign: 'center',
   },
   headerContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 16,
   },
-  titleContainer: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-  },
-  iconContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    paddingHorizontal: 16,
-    gap: 8,
-  },
   icon: {
     borderRadius: 50,
     padding: 0,
   },
-  bodyContainer: {
+  iconContainer: {
     alignItems: 'center',
-    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 8,
+    justifyContent: 'flex-start',
     paddingHorizontal: 16,
-    gap: 16,
-  },
-  card: {
-    marginBottom: 20,
-  },
-  cardFullWidth: {
-    width: '100%',
-    marginBottom: 20,
-    backgroundColor: flowColorsRgbaOnSurface800,
   },
   image: {
     borderRadius: 10,
@@ -261,6 +262,17 @@ const styles = StyleSheet.create({
     aspectRatio: 16 / 9, // Udržuje poměr stran 16:9
     marginBottom: 20,
     borderRadius: 10,
+  },
+  loader: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  mainWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 24,
+    paddingTop: 50,
   },
   text: {
     color: flowColorsRgbaOnSurface0,
@@ -278,28 +290,22 @@ const styles = StyleSheet.create({
   },
   title: {
     color: flowColorsRgbaOnSurface0,
-    paddingHorizontal: 16,
-    gap: 10,
     fontFamily: flowTypographySmallH1.fontFamily,
     fontSize: parseFloat(flowTypographySmallH1.fontSize),
     fontWeight: flowTypographySmallH1.fontWeight as TextStyle['fontWeight'],
+    gap: 10,
     letterSpacing:
       parseFloat(flowTypographySmallH1.letterSpacing) *
       parseFloat(flowTypographySmallH1.fontSize),
     lineHeight: parseFloat(flowTypographySmallH1.lineHeight),
+    paddingHorizontal: 16,
     textDecorationLine:
       flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
     textTransform:
       flowTypographySmallH1.textTransform as TextStyle['textTransform'],
   },
-  loader: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  errorText: {
-    color: flowColorsRgbaSemanticAlert,
-    fontSize: 18,
-    textAlign: 'center',
+  titleContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
   },
 });
