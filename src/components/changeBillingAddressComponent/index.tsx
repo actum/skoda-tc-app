@@ -108,7 +108,7 @@ export default function ChangeBillingAddressComponent() {
       flexDirection: car ? 'row' : 'column',
       gap: 5,
       justifyContent: car ? 'space-between' : 'flex-start',
-      paddingBottom: 40,
+      paddingBottom: car ? 40 : 80,
       paddingHorizontal: car ? 0 : 50,
     },
     description: {
