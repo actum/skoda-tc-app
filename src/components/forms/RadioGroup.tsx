@@ -9,6 +9,7 @@ import {
 } from 'react-hook-form';
 import {
   flowColorsRgbaBrandSecondary,
+  flowColorsRgbaDisabledPrimary,
   flowColorsRgbaDisabledTertiary,
   flowColorsRgbaOnSurface0,
 } from '@/src/assets/styles';
@@ -20,7 +21,7 @@ interface RadioGroupProps<T extends FieldValues> {
     RegisterOptions<T>,
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
-  options: Array<{ label: string; value: string }>;
+  options: Array<{ label: string; value: string; disabled?: boolean }>;
 }
 
 function RadioGroup<T extends FieldValues>({
@@ -37,8 +38,10 @@ function RadioGroup<T extends FieldValues>({
     rules,
   });
 
-  const handlePress = (optionValue: string) => {
-    onChange(optionValue);
+  const handlePress = (optionValue: string, isDisabled?: boolean) => {
+    if (!isDisabled) {
+      onChange(optionValue);
+    }
   };
 
   return (
@@ -47,20 +50,23 @@ function RadioGroup<T extends FieldValues>({
         <TouchableOpacity
           key={option.value}
           style={styles.radioContainer}
-          onPress={() => handlePress(option.value)}
+          onPress={() => handlePress(option.value, option.disabled)}
+          activeOpacity={option.disabled ? 1 : 0.8} // Změna opacity při disabled
+          disabled={option.disabled}
         >
           <View
             style={[
               styles.radioOuter,
               {
-                borderColor:
-                  value === option.value
+                borderColor: option.disabled
+                  ? flowColorsRgbaDisabledPrimary
+                  : value === option.value
                     ? flowColorsRgbaBrandSecondary
                     : flowColorsRgbaDisabledTertiary,
               },
             ]}
           >
-            {value === option.value && (
+            {value === option.value && !option.disabled && (
               <View
                 style={[
                   styles.radioInner,
@@ -69,7 +75,18 @@ function RadioGroup<T extends FieldValues>({
               />
             )}
           </View>
-          <Text style={styles.label}>{option.label}</Text>
+          <Text
+            style={[
+              styles.label,
+              {
+                color: option.disabled
+                  ? flowColorsRgbaDisabledPrimary
+                  : flowColorsRgbaOnSurface0,
+              },
+            ]}
+          >
+            {option.label}
+          </Text>
         </TouchableOpacity>
       ))}
     </View>
@@ -78,9 +95,8 @@ function RadioGroup<T extends FieldValues>({
 
 const styles = StyleSheet.create({
   label: {
-    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODANext-Light',
-    fontSize: 16, // Nastavení fontu
+    fontSize: 16,
   },
   radioContainer: {
     alignItems: 'center',
@@ -90,16 +106,16 @@ const styles = StyleSheet.create({
   radioInner: {
     borderRadius: 6,
     height: 12,
-    width: 12, // Malý vnitřní kruh
+    width: 12,
   },
   radioOuter: {
-    width: 24,
-    height: 24,
-    borderRadius: 12, // Kruhový tvar
-    borderWidth: 2,
-    justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10, // Mezery mezi ikonou a textem
+    borderRadius: 12,
+    borderWidth: 2,
+    height: 24,
+    justifyContent: 'center',
+    marginRight: 10,
+    width: 24,
   },
 });
 

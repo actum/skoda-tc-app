@@ -89,7 +89,7 @@ export default function CheckoutComponent() {
               </View>
               <View style={styles.buttonArea}>
                 <StyledButton
-                  title={'ChangeEvent billing address'}
+                  title={'Change billing address'}
                   variant={'secondary'}
                   onPress={() => {
                     navigate(RouteKey.changeBillingAddress);
@@ -120,6 +120,9 @@ export default function CheckoutComponent() {
                 <StyledButton
                   title={'Change payment method'}
                   variant={'secondary'}
+                  onPress={() => {
+                    navigate(RouteKey.changePayment);
+                  }}
                 />
               </View>
             </View>

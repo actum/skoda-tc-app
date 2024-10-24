@@ -6,6 +6,7 @@ import RenewPage from '@/src/pages/renewPage';
 import ChangeBillingAddress from '@/src/pages/changeBillingAddress';
 import CheckouPage from '@/src/pages/checkouPage';
 import PaymentProcessPage from '@/src/pages/paymentProcessPage';
+import ChangePayment from '@/src/pages/changePayment';
 
 export function AppRoutes() {
   return (
@@ -19,6 +20,7 @@ export function AppRoutes() {
         path={RouteKey.changeBillingAddress}
         element={<ChangeBillingAddress />}
       />
+      <Route path={RouteKey.changePayment} element={<ChangePayment />} />
     </Routes>
   );
 }

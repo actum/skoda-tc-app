@@ -10,6 +10,7 @@ export const RouteKey = {
   paymentProcess: '/paymentProcess',
   detail: '/detail/:id',
   changeBillingAddress: '/changeBillingAddress',
+  changePayment: '/changePayment',
 };
 
 export function Navigation() {
