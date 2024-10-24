@@ -30,8 +30,10 @@ import Icon, { IconType } from '@/src/components/icon';
 import PageHeader from '@/src/components/pageHeader';
 import { CardItemsContext } from '@/src/providers/CardItemsProvider';
 import Accordion from '@/src/components/accordion/Accordion';
+import { BackLinkContext } from '@/src/providers/BackLinkProvider';
 
 export default function DetailPage() {
+  const ctxBackLink = useContext(BackLinkContext);
   let iconType: IconType | null = null;
   let iconColor: string = '';
   let isExpired = false;
@@ -140,7 +142,6 @@ export default function DetailPage() {
   if (loading) {
     return (
       <BaseContainer>
-        <PageHeader title={'Paid services'} backAction={() => {}} />
         <View style={styles.loader}>
           <ActivityIndicator size="large" color={flowColorsRgbaBrandPrimary} />
         </View>
@@ -219,6 +220,9 @@ export default function DetailPage() {
                     title="Renew service"
                     onPress={() => {
                       ctxCard.setItems([product]);
+                      ctxBackLink.setBackLink(
+                        RouteKey.detail.replace(':id', product.code),
+                      );
                       navigate(RouteKey.checkout);
                     }}
                     style={{ width: '100%' }}
@@ -254,46 +258,6 @@ export default function DetailPage() {
 }
 
 const styles = StyleSheet.create({
-  imageContainer: {
-    position: 'relative',
-    width: '100%',
-    height: 250, // Musí odpovídat výšce obrázku
-  },
-  mainWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 24,
-  },
-  titleContainer: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    paddingHorizontal: 16,
-  },
-  title: {
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: flowTypographySmallH1.fontFamily,
-    fontSize: parseFloat(flowTypographySmallH1.fontSize),
-    fontWeight: flowTypographySmallH1.fontWeight as TextStyle['fontWeight'],
-    letterSpacing:
-      parseFloat(flowTypographySmallH1.letterSpacing) *
-      parseFloat(flowTypographySmallH1.fontSize),
-    lineHeight: parseFloat(flowTypographySmallH1.lineHeight),
-    textDecorationLine:
-      flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
-    textTransform:
-      flowTypographySmallH1.textTransform as TextStyle['textTransform'],
-  },
-  iconContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 8,
-    justifyContent: 'flex-start',
-    paddingHorizontal: 16,
-  },
-  icon: {
-    borderRadius: 50,
-    padding: 0,
-  },
   bodyContainer: {
     alignItems: 'center',
     gap: 16,
@@ -313,10 +277,26 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
   },
+  icon: {
+    borderRadius: 50,
+    padding: 0,
+  },
+  iconContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 8,
+    justifyContent: 'flex-start',
+    paddingHorizontal: 16,
+  },
   image: {
-    width: '100%',
-    height: '100%',
     borderRadius: 10,
+    height: '100%',
+    width: '100%',
+  },
+  imageContainer: {
+    height: 250,
+    position: 'relative',
+    width: '100%', // Musí odpovídat výšce obrázku
   },
   imageFullWidth: {
     width: '100%', // Nastavení šířky na 100%
@@ -328,6 +308,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
+  },
+  mainWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 24,
   },
   text: {
     color: flowColorsRgbaOnSurface0,
@@ -342,5 +327,24 @@ const styles = StyleSheet.create({
       flowTypographyLargeBody.textDecoration as TextStyle['textDecorationLine'],
     textTransform:
       flowTypographyLargeBody.textTransform as TextStyle['textTransform'],
+  },
+  title: {
+    color: flowColorsRgbaOnSurface0,
+    fontFamily: flowTypographySmallH1.fontFamily,
+    fontSize: parseFloat(flowTypographySmallH1.fontSize),
+    fontWeight: flowTypographySmallH1.fontWeight as TextStyle['fontWeight'],
+    letterSpacing:
+      parseFloat(flowTypographySmallH1.letterSpacing) *
+      parseFloat(flowTypographySmallH1.fontSize),
+    lineHeight: parseFloat(flowTypographySmallH1.lineHeight),
+    textDecorationLine:
+      flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
+    textTransform:
+      flowTypographySmallH1.textTransform as TextStyle['textTransform'],
+  },
+  titleContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 16,
   },
 });

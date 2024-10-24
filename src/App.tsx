@@ -7,6 +7,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import CardItemsProvider from '@/src/providers/CardItemsProvider';
 import { CategoryProvider } from '@/src/providers/CategoryProvider';
 import { ProductProvider } from '@/src/providers/ProductProvider';
+import BackLinkProvider from '@/src/providers/BackLinkProvider';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,7 +46,9 @@ export default function App() {
       <CategoryProvider>
         <ProductProvider>
           <CardItemsProvider>
-            <Router />
+            <BackLinkProvider>
+              <Router />
+            </BackLinkProvider>
           </CardItemsProvider>
         </ProductProvider>
       </CategoryProvider>
