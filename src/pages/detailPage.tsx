@@ -186,31 +186,6 @@ export default function DetailPage() {
 }
 
 const styles = StyleSheet.create({
-  mainWrapper: {
-    gap: 24,
-    paddingTop: 50,
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  headerContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 16,
-  },
-  titleContainer: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-  },
-  iconContainer: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    paddingHorizontal: 16,
-  },
-  icon: {
-    borderRadius: 50,
-    padding: 0,
-  },
   bodyContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -220,8 +195,28 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   cardFullWidth: {
-    width: '100%',
     marginBottom: 20,
+    width: '100%',
+  },
+  errorText: {
+    color: flowColorsRgbaSemanticAlert,
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  headerContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+  },
+  icon: {
+    borderRadius: 50,
+    padding: 0,
+  },
+  iconContainer: {
+    alignItems: 'flex-start',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 16,
   },
   image: {
     borderRadius: 10,
@@ -235,6 +230,17 @@ const styles = StyleSheet.create({
     aspectRatio: 16 / 9, // Udržuje poměr stran 16:9
     marginBottom: 20,
     borderRadius: 10,
+  },
+  loader: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  mainWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 24,
+    paddingTop: 50,
   },
   text: {
     color: flowColorsRgbaOnSurface0,
@@ -252,28 +258,22 @@ const styles = StyleSheet.create({
   },
   title: {
     color: flowColorsRgbaOnSurface0,
-    paddingHorizontal: 16,
-    gap: 10,
     fontFamily: flowTypographyLargeH1.fontFamily,
     fontSize: parseFloat(flowTypographyLargeH1.fontSize),
     fontWeight: flowTypographyLargeH1.fontWeight as TextStyle['fontWeight'],
+    gap: 10,
     letterSpacing:
       parseFloat(flowTypographyLargeH1.letterSpacing) *
       parseFloat(flowTypographyLargeH1.fontSize),
     lineHeight: parseFloat(flowTypographyLargeH1.lineHeight),
+    paddingHorizontal: 16,
     textDecorationLine:
       flowTypographyLargeH1.textDecoration as TextStyle['textDecorationLine'],
     textTransform:
       flowTypographyLargeH1.textTransform as TextStyle['textTransform'],
   },
-  loader: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  errorText: {
-    color: flowColorsRgbaSemanticAlert,
-    fontSize: 18,
-    textAlign: 'center',
+  titleContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
   },
 });

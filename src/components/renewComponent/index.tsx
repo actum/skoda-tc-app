@@ -1,51 +1,50 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Licence } from '@/src/connections/request/Data';
 import useCarState from '@/src/components/carState';
-import RenewItem from '@/src/components/RenewComponent/RenewItem';
 import { useForm } from 'react-hook-form';
 import StyledButton from '@/src/components/button/StyledButton';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CardItemsContext } from '@/src/providers/CardItemsProvider';
+import { asyncFetch } from '@/src/connections/fetch/asyncFetch';
+import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
+import { useNavigate } from 'react-router-native';
+import { RouteKey } from '@/src/components/navigation/Navigation';
+import RenewItem from '@/src/components/renewComponent/RenewItem';
 
 export interface RenewFormData extends Record<string, boolean> {
   // agreeToTerms: string;
 }
 
 export default function RenewComponent() {
-  const licences: Licence[] = [
-    {
-      name: 'Charge Free',
-      price: 1000,
-      code: 'x01',
-      purchasedLicense: {
-        endDate: '2025-06-27',
-      },
-    },
-    {
-      name: 'Test 2',
-      price: 1000,
-      code: 'x02',
-    },
-    {
-      name: 'Test 3',
-      price: 1000,
-      code: 'x03',
-      purchasedLicense: {
-        endDate: '2024-06-27',
-      },
-    },
-    {
-      name: 'Test 5',
-      price: 1000,
-      code: 'x05',
-      purchasedLicense: {
-        endDate: '2024-06-27',
-      },
-    },
-  ];
+  const [data, setData] = useState<Licence[]>([]);
+  const navigate = useNavigate();
+  const { control, handleSubmit, watch, reset } = useForm<RenewFormData>();
+  async function loadData() {
+    try {
+      const response = await asyncFetch<Licence[]>(
+        '/api/v1/products/inactive',
+        {
+          method: 'GET',
+        },
+      );
+      setData(response);
+      setTimeout(() => {
+        reset(getDefaultValues(response));
+      }, 100);
+    } catch (e) {
+      const error = e as HttpApiCallError;
+      alert(`ERROR WHEN GET CATEGORY: ${error.message}`);
+    }
+  }
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const licences = data;
   const { car } = useCarState();
 
-  function getDefaultValues(): RenewFormData {
+  function getDefaultValues(licences: Licence[]): RenewFormData {
     const values: Record<string, boolean> = {};
     licences.forEach((licence) => {
       values[licence.code] = true;
@@ -53,10 +52,9 @@ export default function RenewComponent() {
     return values;
   }
 
-  const { control, handleSubmit, watch } = useForm<RenewFormData>({
-    defaultValues: getDefaultValues(),
-  });
   const formValues = watch();
+
+  console.log('formValues', formValues);
 
   const calculateTotalPrice = () => {
     let total = 0;
@@ -82,6 +80,7 @@ export default function RenewComponent() {
     console.log('FORM SUBMIT DATA', data);
     console.log('NEW LICENCES', newLicences);
     cardCtx.setItems(newLicences);
+    navigate(RouteKey.checkout);
   }
 
   return (
@@ -150,6 +149,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     gap: 5,
+    paddingBottom: 20,
   },
   root: {
     position: 'relative',
@@ -159,15 +159,15 @@ const styles = StyleSheet.create({
   },
   summary: {
     backgroundColor: '#303132',
+    borderRadius: 8,
     bottom: 0,
-    gap: 20,
     justifyContent: 'center',
-    left: 0,
-    paddingBottom: 20,
+    left: 20,
+    paddingBottom: 10,
     paddingHorizontal: 20,
-    paddingTop: 40,
+    paddingTop: 20,
     position: 'absolute',
-    width: '100%', // Vertikálně centrované tlačítko
+    right: 20,
   },
   total: {
     color: '#fff',

@@ -14,7 +14,7 @@ export default function HomePage() {
       <View style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <PageHeader title={'Paid services'} backAction={() => {}} />
-          <LicenceItemExample />
+          <Licences />
         </ScrollView>
       </View>
       {car && (
