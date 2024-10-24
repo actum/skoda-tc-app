@@ -13,13 +13,15 @@ import StyledButton from '@/src/components/button/StyledButton';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { useLocation, useNavigate, useParams } from 'react-router-native';
 import {
-    flowColorsRgbaBrandPrimary,
-    flowColorsRgbaOnSurface0,
-    flowColorsRgbaOnSurface800,
-    flowColorsRgbaSemanticAlert,
-    flowColorsRgbaTextPrimary,
-    flowTypographyLargeBody,
-    flowTypographyLargeH1, flowTypographyMediumH1, flowTypographySmallH1,
+  flowColorsRgbaBrandPrimary,
+  flowColorsRgbaOnSurface0,
+  flowColorsRgbaOnSurface800,
+  flowColorsRgbaSemanticAlert,
+  flowColorsRgbaTextPrimary,
+  flowTypographyLargeBody,
+  flowTypographyLargeH1,
+  flowTypographyMediumH1,
+  flowTypographySmallH1,
 } from '@/src/assets/styles';
 import TextParagraph from '@/src/components/text/TextParagraph';
 import CustomImage from '@/src/components/image/Image';
@@ -138,7 +140,10 @@ export default function DetailPage() {
 
   return (
     <BaseContainer>
-      <PageHeader title={'Paid services'} backAction={() => {}} />
+      <PageHeader
+        title={'Paid services'}
+        backAction={() => navigate(RouteKey.home)}
+      />
       <ScrollView style={{ marginBottom: 80 }}>
         <View style={styles.mainWrapper}>
           <View style={styles.headerContainer}>
@@ -283,9 +288,9 @@ const styles = StyleSheet.create({
       parseFloat(flowTypographySmallH1.fontSize),
     lineHeight: parseFloat(flowTypographySmallH1.lineHeight),
     textDecorationLine:
-        flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
+      flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
     textTransform:
-        flowTypographySmallH1.textTransform as TextStyle['textTransform'],
+      flowTypographySmallH1.textTransform as TextStyle['textTransform'],
   },
   loader: {
     flex: 1,
