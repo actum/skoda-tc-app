@@ -13,6 +13,7 @@ import {
   flowColorsRgbaDisabledTertiary,
   flowColorsRgbaOnSurface0,
 } from '@/src/assets/styles';
+import useCarState from '@/src/components/carState';
 
 interface RadioGroupProps<T extends FieldValues> {
   name: FieldPath<T>;
@@ -38,6 +39,9 @@ function RadioGroup<T extends FieldValues>({
     rules,
   });
 
+  const { car } = useCarState();
+
+  const styles = inputStyles({ car });
   const handlePress = (optionValue: string, isDisabled?: boolean) => {
     if (!isDisabled) {
       onChange(optionValue);
@@ -93,30 +97,31 @@ function RadioGroup<T extends FieldValues>({
   );
 }
 
-const styles = StyleSheet.create({
-  label: {
-    fontFamily: 'SKODANext-Light',
-    fontSize: 16,
-  },
-  radioContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginVertical: 10,
-  },
-  radioInner: {
-    borderRadius: 6,
-    height: 12,
-    width: 12,
-  },
-  radioOuter: {
-    alignItems: 'center',
-    borderRadius: 12,
-    borderWidth: 2,
-    height: 24,
-    justifyContent: 'center',
-    marginRight: 10,
-    width: 24,
-  },
-});
+const inputStyles = (props: { car: boolean }) =>
+  StyleSheet.create({
+    label: {
+      fontFamily: 'SKODANext-Light',
+      fontSize: props.car ? 24 : 16,
+    },
+    radioContainer: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      marginVertical: 10,
+    },
+    radioInner: {
+      borderRadius: 6,
+      height: 12,
+      width: 12,
+    },
+    radioOuter: {
+      alignItems: 'center',
+      borderRadius: 12,
+      borderWidth: 2,
+      height: 24,
+      justifyContent: 'center',
+      marginRight: 10,
+      width: 24,
+    },
+  });
 
 export default RadioGroup;
