@@ -5,6 +5,7 @@ import NavigationButton from '@/src/components/navigation/NavigationButton';
 export const RouteKey = {
   home: '/',
   detail: '/detail/:id',
+  changeBillingAddress: '/changeBillingAddress',
 };
 
 export function Navigation() {

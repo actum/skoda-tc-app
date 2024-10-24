@@ -61,6 +61,13 @@ export const flowColorsRgbaOnSurface200 = 'rgba(196, 198, 199, 1.00)';
 export const flowColorsRgbaOnSurface100 = 'rgba(216, 216, 216, 1.00)';
 export const flowColorsRgbaOnSurface0 = 'rgba(255, 255, 255, 1.00)';
 export const flowColorsRgbaTextPrimary = 'rgba(22, 23, 24, 1.00)';
+export const flowColorsRgbaTextSecondary = 'rgba(196, 198, 199, 1)';
+export const flowColorsRgbaTextQuaternary = 'rgba(90, 91, 92, 1)';
+export const flowColorsRgbaTextTertiary = 'rgba(142, 143, 144, 1)';
+export const flowColorsRgbaNaturalDarkPrimary = 'rgba(35, 36, 37, 1)';
+export const flowColorsRgbaNaturalDarkPrimaryQuaternary =
+  'rgba(35, 36, 37, 0.6)';
+export const flowColorsRgbaNaturalDarkTertiary = 'rgba(124, 125, 126, 1)';
 export const flowColorsRgbaDisabledPrimary = 'rgba(196, 198, 199, 1.00)';
 export const flowColorsRgbaDisabledSecondary = 'rgba(216, 216, 216, 1.00)';
 export const flowColorsRgbaDisabledTertiary = 'rgba(158, 159, 160, 1.00)';
