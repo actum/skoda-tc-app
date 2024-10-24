@@ -63,7 +63,7 @@ export default function DetailPage() {
       isExpired = true;
     }
 
-      licenceStateText = `${isExpired ? 'Expired on':'Active until'} ${formatDate(new Date(product.purchasedLicense.endDate).toString())}`;
+    licenceStateText = `${isExpired ? 'Expired on' : 'Active until'} ${formatDate(new Date(product.purchasedLicense.endDate).toString())}`;
   }
 
   console.log(iconType);
