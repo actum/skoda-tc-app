@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
 import LicenceItem from '@/src/components/LicenceItem/index';
-import { Category } from '@/src/connections/request/Data';
 import useCarState from '@/src/components/carState';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
@@ -9,10 +8,18 @@ import {
   flowColorsRgbaOnSurface0,
   flowColorsRgbaTransparentTertiary,
 } from '@/src/assets/styles';
+import { useContext, useEffect } from 'react';
+import { CategoryContext } from '@/src/providers/CategoryProvider';
 
-export default function LicenceItemExample() {
+export default function Licences() {
   const { car } = useCarState();
   const navigate = useNavigate();
+
+  const categoryContext = useContext(CategoryContext);
+
+  useEffect(() => {
+    categoryContext.loadCategories();
+  }, []);
 
   function formatDate(date: string): string {
     return new Date(date).toLocaleDateString('cs-CZ', {
@@ -21,60 +28,9 @@ export default function LicenceItemExample() {
       day: 'numeric',
     });
   }
-  const categories: Category[] = [
-    {
-      name: 'Tarif Powerpass',
-      licences: [
-        {
-          name: 'Charge Free',
-          price: 1000,
-          code: 'PR00031',
-          purchasedLicense: {
-            endDate: '2025-06-27',
-          },
-        },
-        {
-          name: 'Test 2',
-          price: 1000,
-          code: '',
-        },
-        {
-          name: 'Test 3',
-          price: 1000,
-          code: 'PR0003',
-          purchasedLicense: {
-            endDate: '2024-06-27',
-          },
-        },
-        {
-          name: 'Test 5',
-          price: 1000,
-          code: 'PR0005',
-          purchasedLicense: {
-            endDate: '2024-06-27',
-          },
-        },
-      ],
-    },
-    {
-      name: 'Skoda Connect services',
-      licences: [
-        {
-          name: 'Media Streaming',
-          price: 1000,
-          code: 'PR0004',
-          purchasedLicense: {
-            endDate: '2024-06-27',
-          },
-        },
-        {
-          name: 'Care Connect - Remote Access',
-          price: 1000,
-          code: 'PR0006',
-        },
-      ],
-    },
-  ];
+  const categories = categoryContext.items;
+
+  console.log('----categories----', categories);
 
   return (
     <View style={styles.root}>
@@ -82,7 +38,8 @@ export default function LicenceItemExample() {
       {categories.map((category, key) => (
         <View key={key}>
           <Text style={styles.categoryText}>{category.name}</Text>
-          {category.licences.map((value, index) => {
+          {category.productList.map((value, index) => {
+            console.log('PRODUCT ITEM', value);
             let iconType: 'success' | 'warning' | 'normal' = 'normal';
             let description = 'Available for Purchase';
             if (value.purchasedLicense?.endDate) {
@@ -108,7 +65,7 @@ export default function LicenceItemExample() {
                     navigate(RouteKey.detail.replace(':id', value.code));
                   }}
                 />
-                {index !== category.licences.length - 1 && (
+                {index !== category.productList.length - 1 && (
                   <View style={styles.border}></View>
                 )}
               </View>

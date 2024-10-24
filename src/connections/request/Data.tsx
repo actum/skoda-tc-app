@@ -1,6 +1,6 @@
 export interface Category {
   name: string;
-  licences: Licence[];
+  productList: Licence[];
 }
 
 export interface Licence {
@@ -25,5 +25,12 @@ export interface User {
     postalCode: string;
     addressType: string;
     country: string;
+  };
+  creditCard?: {
+    cvv: number;
+    expiryMonth: number;
+    expiryYear: number;
+    id: string;
+    number: string;
   };
 }

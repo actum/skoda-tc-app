@@ -2,20 +2,20 @@ import BaseContainer from '@/src/components/containers/BaseContainer';
 import PageHeader from '@/src/components/pageHeader';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
-import RenewComponent from '@/src/components/renewComponent';
+import CheckoutComponent from '@/src/components/checkoutComponent';
 
-export default function RenewPage() {
+export default function CheckouPage() {
   const navigate = useNavigate();
 
   return (
     <BaseContainer>
       <PageHeader
-        title={'Renew expired services'}
+        title={'Checkout'}
         backAction={() => {
-          navigate(RouteKey.home);
+          navigate(RouteKey.renew);
         }}
       />
-      <RenewComponent />
+      <CheckoutComponent />
     </BaseContainer>
   );
 }
