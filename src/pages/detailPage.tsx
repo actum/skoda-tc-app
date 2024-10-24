@@ -13,12 +13,12 @@ import StyledButton from '@/src/components/button/StyledButton';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { useLocation, useNavigate, useParams } from 'react-router-native';
 import {
-  flowColorsRgbaBrandPrimary,
-  flowColorsRgbaOnSurface0,
-  flowColorsRgbaOnSurface800,
-  flowColorsRgbaSemanticAlert,
-  flowTypographyLargeBody,
-  flowTypographyLargeH1,
+    flowColorsRgbaBrandPrimary,
+    flowColorsRgbaOnSurface0,
+    flowColorsRgbaOnSurface800,
+    flowColorsRgbaSemanticAlert, flowColorsRgbaTextPrimary,
+    flowTypographyLargeBody,
+    flowTypographyLargeH1,
 } from '@/src/assets/styles';
 import TextParagraph from '@/src/components/text/TextParagraph';
 import CustomImage from '@/src/components/image/Image';
@@ -160,7 +160,7 @@ export default function DetailPage() {
                 <Icon
                   type={iconType as IconType}
                   size={18}
-                  color={flowColorsRgbaOnSurface0}
+                  color={flowColorsRgbaTextPrimary}
                 />
               </View>
               {licenceStateText && (
