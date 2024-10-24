@@ -77,7 +77,7 @@ export default function CheckoutComponent() {
       paddingBottom: car ? 15 : 0,
     },
     items: {
-      height: car ? '46%' : '80%',
+      height: car ? '44%' : '80%',
     },
     price: {
       color: '#fff',
@@ -221,6 +221,7 @@ export default function CheckoutComponent() {
       {car ? (
         <View
           style={{
+            height: 100,
             backgroundColor: '#303132',
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -263,6 +264,7 @@ export default function CheckoutComponent() {
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
             <Text style={styles.vat}>You will be redirected to a pay gate</Text>
             <StyledButton
+              style={{ paddingTop: 10, marginTop: 15 }}
               fontSize={car ? 24 : undefined}
               title={'Proceed to payment'}
               onPress={(e) => {
