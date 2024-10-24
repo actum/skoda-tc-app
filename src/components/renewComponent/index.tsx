@@ -10,6 +10,7 @@ import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import RenewItem from '@/src/components/renewComponent/RenewItem';
+import Icon from '@/src/components/icon';
 
 export interface RenewFormData extends Record<string, boolean> {
   // agreeToTerms: string;
@@ -83,6 +84,62 @@ export default function RenewComponent() {
     navigate(RouteKey.checkout);
   }
 
+  const styles = StyleSheet.create({
+    border: {
+      borderBottomWidth: 1,
+      borderColor: '#F3F3F31F',
+    },
+    items: {
+      height: car ? '62%' : '80%',
+    },
+    price: {
+      color: '#fff',
+      fontFamily: 'SKODA Next',
+      fontSize: 24,
+      fontWeight: 'bold',
+    },
+    prices: {
+      alignItems: 'center',
+      flexDirection: 'column',
+      gap: 5,
+      paddingBottom: 20,
+    },
+    root: {
+      position: 'relative',
+    },
+    scrollContainer: {
+      marginBottom: car ? 0 : 80,
+    },
+    summary: {
+      backgroundColor: '#303132',
+      borderRadius: 8,
+      bottom: 0,
+      justifyContent: 'center',
+      left: 20,
+      paddingBottom: 10,
+      paddingHorizontal: 20,
+      paddingTop: 20,
+      position: 'absolute',
+      right: 20,
+    },
+    total: {
+      color: '#fff',
+      fontFamily: 'SKODA Next',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    totalTexts: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    vat: {
+      color: '#C4C6C7',
+      fontFamily: 'SKODA Next',
+      fontSize: car ? 22 : 16,
+      paddingLeft: 16,
+    },
+  });
+
   return (
     <View style={styles.root}>
       <View style={styles.items}>
@@ -108,80 +165,66 @@ export default function RenewComponent() {
           })}
         </ScrollView>
       </View>
-      <View style={styles.summary}>
-        <View style={styles.totalTexts}>
-          <View>
-            <Text style={styles.total}>Price Total</Text>
+      {car ? (
+        <View
+          style={{
+            backgroundColor: '#303132',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingHorizontal: 30,
+            paddingVertical: 10,
+          }}
+        >
+          <View style={{ flexDirection: 'row', gap: car ? 25 : 10 }}>
+            <View style={{ paddingTop: car ? 20 : 5 }}>
+              <Icon type={'arrow'} size={32} color={'white'} />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+            >
+              <Text
+                style={{
+                  color: '#fff',
+                  fontSize: 28,
+                }}
+              >
+                Price Total {total} CZK
+              </Text>
+              <Text style={styles.vat}>including VAT</Text>
+            </View>
           </View>
-          <View style={styles.prices}>
-            <Text style={styles.price}>{total} CZK</Text>
-            <Text style={styles.vat}>including VAT</Text>
-          </View>
-        </View>
-        <View>
           <StyledButton
+            fontSize={car ? 24 : undefined}
             title={'Continue to Checkout'}
             onPress={(e) => {
               handleSubmit(onSubmit)(e);
             }}
           />
         </View>
-      </View>
+      ) : (
+        <View style={styles.summary}>
+          <View style={styles.totalTexts}>
+            <View>
+              <Text style={styles.total}>Price Total</Text>
+            </View>
+            <View style={styles.prices}>
+              <Text style={styles.price}>{total} CZK</Text>
+              <Text style={styles.vat}>including VAT</Text>
+            </View>
+          </View>
+          <View>
+            <StyledButton
+              title={'Continue to Checkout'}
+              onPress={(e) => {
+                handleSubmit(onSubmit)(e);
+              }}
+            />
+          </View>
+        </View>
+      )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  border: {
-    borderBottomWidth: 1,
-    borderColor: '#F3F3F31F',
-  },
-  items: {
-    height: '80%',
-  },
-  price: {
-    color: '#fff',
-    fontFamily: 'SKODA Next',
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  prices: {
-    alignItems: 'center',
-    flexDirection: 'column',
-    gap: 5,
-    paddingBottom: 20,
-  },
-  root: {
-    position: 'relative',
-  },
-  scrollContainer: {
-    marginBottom: 80,
-  },
-  summary: {
-    backgroundColor: '#303132',
-    borderRadius: 8,
-    bottom: 0,
-    justifyContent: 'center',
-    left: 20,
-    paddingBottom: 10,
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    position: 'absolute',
-    right: 20,
-  },
-  total: {
-    color: '#fff',
-    fontFamily: 'SKODA Next',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  totalTexts: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  vat: {
-    color: '#C4C6C7',
-    fontFamily: 'SKODA Next',
-    fontSize: 16,
-  },
-});

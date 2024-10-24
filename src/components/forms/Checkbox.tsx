@@ -25,6 +25,7 @@ import {
   flowColorsRgbaSemanticAlert,
   flowColorsRgbaOnSurface0,
 } from '@/src/assets/styles';
+import useCarState from '@/src/components/carState';
 
 interface CheckboxProps<T extends FieldValues> {
   name: FieldPath<T>;
@@ -56,6 +57,8 @@ function Checkbox<T extends FieldValues>({
   style = {},
   labelStyle = {},
 }: CheckboxProps<T>) {
+  const { car } = useCarState();
+
   const {
     field: { value, onChange },
     fieldState: { error },
@@ -89,6 +92,39 @@ function Checkbox<T extends FieldValues>({
       onChange(!isChecked);
     }
   };
+
+  const styles = StyleSheet.create({
+    checkbox: {
+      alignItems: 'center',
+      borderColor: flowColorsRgbaBrandSecondary,
+      borderRadius: 2,
+      borderWidth: 2,
+      justifyContent: 'center',
+    },
+    checkmark: {
+      borderBottomWidth: 2,
+      borderColor: flowColorsRgbaTextPrimary,
+      borderRightWidth: 2,
+      height: car ? 15 : 7.5,
+      transform: [{ rotate: '45deg' }],
+      width: car ? 9 : 6,
+    },
+    container: {
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
+    errorText: {
+      color: flowColorsRgbaSemanticAlert,
+      fontFamily: 'SKODANext-Light',
+      marginTop: 5,
+    },
+    label: {
+      color: flowColorsRgbaOnSurface0,
+      fontFamily: 'SKODANext-Light',
+      fontSize: 16,
+      marginHorizontal: 8,
+    },
+  });
 
   return (
     <View>
@@ -124,38 +160,5 @@ function Checkbox<T extends FieldValues>({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  checkbox: {
-    alignItems: 'center',
-    borderColor: flowColorsRgbaBrandSecondary,
-    borderRadius: 2,
-    borderWidth: 2,
-    justifyContent: 'center',
-  },
-  checkmark: {
-    borderBottomWidth: 2,
-    borderColor: flowColorsRgbaTextPrimary,
-    borderRightWidth: 2,
-    height: 7.5,
-    transform: [{ rotate: '45deg' }],
-    width: 6,
-  },
-  container: {
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  errorText: {
-    color: flowColorsRgbaSemanticAlert,
-    fontFamily: 'SKODANext-Light',
-    marginTop: 5,
-  },
-  label: {
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: 'SKODANext-Light',
-    fontSize: 16,
-    marginHorizontal: 8,
-  },
-});
 
 export default Checkbox;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Checkbox from '@/src/components/forms/Checkbox';
-import { Control, FieldPath, useForm } from 'react-hook-form';
+import { Control, FieldPath } from 'react-hook-form';
 import { RenewFormData } from '@/src/components/renewComponent/index';
 
 interface IRenewItem {
@@ -18,25 +18,63 @@ interface IRenewItem {
 export default function RenewItem(props: IRenewItem) {
   const isLarge = props.size === 'large';
 
+  const styles = StyleSheet.create({
+    action: {
+      justifyContent: 'center',
+      paddingLeft: 10,
+    },
+    description: {
+      color: '#aaa', // Šedý text pro popis
+      fontSize: 14,
+      fontFamily: 'SKODA Next',
+    },
+    icon: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: 5,
+    },
+    price: {
+      fontFamily: 'SKODA Next',
+      color: '#fff', // Šedý text pro popis
+      fontSize: isLarge ? 24 : 16,
+      fontWeight: isLarge ? 'normal' : 'bold',
+    },
+    root: {
+      flexDirection: 'row',
+      gap: 20,
+      paddingHorizontal: 20,
+      paddingVertical: 15,
+    },
+    textContainer: {
+      flex: 1,
+    },
+    title: {
+      color: '#ffffff',
+      fontFamily: 'SKODA Next',
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
+  });
+
   return (
     <View
       style={[
         styles.root,
-        isLarge && { paddingVertical: 40, paddingHorizontal: 20 },
+        isLarge && { paddingVertical: 15, paddingHorizontal: 85 },
       ]}
     >
-      <View style={[styles.icon, isLarge && { paddingRight: 20 }]}>
+      <View style={[styles.icon, isLarge && { paddingRight: 10 }]}>
         <Checkbox
-          size={24}
+          size={isLarge ? 32 : 24}
           name={props.identifier as FieldPath<RenewFormData>}
           control={props.control}
         />
       </View>
       <View style={styles.textContainer}>
-        <Text style={[styles.title, isLarge && { fontSize: 32 }]}>
+        <Text style={[styles.title, isLarge && { fontSize: 28 }]}>
           {props.text.title}
         </Text>
-        <Text style={[styles.description, isLarge && { fontSize: 24 }]}>
+        <Text style={[styles.description, isLarge && { fontSize: 22 }]}>
           {props.text.description}
         </Text>
       </View>
@@ -46,42 +84,3 @@ export default function RenewItem(props: IRenewItem) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  action: {
-    justifyContent: 'center',
-    paddingLeft: 10,
-  },
-  description: {
-    color: '#aaa', // Šedý text pro popis
-    fontSize: 14,
-    fontFamily: 'SKODA Next',
-  },
-  icon: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    // paddingRight: 10,
-    paddingTop: 5,
-  },
-  price: {
-    fontFamily: 'SKODA Next',
-    color: '#fff', // Šedý text pro popis
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  root: {
-    flexDirection: 'row',
-    gap: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-  },
-  textContainer: {
-    flex: 1,
-  },
-  title: {
-    color: '#ffffff',
-    fontFamily: 'SKODA Next',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
