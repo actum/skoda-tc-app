@@ -33,7 +33,6 @@ import { CardItemsContext } from '@/src/providers/CardItemsProvider';
 import Accordion from '@/src/components/accordion/Accordion';
 import { BackLinkContext } from '@/src/providers/BackLinkProvider';
 import useCarState from '@/src/components/carState';
-import LicenceRenewSection from '@/src/components/LicenceItem/LicenceRenewSection';
 import formatPrice from '@/src/helpers/price';
 
 export default function DetailPage() {
@@ -226,6 +225,21 @@ export default function DetailPage() {
     setLoading(false);
   };
 
+  function getImage(product: Licence) {
+    switch (product.code) {
+      case 'PR0001':
+        return require(`../assets/images/products/PR0001.png`);
+      case 'PR0002':
+        return require(`../assets/images/products/PR0002.png`);
+      case 'PR0003':
+        return require(`../assets/images/products/PR0003.png`);
+      case 'PR0004':
+        return require(`../assets/images/products/PR0004.png`);
+      default:
+        return require(`../assets/images/products/1.png`);
+    }
+  }
+
   function renewService(product: Licence) {
     ctxCard.setItems([product]);
     ctxBackLink.setBackLink(RouteKey.detail.replace(':id', product.code));
@@ -327,7 +341,7 @@ export default function DetailPage() {
               <View style={{ flex: 1 }}>
                 <View style={styles.imageContainer}>
                   <CustomImage
-                    source={require('../assets/images/products/1.png')}
+                    source={getImage(product)}
                     placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
                     errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
                     style={styles.imageFullWidth}
@@ -424,7 +438,7 @@ export default function DetailPage() {
               />
             </View>
             <CustomImage
-              source={require('../assets/images/products/1.png')}
+              source={getImage(product)}
               placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
               errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
               style={styles.imageFullWidth}
