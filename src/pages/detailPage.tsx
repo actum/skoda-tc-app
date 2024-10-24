@@ -272,7 +272,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 24,
-    paddingTop: 50,
   },
   text: {
     color: flowColorsRgbaOnSurface0,
