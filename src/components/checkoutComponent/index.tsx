@@ -57,6 +57,11 @@ export default function CheckoutComponent() {
     return number.replace(/(\d{3})(?=\d)/g, '$1 ');
   }
 
+  function capitalizeFirstLetter(str: string) {
+    if (!str) return '';
+    return str[0] + str.slice(1).toLowerCase();
+  }
+
   return (
     <View style={styles.root}>
       <View style={styles.items}>
@@ -70,14 +75,14 @@ export default function CheckoutComponent() {
                 </Text>
                 <Text style={styles.infos}>
                   {userCtx.userData?.address?.street}{' '}
-                  {userCtx.userData?.address?.city}
+                  {userCtx.userData?.address?.city}{' '}
                   {userCtx.userData?.address?.postalCode}
                   {', '}
-                  {userCtx.userData?.address?.country}
+                  {capitalizeFirstLetter(
+                    String(userCtx.userData?.address?.country),
+                  )}
                 </Text>
-                <Text style={styles.infos}>
-                  {userCtx.userData?.address?.country}
-                </Text>
+                <Text style={styles.infos}>{userCtx.userData?.email}</Text>
                 <Text style={styles.infos}>
                   {formatPhoneNumber(String(userCtx.userData?.phoneNumber))}
                 </Text>

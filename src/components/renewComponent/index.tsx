@@ -9,8 +9,7 @@ import { asyncFetch } from '@/src/connections/fetch/asyncFetch';
 import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
-import RenewItem from '@/src/components/RenewComponent/RenewItem';
-import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
+import RenewItem from '@/src/components/renewComponent/RenewItem';
 
 export interface RenewFormData extends Record<string, boolean> {
   // agreeToTerms: string;
@@ -22,12 +21,9 @@ export default function RenewComponent() {
   const { control, handleSubmit, watch, reset } = useForm<RenewFormData>();
   async function loadData() {
     try {
-      const response = await asyncFetch<Licence[]>(
-        '/api/v1/products/inactive',
-        {
-          method: 'GET',
-        },
-      );
+      const response = await asyncFetch<Licence[]>('/api/v1/products/expired', {
+        method: 'GET',
+      });
       setData(response);
       setTimeout(() => {
         reset(getDefaultValues(response));
@@ -141,7 +137,7 @@ const styles = StyleSheet.create({
     height: '80%',
   },
   price: {
-    color: flowColorsRgbaOnSurface0,
+    color: '#fff',
     fontFamily: 'SKODA Next',
     fontSize: 24,
     fontWeight: 'bold',
@@ -171,7 +167,7 @@ const styles = StyleSheet.create({
     right: 20,
   },
   total: {
-    color: flowColorsRgbaOnSurface0,
+    color: '#fff',
     fontFamily: 'SKODA Next',
     fontSize: 16,
     fontWeight: 'bold',
