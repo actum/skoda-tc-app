@@ -2,9 +2,9 @@ import BaseContainer from '@/src/components/containers/BaseContainer';
 import PageHeader from '@/src/components/pageHeader';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
-import RenewComponent from '@/src/components/renewComponent';
 import { View } from 'react-native';
 import React from 'react';
+import RenewComponent from "@/src/components/RenewComponent";
 
 export default function RenewPage() {
   const navigate = useNavigate();

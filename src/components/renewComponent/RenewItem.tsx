@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Checkbox from '@/src/components/forms/Checkbox';
 import { Control, FieldPath } from 'react-hook-form';
-import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
 import { RenewFormData } from '@/src/components/renewComponent/index';
 
 interface IRenewItem {
