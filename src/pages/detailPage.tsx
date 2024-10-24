@@ -115,6 +115,7 @@ export default function DetailPage() {
       display: 'flex',
       flexDirection: 'column',
       gap: 24,
+      paddingBottom: car ? 0 : 30,
     },
     text: {
       color: flowColorsRgbaOnSurface0,
@@ -405,14 +406,23 @@ export default function DetailPage() {
   return (
     <BaseContainer>
       {/* PageHeader Absolutně Umístěn nad obrázek */}
-      <PageHeader
-        title={car ? product.name : ''} // Prázdný nadpis
-        backAction={() => navigate(RouteKey.home)}
-      />
       <ScrollView style={{ marginBottom: 80 }}>
         <View style={styles.mainWrapper}>
           {/* Container pro obrázek */}
           <View style={styles.imageContainer}>
+            <View
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: 10,
+              }}
+            >
+              <PageHeader
+                title={car ? product.name : ''}
+                backAction={() => navigate(RouteKey.home)}
+              />
+            </View>
             <CustomImage
               source={require('../assets/images/products/1.png')}
               placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
@@ -470,12 +480,6 @@ export default function DetailPage() {
                 <TextParagraph text={item.content} />
               </Accordion>
             ))}
-            <StyledButton
-              title={'HOME'}
-              onPress={() => {
-                navigate(RouteKey.home);
-              }}
-            />
           </View>
         </View>
       </ScrollView>
