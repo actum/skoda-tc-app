@@ -62,7 +62,7 @@ export default function PaymentProcessPage() {
       alignItems: 'center',
       gap: 20,
       justifyContent: 'center',
-      margin: car ? 70 : 'auto',
+      margin: car ? 180 : 'auto',
     },
     text: {
       color: flowColorsRgbaOnSurface0,
