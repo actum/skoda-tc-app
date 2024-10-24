@@ -1,36 +1,20 @@
 import BaseContainer from '@/src/components/containers/BaseContainer';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
-import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import CheckIcon from '@/src/components/icon/CheckIcon';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StyledButton from '@/src/components/button/StyledButton';
-import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
-import { MaterialIcons } from '@expo/vector-icons';
+import {
+  flowColorsRgbaBrandPrimary,
+  flowColorsRgbaOnSurface0,
+} from '@/src/assets/styles';
 import { asyncFetch } from '@/src/connections/fetch/asyncFetch';
 import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
 import ErrorIcon from '@/src/components/icon/ErrorIcon';
 
 export default function PaymentProcessPage() {
-  const rotateAnim = useRef(new Animated.Value(0)).current;
   const [error, setError] = useState(false);
-
-  useEffect(() => {
-    Animated.loop(
-      Animated.timing(rotateAnim, {
-        toValue: 1,
-        duration: 1000,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      }),
-    ).start();
-  }, [rotateAnim]);
-
-  const rotate = rotateAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['360deg', '0deg'],
-  });
-
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     processPayment();
@@ -46,7 +30,7 @@ export default function PaymentProcessPage() {
     } catch (e) {
       const error = e as HttpApiCallError;
       setError(true);
-      alert(`ERROR WHEN PROCESS ORDER: ${error.message}`);
+      // alert(`ERROR WHEN PROCESS ORDER: ${error.message}`);
     } finally {
       setTimeout(async () => {
         setLoading(false);
@@ -60,13 +44,7 @@ export default function PaymentProcessPage() {
     return (
       <BaseContainer>
         <View style={styles.root}>
-          <Animated.View style={{ transform: [{ rotate }] }}>
-            <MaterialIcons
-              size={60}
-              name={'rotate-left'}
-              color={flowColorsRgbaOnSurface0}
-            />
-          </Animated.View>
+          <ActivityIndicator size="large" color={flowColorsRgbaBrandPrimary} />
         </View>
       </BaseContainer>
     );

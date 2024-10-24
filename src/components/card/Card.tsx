@@ -1,23 +1,28 @@
 // components/Card.tsx
 import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  StyleProp,
-  ViewStyle,
+  ImageSourcePropType,
   ImageStyle,
-  Image,
+  StyleProp,
+  StyleSheet,
   TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
-import { ImageSourcePropType } from 'react-native';
 import CustomImage from '@/src/components/image/Image';
+import {
+  flowColorsRgbaOnSurface0,
+  flowColorsRgbaOnSurface800,
+  flowColorsRgbaOnSurface900,
+} from '@/src/assets/styles';
+import TextParagraph from '@/src/components/text/TextParagraph';
 
 // Typování props pro Card komponentu
 interface CardProps {
   title: string;
   subtitle?: string;
   description?: string;
+  priceValue?: number;
   image?: ImageSourcePropType | React.ReactNode;
   actions?: React.ReactNode;
   onPress?: () => void;
@@ -31,6 +36,7 @@ const Card: React.FC<CardProps> = ({
   title,
   subtitle,
   description,
+  priceValue,
   image,
   actions,
   onPress,
@@ -50,7 +56,7 @@ const Card: React.FC<CardProps> = ({
           source={require('../../assets/images/products/1.png')}
           placeholder={require('../../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
           errorPlaceholder={require('../../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
-          style={styles.image}
+          style={[styles.image, imageStyle]}
           loadingIndicatorColor="#ff0000"
           onLoad={() => console.log('Obrázek načten!')}
           onError={() => console.log('Chyba při načítání obrázku!')}
@@ -63,7 +69,7 @@ const Card: React.FC<CardProps> = ({
         source={require('../../assets/images/products/1.png')}
         placeholder={require('../../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
         errorPlaceholder={require('../../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
-        style={styles.image}
+        style={[styles.image, imageStyle]}
         loadingIndicatorColor="#ff0000"
         onLoad={() => console.log('Obrázek načten!')}
         onError={() => console.log('Chyba při načítání obrázku!')}
@@ -72,11 +78,31 @@ const Card: React.FC<CardProps> = ({
   };
 
   // Základní obsah karty
-  const cardContent = (
+  const cardContent = priceValue ? (
     <View style={[styles.content, contentStyle]}>
-      {title && <Text style={styles.title}>{title}</Text>}
-      {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
-      {description && <Text style={styles.description}>{description}</Text>}
+      <View style={styles.cardWithPrice}>
+        <View>
+          {title && <TextParagraph text={title} style={styles.subtitle} />}
+        </View>
+        <View>
+          {priceValue && (
+            <TextParagraph text={`${priceValue} CZK`} style={styles.title} />
+          )}
+          {description && (
+            <TextParagraph text={description} style={styles.description} />
+          )}
+        </View>
+      </View>
+      {children}
+      {actions && <View style={styles.actions}>{actions}</View>}
+    </View>
+  ) : (
+    <View style={[styles.content, contentStyle]}>
+      {title && <TextParagraph text={title} style={styles.title} />}
+      {subtitle && <TextParagraph text={subtitle} style={styles.subtitle} />}
+      {description && (
+        <TextParagraph text={description} style={styles.description} />
+      )}
       {children}
       {actions && <View style={styles.actions}>{actions}</View>}
     </View>
@@ -97,9 +123,9 @@ const Card: React.FC<CardProps> = ({
 // Styly pro Card komponentu
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: flowColorsRgbaOnSurface800,
     borderRadius: 12,
-    shadowColor: '#000',
+    shadowColor: flowColorsRgbaOnSurface900,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -114,7 +140,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: '100%',
     height: 200,
-    backgroundColor: '#eee', // Základní barva pro případ, že obrázek není
+    backgroundColor: flowColorsRgbaOnSurface0, // Základní barva pro případ, že obrázek není
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -126,21 +152,26 @@ const styles = StyleSheet.create({
   content: {
     padding: 15,
   },
+  cardWithPrice: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   title: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#333',
+    color: flowColorsRgbaOnSurface0,
     marginBottom: 5,
   },
   subtitle: {
     fontSize: 16,
     fontWeight: '400',
-    color: '#666',
+    color: flowColorsRgbaOnSurface0,
     marginBottom: 10,
   },
   description: {
     fontSize: 14,
-    color: '#666',
+    color: flowColorsRgbaOnSurface0,
     marginBottom: 10,
   },
   actions: {

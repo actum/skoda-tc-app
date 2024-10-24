@@ -22,12 +22,9 @@ export default function RenewComponent() {
   const { control, handleSubmit, watch, reset } = useForm<RenewFormData>();
   async function loadData() {
     try {
-      const response = await asyncFetch<Licence[]>(
-        '/api/v1/products/inactive',
-        {
-          method: 'GET',
-        },
-      );
+      const response = await asyncFetch<Licence[]>('/api/v1/products/expired', {
+        method: 'GET',
+      });
       setData(response);
       setTimeout(() => {
         reset(getDefaultValues(response));

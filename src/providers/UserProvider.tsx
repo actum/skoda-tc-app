@@ -10,7 +10,9 @@ export const UserProvider = ({ children }: { children: JSX.Element }) => {
   const initialData: IUserContext = {
     token: token,
     isAuthenticated: true,
+    reload: () => loadUserData(),
     userData: {
+      email: 'email@email.cz',
       firstname: 'Josef',
       lastname: 'Novák',
       phoneNumber: '+42001003006',

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import {
+  StyleProp,
   StyleSheet,
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
+  ViewStyle,
 } from 'react-native';
 import {
   flowColorsRgbaBrandSecondary,
@@ -14,6 +16,7 @@ interface IButton extends TouchableOpacityProps {
   title: string;
   variant?: 'primary' | 'secondary'; // Přidání varianty pro různé barvy tlačítka
   fontSize?: number;
+  style?: StyleProp<ViewStyle>;
 }
 
 export default function StyledButton(props: IButton) {
@@ -27,7 +30,7 @@ export default function StyledButton(props: IButton) {
   return (
     <TouchableOpacity
       {...props}
-      style={[buttonStyle, isHovered && styles.hover]}
+      style={[props.style, buttonStyle, isHovered && styles.hover]}
       onPressIn={() => setIsHovered(true)}
       onPressOut={() => setIsHovered(false)}
     >

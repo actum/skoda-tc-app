@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import React, { ReactNode } from 'react';
 import { Navigation } from '../navigation/Navigation';
 import { CarNavigation } from '@/src/components/car-navigation/CarNavigation';
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   },
   children: {
     height: '100%',
+    paddingTop: Platform.OS === 'ios' ? 50 : 0,
   },
   container: {
     backgroundColor: 'rgba(22, 23, 24, 1)',

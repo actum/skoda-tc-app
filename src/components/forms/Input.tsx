@@ -78,7 +78,7 @@ const inputStyles = <T extends Value>(props: Props<T>) =>
         props?.editable === false
           ? flowColorsRgbaTextQuaternary
           : flowColorsRgbaTextSecondary,
-      fontFamily: 'SKODANextW05-Regular',
+      fontFamily: 'SKODA Next',
       fontSize: 14,
       paddingLeft: 10,
       paddingRight: 10,

@@ -60,21 +60,21 @@ export default function RenewItem(props: IRenewItem) {
     <View
       style={[
         styles.root,
-        isLarge && { paddingVertical: 15, paddingHorizontal: 85 },
+        isLarge && { paddingVertical: 40, paddingHorizontal: 20 },
       ]}
     >
-      <View style={[styles.icon, isLarge && { paddingRight: 10 }]}>
+      <View style={[styles.icon, isLarge && { paddingRight: 20 }]}>
         <Checkbox
-          size={isLarge ? 32 : 24}
+          size={24}
           name={props.identifier as FieldPath<RenewFormData>}
           control={props.control}
         />
       </View>
       <View style={styles.textContainer}>
-        <Text style={[styles.title, isLarge && { fontSize: 28 }]}>
+        <Text style={[styles.title, isLarge && { fontSize: 32 }]}>
           {props.text.title}
         </Text>
-        <Text style={[styles.description, isLarge && { fontSize: 22 }]}>
+        <Text style={[styles.description, isLarge && { fontSize: 24 }]}>
           {props.text.description}
         </Text>
       </View>
