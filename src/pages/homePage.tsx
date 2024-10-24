@@ -1,10 +1,10 @@
 import BaseContainer from '@/src/components/containers/BaseContainer';
-import LicenceItemExample from '@/src/components/LicenceItem/LicenceItemExample';
 import PageHeader from '@/src/components/pageHeader';
 import { ScrollView, View } from 'react-native';
 import React from 'react';
 import LicenceRenewSection from '@/src/components/LicenceItem/LicenceRenewSection';
 import useCarState from '@/src/components/carState';
+import Licences from '@/src/components/LicenceItem/Licences';
 
 export default function HomePage() {
   const { car } = useCarState();

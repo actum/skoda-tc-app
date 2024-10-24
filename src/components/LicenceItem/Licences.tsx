@@ -70,7 +70,8 @@ export default function Licences() {
             <Text style={styles.carCategoryText}>{category.name}</Text>
           ) : (
             <Text style={styles.categoryText}>{category.name}</Text>
-          )}          {category.productList.map((value, index) => {
+          )}
+          {category.productList.map((value, index) => {
             let iconType: 'success' | 'warning' | 'normal' = 'normal';
             let description = 'Available for Purchase';
             if (value.purchasedLicense?.endDate) {
