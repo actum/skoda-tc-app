@@ -3,6 +3,7 @@ import { RouteKey } from '../components/navigation/Navigation';
 import HomePage from '@/src/pages/homePage';
 import DetailPage from '@/src/pages/detailPage';
 import RenewPage from '@/src/pages/renewPage';
+import ChangeBillingAddress from '@/src/pages/changeBillingAddress';
 
 export function AppRoutes() {
   return (
@@ -10,6 +11,10 @@ export function AppRoutes() {
       <Route path={RouteKey.home} element={<HomePage />} />
       <Route path={RouteKey.renew} element={<RenewPage />} />
       <Route path={RouteKey.detail} element={<DetailPage />} />
+      <Route
+        path={RouteKey.changeBillingAddress}
+        element={<ChangeBillingAddress />}
+      />
     </Routes>
   );
 }

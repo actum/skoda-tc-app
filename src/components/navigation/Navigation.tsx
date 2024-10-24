@@ -6,6 +6,7 @@ export const RouteKey = {
   home: '/',
   renew: '/renew',
   detail: '/detail/:id',
+  changeBillingAddress: '/changeBillingAddress',
 };
 
 export function Navigation() {
