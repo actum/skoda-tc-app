@@ -1,0 +1,68 @@
+name: Android Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Expo CLI
+        run: npm install -g expo-cli
+
+      - name: Install project dependencies
+        run: npm install
+
+      - name: Set up JDK 11 (required for Gradle)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          api-level: 31
+          target: android-31
+          ndk: 21.4.7075529
+
+      - name: Set ANDROID_HOME environment variable
+        run: echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
+
+      - name: Grant execute permission for Gradle
+        run: |
+          chmod +x ./android/gradlew
+          chmod +x ./automotive/gradlew
+
+      - name: Build Android APK
+        working-directory: android
+        run: ./gradlew assembleRelease
+
+      - name: Build Android Automotive APK
+        working-directory: automotive
+        run: ./gradlew assembleRelease
+
+      - name: Copy APK to output
+        run: |
+          cp android/app/build/outputs/apk/release/skoda-app.apk ${{ github.workspace }}/output_apk/android.apk
+          cp automotive/app/build/outputs/apk/release/skoda-app.apk ${{ github.workspace }}/output_apk/automotive.apk
+
+      - name: Upload apk
+        uses: actions/upload-artifact@v4
+        with:
+          name: output_apk
+          path: ${{ github.workspace }}/output_apk
