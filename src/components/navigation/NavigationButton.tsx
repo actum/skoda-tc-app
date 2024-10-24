@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Icon, { IconType } from '@/src/components/icon';
 import {
-  flowColorsBrandSecondary,
+  flowColorsRgbaBrandSecondary,
   flowColorsRgbaOnSurface0,
 } from '@/src/assets/styles';
 
@@ -36,7 +36,7 @@ export default function NavigationButton({
       <Icon
         type={icon}
         size={getSize()}
-        color={isActive ? '#7FFFB0' : '#fff'}
+        color={isActive ? '#7fffb0' : '#fff'}
       />
       {title && (
         <Text
@@ -55,7 +55,7 @@ export default function NavigationButton({
 
 const styles = StyleSheet.create({
   activeText: {
-    color: flowColorsBrandSecondary,
+    color: flowColorsRgbaBrandSecondary,
   },
   menuItem: {
     alignItems: 'center',
