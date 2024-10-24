@@ -50,6 +50,7 @@ export default function StyledButton(props: IButton) {
       borderRadius: 50,
       borderWidth: 1,
       justifyContent: 'center',
+      marginBottom: 10,
       paddingHorizontal: 30,
       paddingVertical: 14,
     },

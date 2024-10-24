@@ -10,6 +10,7 @@ import { asyncFetch } from '@/src/connections/fetch/asyncFetch';
 import { Category } from '@/src/connections/request/Data';
 import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
 import RadioGroup from '@/src/components/forms/RadioGroup';
+import useCarState from '@/src/components/carState';
 
 interface ChangeBillingFormData extends Value {
   firstName?: string;
@@ -27,6 +28,7 @@ interface ChangeBillingFormData extends Value {
 }
 
 export default function ChangeBillingAddressComponent() {
+  const { car } = useCarState();
   const [isCompany, setIsCompany] = useState(false);
 
   const userCtx = useContext(UserContext);
@@ -101,138 +103,146 @@ export default function ChangeBillingAddressComponent() {
     }
   }
 
+  const styles = StyleSheet.create({
+    buttonArea: {
+      flexDirection: car ? 'row' : 'column',
+      gap: 5,
+      justifyContent: car ? 'space-between' : 'flex-start',
+      paddingBottom: 40,
+      paddingHorizontal: car ? 0 : 50,
+    },
+    description: {
+      color: 'rgba(255, 255, 255, 1)',
+      fontFamily: 'SKODA Next',
+      fontSize: car ? 22 : 12,
+    },
+    scrollContainer: {
+      marginBottom: car ? 0 : 80,
+    },
+    title: {
+      color: 'rgba(255, 255, 255, 1)',
+      fontFamily: 'SKODA Next',
+      fontSize: car ? 24 : 16,
+    },
+  });
+
   return (
-    <ScrollView style={styles.scrollContainer}>
-      <View style={{ flexDirection: 'column', gap: 20, padding: 20 }}>
-        <Text style={styles.title}>
-          Are you ordering for a private person or a company?
-        </Text>
-        <RadioGroup
-          name="type"
-          control={control}
-          options={[
-            { label: 'Private customer', value: 'user' },
-            { label: 'Company', value: 'company' },
-          ]}
-          rules={{ required: 'Required message' }}
-        />
-
-        <Text style={styles.description}>
-          Which payment card is stored in the "payment method" section depends
-          on whether you have selected the private customer or business customer
-          option.
-        </Text>
-
-        {isCompany && (
-          <>
-            <Input
-              label={'Company name *'}
-              name={'companyName'}
-              control={control}
-              rules={{ required: 'Required' }}
-            />
-            <Input
-              label={'VAT ID no *'}
-              name={'VAT'}
-              control={control}
-              rules={{ required: 'Required' }}
-            />
-          </>
-        )}
-
-        <Input
-          label={'First name *'}
-          name={'firstName'}
-          control={control}
-          rules={{ required: 'Required' }}
-        />
-        <Input
-          label={'Last name *'}
-          name={'lastName'}
-          control={control}
-          rules={{ required: 'Required' }}
-        />
-        <Input
-          label={'Street *'}
-          name={'street'}
-          control={control}
-          rules={{ required: 'Required' }}
-        />
-        <Input
-          label={'House number *'}
-          name={'houseNumber'}
-          control={control}
-          rules={{ required: 'Required' }}
-        />
-        <Input
-          label={'ZIP code *'}
-          name={'zipCode'}
-          control={control}
-          rules={{ required: 'Required' }}
-        />
-        <Input
-          label={'City *'}
-          name={'city'}
-          control={control}
-          rules={{ required: 'Required' }}
-        />
-        <Input
-          label={'Country'}
-          name={'country'}
-          control={control}
-          rules={{ required: 'Required' }}
-          editable={false}
-          defaultValue={'Czechia'}
-        />
-        <Input
-          label={'E-mail *'}
-          name={'email'}
-          control={control}
-          rules={{ required: 'Required' }}
-        />
-        <Input
-          label={'Phone number *'}
-          name={'phoneNumber'}
-          control={control}
-          rules={{ required: 'Required' }}
-        />
-        <View style={styles.buttonArea}>
-          <StyledButton
-            title="Save Billing Address"
-            onPress={(e) => {
-              handleSubmit(onSubmit)(e);
-            }}
+    <View style={car ? { height: '60%', paddingHorizontal: 65 } : undefined}>
+      <ScrollView style={styles.scrollContainer}>
+        <View style={{ flexDirection: 'column', gap: 20, padding: 20 }}>
+          <Text style={styles.title}>
+            Are you ordering for a private person or a company?
+          </Text>
+          <RadioGroup
+            name="type"
+            control={control}
+            options={[
+              { label: 'Private customer', value: 'user' },
+              { label: 'Company', value: 'company' },
+            ]}
+            rules={{ required: 'Required message' }}
           />
-          <StyledButton
-            title="Cancel"
-            variant={'secondary'}
-            onPress={(e) => {
-              navigate(RouteKey.checkout);
-            }}
+
+          <Text style={styles.description}>
+            Which payment card is stored in the "payment method" section depends
+            on whether you have selected the private customer or business
+            customer option.
+          </Text>
+
+          {isCompany && (
+            <>
+              <Input
+                label={'Company name *'}
+                name={'companyName'}
+                control={control}
+                rules={{ required: 'Required' }}
+              />
+              <Input
+                label={'VAT ID no *'}
+                name={'VAT'}
+                control={control}
+                rules={{ required: 'Required' }}
+              />
+            </>
+          )}
+
+          <Input
+            label={'First name *'}
+            name={'firstName'}
+            control={control}
+            rules={{ required: 'Required' }}
           />
+          <Input
+            label={'Last name *'}
+            name={'lastName'}
+            control={control}
+            rules={{ required: 'Required' }}
+          />
+          <Input
+            label={'Street *'}
+            name={'street'}
+            control={control}
+            rules={{ required: 'Required' }}
+          />
+          <Input
+            label={'House number *'}
+            name={'houseNumber'}
+            control={control}
+            rules={{ required: 'Required' }}
+          />
+          <Input
+            label={'ZIP code *'}
+            name={'zipCode'}
+            control={control}
+            rules={{ required: 'Required' }}
+          />
+          <Input
+            label={'City *'}
+            name={'city'}
+            control={control}
+            rules={{ required: 'Required' }}
+          />
+          <Input
+            label={'Country'}
+            name={'country'}
+            control={control}
+            rules={{ required: 'Required' }}
+            editable={false}
+            defaultValue={'Czechia'}
+          />
+          <Input
+            label={'E-mail *'}
+            name={'email'}
+            control={control}
+            rules={{ required: 'Required' }}
+          />
+          <Input
+            label={'Phone number *'}
+            name={'phoneNumber'}
+            control={control}
+            rules={{ required: 'Required' }}
+          />
+          <View style={styles.buttonArea}>
+            <StyledButton
+              style={car ? { width: '40%' } : undefined}
+              fontSize={car ? 22 : undefined}
+              title="Save Billing Address"
+              onPress={(e) => {
+                handleSubmit(onSubmit)(e);
+              }}
+            />
+            <StyledButton
+              style={car ? { width: '40%' } : undefined}
+              fontSize={car ? 22 : undefined}
+              title="Cancel"
+              variant={'secondary'}
+              onPress={(e) => {
+                navigate(RouteKey.checkout);
+              }}
+            />
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  buttonArea: {
-    gap: 5,
-    paddingBottom: 40,
-    paddingHorizontal: 50,
-  },
-  description: {
-    color: 'rgba(255, 255, 255, 1)',
-    fontFamily: 'SKODA Next',
-    fontSize: 12,
-  },
-  scrollContainer: {
-    marginBottom: 80,
-  },
-  title: {
-    color: 'rgba(255, 255, 255, 1)',
-    fontFamily: 'SKODA Next',
-    fontSize: 16,
-  },
-});

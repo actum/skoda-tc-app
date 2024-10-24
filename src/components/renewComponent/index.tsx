@@ -1,4 +1,10 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Licence } from '@/src/connections/request/Data';
 import useCarState from '@/src/components/carState';
 import { useForm } from 'react-hook-form';
@@ -173,9 +179,14 @@ export default function RenewComponent() {
           }}
         >
           <View style={{ flexDirection: 'row', gap: car ? 25 : 10 }}>
-            <View style={{ paddingTop: car ? 20 : 5 }}>
+            <TouchableOpacity
+              style={{ paddingTop: car ? 20 : 5 }}
+              onPressOut={() => {
+                navigate(RouteKey.home);
+              }}
+            >
               <Icon type={'arrow'} size={32} color={'white'} />
-            </View>
+            </TouchableOpacity>
             <View
               style={{
                 flexDirection: 'row',

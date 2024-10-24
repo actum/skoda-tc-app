@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import StyledButton from '@/src/components/button/StyledButton';
 import Icon from '@/src/components/icon';
 import React from 'react';
@@ -11,7 +11,7 @@ interface ILicenceRenewSection {
 }
 
 export default function LicenceRenewSection(props: ILicenceRenewSection) {
-  const navagate = useNavigate();
+  const navigate = useNavigate();
   const { car } = useCarState();
 
   const styles = StyleSheet.create({
@@ -53,9 +53,14 @@ export default function LicenceRenewSection(props: ILicenceRenewSection) {
     <View style={styles.root}>
       <View style={styles.descriptionRow}>
         {car && (
-          <View style={styles.icon}>
+          <TouchableOpacity
+            style={styles.icon}
+            onPressOut={() => {
+              navigate(RouteKey.home);
+            }}
+          >
             <Icon type={'arrow'} size={32} color={'white'} />
-          </View>
+          </TouchableOpacity>
         )}
         <View style={styles.icon}>
           <View style={styles.iconWrapped}>
@@ -73,7 +78,7 @@ export default function LicenceRenewSection(props: ILicenceRenewSection) {
         fontSize={car ? 24 : undefined}
         title={'Renew expired services'}
         onPress={() => {
-          navagate(RouteKey.renew);
+          navigate(RouteKey.renew);
         }}
       />
     </View>
