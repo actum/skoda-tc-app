@@ -50,13 +50,13 @@ export default function Licences() {
       fontFamily: 'SKODA Next',
       fontSize: 20,
       fontWeight: car ? 'normal' : 'bold',
-      paddingHorizontal: 10,
+      paddingHorizontal: car ? 10 : 0,
     },
     root: {
       flexDirection: 'column',
       gap: 20,
       paddingBottom: car ? 20 : 200,
-      paddingHorizontal: 10,
+      paddingHorizontal: car ? 10 : 15,
       paddingTop: 20,
     },
   });
