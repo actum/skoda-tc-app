@@ -36,17 +36,15 @@ export default function DetailPage() {
   let iconColor: string = '';
   let isExpired = false;
   let licenceStateText = '';
+
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-
   const { getProductById } = useContext(ProductContext);
   const [product, setProduct] = useState<Licence | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const ctxCard = useContext(CardItemsContext);
-
-  // Mock data pro Accordion
   const mockAccordionData = [
     {
       id: 1,
@@ -84,7 +82,6 @@ export default function DetailPage() {
     },
   ];
 
-  // Formátování data
   function formatDate(date: string): string {
     return new Date(date).toLocaleDateString('cs-CZ', {
       year: 'numeric',
@@ -120,7 +117,6 @@ export default function DetailPage() {
     setLoading(false);
   };
 
-  // Nastavení ikony a barvy na základě expirace
   if (product && product.purchasedLicense?.endDate) {
     if (new Date(product.purchasedLicense.endDate) > new Date()) {
       iconType = 'check';
@@ -148,7 +144,6 @@ export default function DetailPage() {
     );
   }
 
-  // Zobrazit Chybu
   if (error || !product || !id) {
     return (
       <BaseContainer>
@@ -156,8 +151,8 @@ export default function DetailPage() {
         <View style={styles.mainWrapper}>
           <CustomImage
             source={require('../assets/images/404.png')}
-            placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
-            errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
+            placeholder={require('../assets/images/placeholder.webp')}
+            errorPlaceholder={require('../assets/images/missing-image.webp')}
             style={styles.image}
             loadingIndicatorColor={flowColorsRgbaBrandPrimary}
           />
@@ -173,19 +168,17 @@ export default function DetailPage() {
 
   return (
     <BaseContainer>
-      {/* PageHeader Absolutně Umístěn nad obrázek */}
       <PageHeader
-        title={''} // Prázdný nadpis
+        title={''}
         backAction={() => navigate(RouteKey.home)}
       />
       <ScrollView style={{ marginBottom: 80 }}>
         <View style={styles.mainWrapper}>
-          {/* Container pro obrázek */}
           <View style={styles.imageContainer}>
             <CustomImage
               source={require('../assets/images/products/1.png')}
-              placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
-              errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
+              placeholder={require('../assets/images/placeholder.webp')}
+              errorPlaceholder={require('../assets/images/missing-image.webp')}
               style={styles.imageFullWidth}
               loadingIndicatorColor={flowColorsRgbaBrandPrimary}
             />
@@ -230,7 +223,6 @@ export default function DetailPage() {
             {product.description && (
               <TextParagraph text={product.description} />
             )}
-            {/* Dynamické vykreslení Accordion sekcí z mock dat */}
             {mockAccordionData.map((item) => (
               <Accordion
                 key={item.id}
@@ -257,7 +249,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     position: 'relative',
     width: '100%',
-    height: 250, // Musí odpovídat výšce obrázku
+    height: 250,
   },
   mainWrapper: {
     display: 'flex',
@@ -319,9 +311,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   imageFullWidth: {
-    width: '100%', // Nastavení šířky na 100%
+    width: '100%',
     height: '100%',
-    aspectRatio: 16 / 9, // Udržuje poměr stran 16:9
+    aspectRatio: 16 / 9,
     borderRadius: 10,
   },
   loader: {
