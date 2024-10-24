@@ -5,6 +5,10 @@ import useCarState from '@/src/components/carState';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import LicenceRenewSection from '@/src/components/LicenceItem/LicenceRenewSection';
+import {
+  flowColorsRgbaOnSurface0,
+  flowColorsRgbaTransparentTertiary,
+} from '@/src/assets/styles';
 
 export default function LicenceItemExample() {
   const { car } = useCarState();
@@ -24,7 +28,7 @@ export default function LicenceItemExample() {
         {
           name: 'Charge Free',
           price: 1000,
-          code: 'x01',
+          code: 'PR00031',
           purchasedLicense: {
             endDate: '2025-06-27',
           },
@@ -32,12 +36,12 @@ export default function LicenceItemExample() {
         {
           name: 'Test 2',
           price: 1000,
-          code: 'x02',
+          code: '',
         },
         {
           name: 'Test 3',
           price: 1000,
-          code: 'x03',
+          code: 'PR0003',
           purchasedLicense: {
             endDate: '2024-06-27',
           },
@@ -45,7 +49,7 @@ export default function LicenceItemExample() {
         {
           name: 'Test 5',
           price: 1000,
-          code: 'x05',
+          code: 'PR0005',
           purchasedLicense: {
             endDate: '2024-06-27',
           },
@@ -58,7 +62,7 @@ export default function LicenceItemExample() {
         {
           name: 'Media Streaming',
           price: 1000,
-          code: 'x01',
+          code: 'PR0004',
           purchasedLicense: {
             endDate: '2024-06-27',
           },
@@ -66,7 +70,7 @@ export default function LicenceItemExample() {
         {
           name: 'Care Connect - Remote Access',
           price: 1000,
-          code: 'x02',
+          code: 'PR0006',
         },
       ],
     },
@@ -119,10 +123,10 @@ export default function LicenceItemExample() {
 const styles = StyleSheet.create({
   border: {
     borderBottomWidth: 1,
-    borderColor: '#F3F3F31F',
+    borderColor: flowColorsRgbaTransparentTertiary,
   },
   categoryText: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODA Next',
     fontSize: 20,
     fontWeight: 'bold',

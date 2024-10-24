@@ -1,6 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon, { IconType } from '@/src/components/icon';
+import {
+  flowColorsRgbaOnSurface0,
+  flowColorsRgbaSemanticAlert,
+  flowColorsRgbaSemanticPositive,
+  flowColorsRgbaTextPrimary,
+} from '@/src/assets/styles';
 
 interface ILicenceItem {
   size?: 'normal' | 'large';
@@ -46,7 +52,11 @@ export default function LicenceItem(props: ILicenceItem) {
           <Icon
             type={type}
             size={isLarge ? 42 : 18}
-            color={props.icon === 'normal' ? '#fff' : 'black'}
+            color={
+              props.icon === 'normal'
+                ? flowColorsRgbaOnSurface0
+                : flowColorsRgbaTextPrimary
+            }
           />
         </View>
       </View>
@@ -59,7 +69,11 @@ export default function LicenceItem(props: ILicenceItem) {
         </Text>
       </View>
       <View style={styles.action}>
-        <Icon type="chevron-right" size={isLarge ? 64 : 24} color="#ffffff" />
+        <Icon
+          type="chevron-right"
+          size={isLarge ? 64 : 24}
+          color={flowColorsRgbaOnSurface0}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -87,7 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    color: '#ffffff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODANext-Regular',
     fontSize: 18,
   },
