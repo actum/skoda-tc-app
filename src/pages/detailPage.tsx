@@ -45,6 +45,18 @@ export default function DetailPage() {
   const [error, setError] = useState<string | null>(null);
 
   const ctxCard = useContext(CardItemsContext);
+
+  // Dynamické mapování kódů na obrázky
+  const mapProductImage: Record<string, number> = {
+    PR0001: require('../assets/images/products/infotainment.png'),
+    PR0002: require('../assets/images/products/remote-access.png'),
+    PR0003: require('../assets/images/products/online-data.png'),
+    PR0004: require('../assets/images/products/online-data.png'),
+    PR0005: require('../assets/images/products/mediastreaming.png'),
+    PR0006: require('../assets/images/products/traffication.png'),
+    PR0007: require('../assets/images/products/online-data.png'),
+  };
+
   const mockAccordionData = [
     {
       id: 1,
@@ -166,17 +178,24 @@ export default function DetailPage() {
     );
   }
 
+  // Získání obrázku na základě kódu produktu
+  const productImage =
+    mapProductImage[product.code] ||
+    require('../assets/images/products/traffication.png');
+
   return (
     <BaseContainer>
+      {/* Absolutní umístění PageHeader nad obrázek */}
       <PageHeader
-        title={''}
+        title={''} // Prázdný nadpis
         backAction={() => navigate(RouteKey.home)}
       />
       <ScrollView style={{ marginBottom: 80 }}>
         <View style={styles.mainWrapper}>
+          {/* Container pro obrázek */}
           <View style={styles.imageContainer}>
             <CustomImage
-              source={require('../assets/images/products/1.png')}
+              source={productImage}
               placeholder={require('../assets/images/placeholder.webp')}
               errorPlaceholder={require('../assets/images/missing-image.webp')}
               style={styles.imageFullWidth}
@@ -218,6 +237,7 @@ export default function DetailPage() {
                   />
                 )
               }
+              onPress={() => console.log('Karta stisknuta!')}
               style={styles.cardFullWidth}
             />
             {product.description && (
@@ -249,7 +269,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     position: 'relative',
     width: '100%',
-    height: 250,
+    height: 250, // Musí odpovídat výšce obrázku
   },
   mainWrapper: {
     display: 'flex',
@@ -311,9 +331,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   imageFullWidth: {
-    width: '100%',
+    width: '100%', // Nastavení šířky na 100%
     height: '100%',
-    aspectRatio: 16 / 9,
+    aspectRatio: 16 / 9, // Udržuje poměr stran 16:9
     borderRadius: 10,
   },
   loader: {

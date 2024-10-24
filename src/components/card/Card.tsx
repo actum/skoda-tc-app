@@ -53,7 +53,7 @@ const Card: React.FC<CardProps> = ({
       // Pokud je image React element, renderujeme ho přímo
       return (
         <CustomImage
-          source={require('../../assets/images/products/1.png')}
+          source={require('../../assets/images/products/traffication.png')}
           placeholder={require('../../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
           errorPlaceholder={require('../../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
           style={[styles.image, imageStyle]}
@@ -64,7 +64,7 @@ const Card: React.FC<CardProps> = ({
 
     return (
       <CustomImage
-        source={require('../../assets/images/products/1.png')}
+        source={require('../../assets/images/products/traffication.png')}
         placeholder={require('../../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
         errorPlaceholder={require('../../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
         style={[styles.image, imageStyle]}
