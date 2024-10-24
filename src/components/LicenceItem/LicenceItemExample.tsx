@@ -9,6 +9,7 @@ import {
   flowColorsRgbaOnSurface0,
   flowColorsRgbaTransparentTertiary,
 } from '@/src/assets/styles';
+import React from 'react';
 
 export default function LicenceItemExample() {
   const { car } = useCarState();
@@ -76,12 +77,45 @@ export default function LicenceItemExample() {
     },
   ];
 
+  const styles = StyleSheet.create({
+    border: {
+      borderBottomWidth: 1,
+      borderColor: flowColorsRgbaTransparentTertiary,
+    },
+    carCategoryText: {
+      color: flowColorsRgbaOnSurface0,
+      fontFamily: 'SKODA Next',
+      fontSize: 26,
+      fontWeight: car ? 'normal' : 'bold',
+      marginLeft: 15,
+      paddingHorizontal: 60,
+    },
+    categoryText: {
+      color: flowColorsRgbaOnSurface0,
+      fontFamily: 'SKODA Next',
+      fontSize: 20,
+      fontWeight: car ? 'normal' : 'bold',
+      paddingHorizontal: 10,
+    },
+    root: {
+      flexDirection: 'column',
+      gap: 20,
+      paddingBottom: 20,
+      paddingHorizontal: 10,
+      paddingTop: 20,
+    },
+  });
+
   return (
     <View style={styles.root}>
-      <LicenceRenewSection />
+      {!car && <LicenceRenewSection />}
       {categories.map((category, key) => (
         <View key={key}>
-          <Text style={styles.categoryText}>{category.name}</Text>
+          {car ? (
+            <Text style={styles.carCategoryText}>{category.name}</Text>
+          ) : (
+            <Text style={styles.categoryText}>{category.name}</Text>
+          )}
           {category.licences.map((value, index) => {
             let iconType: 'success' | 'warning' | 'normal' = 'normal';
             let description = 'Available for Purchase';
@@ -119,24 +153,3 @@ export default function LicenceItemExample() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  border: {
-    borderBottomWidth: 1,
-    borderColor: flowColorsRgbaTransparentTertiary,
-  },
-  categoryText: {
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: 'SKODA Next',
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingHorizontal: 10,
-  },
-  root: {
-    flexDirection: 'column',
-    gap: 20,
-    paddingBottom: 20,
-    paddingHorizontal: 10,
-    paddingTop: 20,
-  },
-});

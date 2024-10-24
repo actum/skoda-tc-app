@@ -13,6 +13,7 @@ import {
 interface IButton extends TouchableOpacityProps {
   title: string;
   variant?: 'primary' | 'secondary'; // Přidání varianty pro různé barvy tlačítka
+  fontSize?: number;
 }
 
 export default function StyledButton(props: IButton) {
@@ -30,7 +31,13 @@ export default function StyledButton(props: IButton) {
       onPressIn={() => setIsHovered(true)}
       onPressOut={() => setIsHovered(false)}
     >
-      <Text style={[styles.text, variant === 'primary' && styles.textPrimary]}>
+      <Text
+        style={[
+          styles.text,
+          variant === 'primary' && styles.textPrimary,
+          !!props.fontSize && { fontSize: props.fontSize },
+        ]}
+      >
         {props.title}
       </Text>
     </TouchableOpacity>
