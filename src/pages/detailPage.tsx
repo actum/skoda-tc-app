@@ -16,9 +16,10 @@ import {
     flowColorsRgbaBrandPrimary,
     flowColorsRgbaOnSurface0,
     flowColorsRgbaOnSurface800,
-    flowColorsRgbaSemanticAlert, flowColorsRgbaTextPrimary,
+    flowColorsRgbaSemanticAlert,
+    flowColorsRgbaTextPrimary,
     flowTypographyLargeBody,
-    flowTypographyLargeH1,
+    flowTypographyLargeH1, flowTypographyMediumH1, flowTypographySmallH1,
 } from '@/src/assets/styles';
 import TextParagraph from '@/src/components/text/TextParagraph';
 import CustomImage from '@/src/components/image/Image';
@@ -274,17 +275,17 @@ const styles = StyleSheet.create({
     color: flowColorsRgbaOnSurface0,
     paddingHorizontal: 16,
     gap: 10,
-    fontFamily: flowTypographyLargeH1.fontFamily,
-    fontSize: parseFloat(flowTypographyLargeH1.fontSize),
-    fontWeight: flowTypographyLargeH1.fontWeight as TextStyle['fontWeight'],
+    fontFamily: flowTypographySmallH1.fontFamily,
+    fontSize: parseFloat(flowTypographySmallH1.fontSize),
+    fontWeight: flowTypographySmallH1.fontWeight as TextStyle['fontWeight'],
     letterSpacing:
-      parseFloat(flowTypographyLargeH1.letterSpacing) *
-      parseFloat(flowTypographyLargeH1.fontSize),
-    lineHeight: parseFloat(flowTypographyLargeH1.lineHeight),
+      parseFloat(flowTypographySmallH1.letterSpacing) *
+      parseFloat(flowTypographySmallH1.fontSize),
+    lineHeight: parseFloat(flowTypographySmallH1.lineHeight),
     textDecorationLine:
-      flowTypographyLargeH1.textDecoration as TextStyle['textDecorationLine'],
+        flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
     textTransform:
-      flowTypographyLargeH1.textTransform as TextStyle['textTransform'],
+        flowTypographySmallH1.textTransform as TextStyle['textTransform'],
   },
   loader: {
     flex: 1,
