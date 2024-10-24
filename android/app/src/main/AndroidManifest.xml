@@ -35,7 +35,7 @@
         android:exported="true"
         android:screenOrientation="landscape"
         android:windowFullscreen="true">
-<!--      <meta-data android:name="distractionOptimized" android:value="true"/>-->
+      <meta-data android:name="distractionOptimized" android:value="false"/>
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>

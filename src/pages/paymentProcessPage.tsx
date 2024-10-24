@@ -119,7 +119,9 @@ export default function PaymentProcessPage() {
             <ErrorIcon size={60} />
           </View>
           <View>
-            <Text style={styles.text}>Unpaid</Text>
+            <Text style={styles.text}>
+              Something went wrong, please try again
+            </Text>
           </View>
           <View>
             <StyledButton

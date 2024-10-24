@@ -88,7 +88,7 @@ export default function CheckoutComponent() {
     },
     infos: {
       color: 'rgba(196, 198, 199, 1)',
-      fontFamily: 'SKODANext-Lights',
+      fontFamily: 'SKODANext-Light',
       fontSize: car ? 22 : 14,
       fontWeight: '300',
       paddingBottom: car ? 15 : 0,
