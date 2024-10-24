@@ -67,12 +67,14 @@ export default function CheckoutComponent() {
 
   const styles = StyleSheet.create({
     buttonArea: {
+      alignItems: 'center',
+      justifyContent: 'center',
       paddingHorizontal: car ? 0 : 40,
       paddingTop: 20,
     },
     cardContainder: {
       justifyContent: car ? 'space-between' : 'flex-start',
-      width: car ? '45%' : 0,
+      width: car ? '45%' : '100%',
     },
     cardInfo: {
       flexDirection: 'row',
@@ -118,12 +120,12 @@ export default function CheckoutComponent() {
       position: 'relative',
     },
     scrollContainer: {
-      marginBottom: car ? 0 : '25%',
+      marginBottom: car ? 0 : '50%',
     },
     summary: {
       backgroundColor: '#303132',
       borderRadius: 8,
-      bottom: 0,
+      bottom: 170,
       justifyContent: 'center',
       left: 20,
       paddingBottom: 20,

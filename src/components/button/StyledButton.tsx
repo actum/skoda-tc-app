@@ -35,26 +35,21 @@ export default function StyledButton(props: IButton) {
     primary: {
       alignItems: 'center',
       backgroundColor: flowColorsRgbaBrandSecondary,
+    },
+    root: {
+      alignItems: 'center',
       borderRadius: 50,
       justifyContent: 'center',
       marginBottom: 10,
-      paddingBottom: 12,
+      paddingBottom: car ? 18 : 12,
       paddingHorizontal: 30,
       paddingTop: 12,
-    },
-    root: {
-      paddingBottom: car ? 18 : 5,
     },
     secondary: {
       alignItems: 'center',
       backgroundColor: 'rgba(35, 36, 37, 1)',
       borderColor: 'rgba(70, 71, 72, 1)',
-      borderRadius: 50,
       borderWidth: 1,
-      justifyContent: 'center',
-      marginBottom: 10,
-      paddingHorizontal: 30,
-      paddingVertical: 14,
     },
     text: {
       color: '#fff',
