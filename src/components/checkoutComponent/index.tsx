@@ -14,8 +14,10 @@ import { RouteKey } from '@/src/components/navigation/Navigation';
 import { UserContext } from '@/src/providers/UserContext';
 import useCarState from '@/src/components/carState';
 import Icon from '@/src/components/icon';
+import { BackLinkContext } from '@/src/providers/BackLinkProvider';
 
 export default function CheckoutComponent() {
+  const ctxBackLink = useContext(BackLinkContext);
   const { car } = useCarState();
   const userCtx = useContext(UserContext);
   const [data, setData] = useState<Licence[]>([]);
@@ -239,6 +241,11 @@ export default function CheckoutComponent() {
             <TouchableOpacity
               style={{ paddingTop: 5 }}
               onPressOut={() => {
+                if (ctxBackLink.backLink) {
+                  navigate(ctxBackLink.backLink);
+                  ctxBackLink.setBackLink('');
+                  return;
+                }
                 navigate(RouteKey.renew);
               }}
             >

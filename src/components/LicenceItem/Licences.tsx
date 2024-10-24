@@ -55,7 +55,7 @@ export default function Licences() {
     root: {
       flexDirection: 'column',
       gap: 20,
-      paddingBottom: car ? 20 : 200,
+      paddingBottom: car ? 20 : 120,
       paddingHorizontal: car ? 10 : 15,
       paddingTop: 20,
     },
