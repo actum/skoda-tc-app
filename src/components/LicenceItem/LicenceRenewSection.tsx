@@ -4,6 +4,7 @@ import Icon from '@/src/components/icon';
 import React from 'react';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
+import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
 
 interface ILicenceRenewSection {
   size?: 'large' | 'normal';
@@ -39,7 +40,7 @@ export default function LicenceRenewSection(props: ILicenceRenewSection) {
 
 const styles = StyleSheet.create({
   description: {
-    color: '#C4C6C7',
+    color: '#c4c6c7',
     fontSize: 14,
   },
   descriptionRow: {
@@ -65,9 +66,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   title: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODA Next',
     fontSize: 18,
-    // fontWeight: 'bold',
   },
 });

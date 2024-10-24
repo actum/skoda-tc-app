@@ -1,16 +1,17 @@
 // CustomImage.tsx
 import React, { useState } from 'react';
 import {
-  View,
-  Image,
-  ImageStyle,
-  ViewStyle,
-  StyleProp,
   ActivityIndicator,
-  StyleSheet,
-  ImageSourcePropType,
+  Image,
   ImageResizeMode,
+  ImageSourcePropType,
+  ImageStyle,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
 } from 'react-native';
+import { flowColorsRgbaBrandPrimary } from '@/src/assets/styles';
 
 interface CustomImageProps {
   source: ImageSourcePropType;
@@ -33,7 +34,7 @@ const CustomImage: React.FC<CustomImageProps> = ({
   onLoad,
   onError,
   containerStyle,
-  loadingIndicatorColor = '#000',
+  loadingIndicatorColor = flowColorsRgbaBrandPrimary,
 }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);

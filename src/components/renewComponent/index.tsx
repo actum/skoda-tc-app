@@ -10,6 +10,7 @@ import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import RenewItem from '@/src/components/RenewComponent/RenewItem';
+import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
 
 export interface RenewFormData extends Record<string, boolean> {
   // agreeToTerms: string;
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     height: '80%',
   },
   price: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODA Next',
     fontSize: 24,
     fontWeight: 'bold',
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     right: 20,
   },
   total: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODA Next',
     fontSize: 16,
     fontWeight: 'bold',

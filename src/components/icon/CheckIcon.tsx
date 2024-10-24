@@ -1,6 +1,9 @@
 import { StyleSheet, View } from 'react-native';
 import Icon from '@/src/components/icon/index';
-import { flowColorsRgbaTextPrimary } from '@/src/assets/styles';
+import {
+  flowColorsBrandSecondary,
+  flowColorsRgbaTextPrimary,
+} from '@/src/assets/styles';
 import React from 'react';
 
 interface ICheckBoxIcon {
@@ -22,7 +25,7 @@ export default function CheckIcon(props: ICheckBoxIcon) {
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: 'rgba(120, 250, 174, 1)',
+    backgroundColor: flowColorsBrandSecondary,
     borderRadius: 50,
     padding: 0,
   },

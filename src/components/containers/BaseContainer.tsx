@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import { Navigation } from '../navigation/Navigation';
 import { CarNavigation } from '@/src/components/car-navigation/CarNavigation';
 import useCarState from '@/src/components/carState';
+import { flowColorsTransparentPrimary } from '@/src/assets/styles';
 
 export default function BaseContainer({ children }: { children: ReactNode }) {
   const catState = useCarState();
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'ios' ? 50 : 0,
   },
   container: {
-    backgroundColor: 'rgba(22, 23, 24, 1)',
+    backgroundColor: flowColorsTransparentPrimary,
     position: 'relative',
   },
   navigation: {
