@@ -1,4 +1,4 @@
-// components/Accordion.tsx
+// Accordion.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Animated,
@@ -17,17 +17,12 @@ import {
 import Icon from '@/src/components/icon';
 import {
   flowColorsRgbaOnSurface0,
-  flowColorsRgbaOnSurface600,
   flowColorsRgbaOnSurface800,
   flowColorsRgbaOnSurface900,
   flowTypographySmallBody,
-  flowTypographySmallCaption1,
-  flowTypographySmallCaption2,
-  flowTypographySmallH3,
   flowTypographySmallSubheadline,
 } from '@/src/assets/styles';
 
-// Povolení LayoutAnimation na Androidu
 if (
   Platform.OS === 'android' &&
   UIManager.setLayoutAnimationEnabledExperimental

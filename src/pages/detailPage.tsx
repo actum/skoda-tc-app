@@ -32,8 +32,8 @@ import { CardItemsContext } from '@/src/providers/CardItemsProvider';
 import Accordion from '@/src/components/accordion/Accordion';
 
 export default function DetailPage() {
-  let iconType;
-  let iconColor;
+  let iconType: IconType | null = null;
+  let iconColor: string = '';
   let isExpired = false;
   let licenceStateText = '';
   const navigate = useNavigate();
@@ -49,6 +49,7 @@ export default function DetailPage() {
 
   const ctxCard = useContext(CardItemsContext);
 
+  // Mock data pro Accordion
   const mockAccordionData = [
     {
       id: 1,
@@ -86,6 +87,7 @@ export default function DetailPage() {
     },
   ];
 
+  // Formátování data
   function formatDate(date: string): string {
     return new Date(date).toLocaleDateString('cs-CZ', {
       year: 'numeric',
@@ -94,35 +96,14 @@ export default function DetailPage() {
     });
   }
 
-  if (product && product.purchasedLicense?.endDate) {
-    if (new Date(product.purchasedLicense?.endDate) > new Date()) {
-      iconType = 'check';
-      iconColor = 'rgba(120, 250, 174, 1)';
-      isExpired = false;
-    } else {
-      iconType = 'warning';
-      iconColor = 'rgba(253, 88, 88, 1)';
-      isExpired = true;
-    }
-
-    licenceStateText = `${isExpired ? 'Expired on' : 'Active until'} ${formatDate(new Date(product.purchasedLicense.endDate).toString())}`;
-  }
-
-  console.log(iconType);
-
   useEffect(() => {
     if (id) {
       fetchProduct();
     } else {
       setLoading(false);
+      setError('ID produktu není k dispozici.');
     }
   }, [id]);
-
-  if (!id) {
-    console.error('Error fetching product: PRODUCT ID missing');
-    alert('Chyba při načítání produktu.');
-    return;
-  }
 
   const fetchProduct = async () => {
     if (!id) {
@@ -133,6 +114,7 @@ export default function DetailPage() {
 
     setLoading(true);
     const fetchedProduct = await getProductById(id);
+    console.log('Fetched product:', fetchedProduct);
     if (fetchedProduct) {
       setProduct(fetchedProduct);
       setError(null);
@@ -142,6 +124,26 @@ export default function DetailPage() {
     setLoading(false);
   };
 
+  // Nastavení ikony a barvy na základě expirace
+  if (product && product.purchasedLicense?.endDate) {
+    if (new Date(product.purchasedLicense.endDate) > new Date()) {
+      iconType = 'check';
+      iconColor = 'rgba(120, 250, 174, 1)';
+      isExpired = false;
+    } else {
+      iconType = 'warning';
+      iconColor = 'rgba(253, 88, 88, 1)';
+      isExpired = true;
+    }
+
+    licenceStateText = `${isExpired ? 'Expired on' : 'Active until'} ${formatDate(
+      new Date(product.purchasedLicense.endDate).toString(),
+    )}`;
+  }
+
+  console.log('Icon Type:', iconType);
+
+  // Zobrazit Loader
   if (loading) {
     return (
       <BaseContainer>
@@ -153,6 +155,7 @@ export default function DetailPage() {
     );
   }
 
+  // Zobrazit Chybu
   if (error || !product || !id) {
     return (
       <BaseContainer>
@@ -179,13 +182,15 @@ export default function DetailPage() {
 
   return (
     <BaseContainer>
+      {/* PageHeader Absolutně Umístěn nad obrázek */}
       <PageHeader
-        title={'Paid services'}
+        title={''} // Prázdný nadpis
         backAction={() => navigate(RouteKey.home)}
       />
       <ScrollView style={{ marginBottom: 80 }}>
         <View style={styles.mainWrapper}>
-          <View style={styles.headerContainer}>
+          {/* Container pro obrázek */}
+          <View style={styles.imageContainer}>
             <CustomImage
               source={require('../assets/images/products/1.png')}
               placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
@@ -196,6 +201,7 @@ export default function DetailPage() {
               onError={() => console.log('Chyba při načítání obrázku!')}
             />
           </View>
+
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{product.name}</Text>
           </View>
@@ -236,6 +242,7 @@ export default function DetailPage() {
             {product.description && (
               <TextParagraph text={product.description} />
             )}
+            {/* Dynamické vykreslení Accordion sekcí z mock dat */}
             {mockAccordionData.map((item) => (
               <Accordion
                 key={item.id}
@@ -259,6 +266,46 @@ export default function DetailPage() {
 }
 
 const styles = StyleSheet.create({
+  imageContainer: {
+    position: 'relative',
+    width: '100%',
+    height: 250, // Musí odpovídat výšce obrázku
+  },
+  mainWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 24,
+  },
+  titleContainer: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 16,
+  },
+  title: {
+    color: flowColorsRgbaOnSurface0,
+    fontFamily: flowTypographySmallH1.fontFamily,
+    fontSize: parseFloat(flowTypographySmallH1.fontSize),
+    fontWeight: flowTypographySmallH1.fontWeight as TextStyle['fontWeight'],
+    letterSpacing:
+      parseFloat(flowTypographySmallH1.letterSpacing) *
+      parseFloat(flowTypographySmallH1.fontSize),
+    lineHeight: parseFloat(flowTypographySmallH1.lineHeight),
+    textDecorationLine:
+      flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
+    textTransform:
+      flowTypographySmallH1.textTransform as TextStyle['textTransform'],
+  },
+  iconContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 8,
+    justifyContent: 'flex-start',
+    paddingHorizontal: 16,
+  },
+  icon: {
+    borderRadius: 50,
+    padding: 0,
+  },
   bodyContainer: {
     alignItems: 'center',
     gap: 16,
@@ -278,45 +325,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
   },
-  headerContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 16,
-  },
-  icon: {
-    borderRadius: 50,
-    padding: 0,
-  },
-  iconContainer: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'row',
-    gap: 8,
-    justifyContent: 'flex-start',
-    paddingHorizontal: 16,
-  },
   image: {
+    width: '100%',
+    height: '100%',
     borderRadius: 10,
-    height: 200,
-    marginBottom: 20,
-    width: 200,
   },
   imageFullWidth: {
     width: '100%', // Nastavení šířky na 100%
-    height: 250,
+    height: '100%',
     aspectRatio: 16 / 9, // Udržuje poměr stran 16:9
-    marginBottom: 20,
     borderRadius: 10,
   },
   loader: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-  },
-  mainWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 24,
   },
   text: {
     color: flowColorsRgbaOnSurface0,
@@ -331,25 +354,5 @@ const styles = StyleSheet.create({
       flowTypographyLargeBody.textDecoration as TextStyle['textDecorationLine'],
     textTransform:
       flowTypographyLargeBody.textTransform as TextStyle['textTransform'],
-  },
-  title: {
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: flowTypographySmallH1.fontFamily,
-    fontSize: parseFloat(flowTypographySmallH1.fontSize),
-    fontWeight: flowTypographySmallH1.fontWeight as TextStyle['fontWeight'],
-    gap: 10,
-    letterSpacing:
-      parseFloat(flowTypographySmallH1.letterSpacing) *
-      parseFloat(flowTypographySmallH1.fontSize),
-    lineHeight: parseFloat(flowTypographySmallH1.lineHeight),
-    paddingHorizontal: 16,
-    textDecorationLine:
-      flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
-    textTransform:
-      flowTypographySmallH1.textTransform as TextStyle['textTransform'],
-  },
-  titleContainer: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-  },
+  }
 });
