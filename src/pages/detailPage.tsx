@@ -104,7 +104,7 @@ export default function DetailPage() {
   if (error || !product || !id) {
     return (
       <BaseContainer>
-        <View style={styles.bodyContainer}>
+        <View style={styles.mainWrapper}>
           <CustomImage
             source={require('../assets/images/404.png')}
             placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
