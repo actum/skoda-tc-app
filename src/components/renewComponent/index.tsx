@@ -87,7 +87,7 @@ export default function RenewComponent() {
       borderColor: '#F3F3F31F',
     },
     items: {
-      height: car ? '62%' : '80%',
+      height: car ? '61%' : '80%',
     },
     price: {
       color: '#fff',

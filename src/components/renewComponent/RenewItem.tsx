@@ -60,7 +60,7 @@ export default function RenewItem(props: IRenewItem) {
     <View
       style={[
         styles.root,
-        isLarge && { paddingVertical: 40, paddingHorizontal: 20 },
+        isLarge && { paddingVertical: 10, paddingHorizontal: 20 },
       ]}
     >
       <View style={[styles.icon, isLarge && { paddingRight: 20 }]}>
