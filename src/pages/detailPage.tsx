@@ -19,8 +19,6 @@ import {
   flowColorsRgbaSemanticAlert,
   flowColorsRgbaTextPrimary,
   flowTypographyLargeBody,
-  flowTypographyLargeH1,
-  flowTypographyMediumH1,
   flowTypographySmallH1,
 } from '@/src/assets/styles';
 import TextParagraph from '@/src/components/text/TextParagraph';
@@ -117,7 +115,7 @@ export default function DetailPage() {
   if (error || !product || !id) {
     return (
       <BaseContainer>
-        <PageHeader title={'Paid services'} backAction={() => {}} />
+        <PageHeader title={''} backAction={() => {}} />
         <View style={styles.mainWrapper}>
           <CustomImage
             source={require('../assets/images/404.png')}
@@ -210,7 +208,6 @@ export default function DetailPage() {
 const styles = StyleSheet.create({
   mainWrapper: {
     gap: 24,
-    paddingTop: 50,
     display: 'flex',
     flexDirection: 'column',
   },
