@@ -1,7 +1,7 @@
 // ProductProvider.tsx
-import React, { createContext, useEffect, useState } from 'react';
-import { Licence } from '../connections/request/Data';
-import { asyncFetch } from '@/src/connections/fetch/asyncFetch';
+import React, {createContext, useEffect, useState} from 'react';
+import {Licence} from '../connections/request/Data';
+import {asyncFetch} from '@/src/connections/fetch/asyncFetch';
 import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
 
 interface IProductContext {
@@ -28,7 +28,6 @@ export const ProductProvider = ({ children }: { children: JSX.Element }) => {
       const products = await asyncFetch<Licence[]>('/api/v1/products', {
         method: 'GET',
       });
-      console.log('Fetched Products:', products);
       setItems(products);
     } catch (e) {
       const error = e as HttpApiCallError;
@@ -41,11 +40,9 @@ export const ProductProvider = ({ children }: { children: JSX.Element }) => {
     id: string | number,
   ): Promise<Licence | null> => {
     try {
-      const product = await asyncFetch<Licence>(`/api/v1/products/${id}`, {
-        method: 'GET',
+        return await asyncFetch<Licence>(`/api/v1/products/${id}`, {
+          method: 'GET',
       });
-      console.log(`Fetched Product with ID ${id}:`, product);
-      return product;
     } catch (e) {
       const error = e as HttpApiCallError;
       alert(`ERROR WHEN GET PRODUCT BY ID ${id}: ${error.message}`);

@@ -4,9 +4,9 @@ import StyledButton from '@/src/components/button/StyledButton';
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-native';
 import { CardItemsContext } from '@/src/providers/CardItemsProvider';
-import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { UserContext } from '@/src/providers/UserContext';
+import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
 
 export default function CheckoutComponent() {
   const userCtx = useContext(UserContext);
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     height: '80%',
   },
   price: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODA Next',
     fontSize: 24,
     fontWeight: 'bold',
@@ -217,14 +217,14 @@ const styles = StyleSheet.create({
     right: 20,
   },
   title: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODA Next',
     fontSize: 20,
     fontWeight: 'bold',
     paddingBottom: 20,
   },
   total: {
-    color: '#fff',
+    color: flowColorsRgbaOnSurface0,
     fontFamily: 'SKODA Next',
     fontSize: 16,
     fontWeight: 'bold',
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   vat: {
-    color: '#C4C6C7',
+    color: '#c4c6c7',
     fontFamily: 'SKODA Next',
     fontSize: 16,
   },

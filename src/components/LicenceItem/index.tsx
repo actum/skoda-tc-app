@@ -5,7 +5,6 @@ import {
   flowColorsRgbaOnSurface0,
   flowColorsRgbaTextPrimary,
 } from '@/src/assets/styles';
-import CheckIcon from '@/src/components/icon/CheckIcon';
 
 interface ILicenceItem {
   size?: 'normal' | 'large';

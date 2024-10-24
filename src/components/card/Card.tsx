@@ -58,8 +58,6 @@ const Card: React.FC<CardProps> = ({
           errorPlaceholder={require('../../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
           style={[styles.image, imageStyle]}
           loadingIndicatorColor="#ff0000"
-          onLoad={() => console.log('Obrázek načten!')}
-          onError={() => console.log('Chyba při načítání obrázku!')}
         />
       );
     }
@@ -71,8 +69,6 @@ const Card: React.FC<CardProps> = ({
         errorPlaceholder={require('../../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
         style={[styles.image, imageStyle]}
         loadingIndicatorColor="#ff0000"
-        onLoad={() => console.log('Obrázek načten!')}
-        onError={() => console.log('Chyba při načítání obrázku!')}
       />
     );
   };
