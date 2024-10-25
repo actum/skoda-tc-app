@@ -82,8 +82,8 @@ export default function ChangeBillingAddressComponent() {
         country: data.country,
         email: data.email,
         phoneNumber: data.phoneNumber,
-        firstName: data.firstName,
-        lastName: data.lastName,
+        firstname: data.firstName,
+        lastname: data.lastName,
         companyName: data.companyName ?? '',
         VAT: data.VAT ?? '',
       };
