@@ -67,3 +67,44 @@ jobs:
         with:
           name: output_apk
           path: ${{ github.workspace }}/output_apk
+
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cache Cocoapods Pods
+        uses: actions/cache@v3
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Expo CLI
+        run: npm install -g expo-cli
+
+      - name: Install project dependencies
+        run: npm install
+
+      - name: Install Cocoapods dependencies
+        run: |
+          cd ios
+          pod install
+
+      - name: Build iOS app and Archive
+        run: |
+          cd ios
+          xcodebuild -workspace skodaapp.xcworkspace \
+            -scheme skodaapp \
+            -configuration Release \
+            -sdk iphoneos \
+            -archivePath $PWD/build/skodaapp.xcarchive \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
+            archive
