@@ -206,7 +206,6 @@ export default function ChangeBillingAddressComponent() {
             label={'Country'}
             name={'country'}
             control={control}
-            rules={{ required: 'Required' }}
             editable={false}
             defaultValue={'Czechia'}
           />
@@ -214,6 +213,7 @@ export default function ChangeBillingAddressComponent() {
             label={'E-mail *'}
             name={'email'}
             control={control}
+            editable={false}
             rules={{ required: 'Required' }}
           />
           <Input

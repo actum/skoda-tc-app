@@ -60,7 +60,7 @@ export default function ChangePaymentComponent() {
     try {
       const requestData = {
         id: userCtx.userData?.creditCard?.id,
-        number: data.number,
+        number: data.number.replaceAll(' ', ''),
         expiryMonth: data.expiryMonth,
         expiryYear: data.expiryYear,
         cvv: data.cvv,
