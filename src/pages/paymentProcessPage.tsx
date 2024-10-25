@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import CheckIcon from '@/src/components/icon/CheckIcon';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import StyledButton from '@/src/components/button/StyledButton';
 import {
   flowColorsRgbaBrandPrimary,
@@ -12,9 +12,20 @@ import {
 import { asyncFetch } from '@/src/connections/fetch/asyncFetch';
 import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
 import ErrorIcon from '@/src/components/icon/ErrorIcon';
+import { CardItemsContext } from '@/src/providers/CardItemsProvider';
+import useCarState from '@/src/components/carState';
+
+type Status = 'PAID' | 'UNPAID' | undefined;
+
+interface PaymentResponse {
+  paymentStatus: Status;
+}
 
 export default function PaymentProcessPage() {
+  const { car } = useCarState();
+  const cardCtx = useContext(CardItemsContext);
   const [error, setError] = useState(false);
+  const [status, setStatus] = useState<Status>();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     processPayment();
@@ -23,9 +34,17 @@ export default function PaymentProcessPage() {
   async function processPayment() {
     try {
       setLoading(true);
-      const response = await asyncFetch<unknown>('/api/v1/orders', {
+      const response = await asyncFetch<PaymentResponse>('/api/v1/orders', {
         method: 'POST',
+        body: JSON.stringify(
+          cardCtx.items.map((value) => ({
+            code: value.code,
+          })),
+        ),
       });
+
+      setStatus(response.paymentStatus);
+
       console.log('processPayment response', response);
     } catch (e) {
       const error = e as HttpApiCallError;
@@ -38,13 +57,30 @@ export default function PaymentProcessPage() {
     }
   }
 
+  const styles = StyleSheet.create({
+    root: {
+      alignItems: 'center',
+      gap: 20,
+      justifyContent: 'center',
+      margin: car ? 180 : 'auto',
+    },
+    text: {
+      color: flowColorsRgbaOnSurface0,
+      fontFamily: 'SKODA Next',
+      fontSize: car ? 30 : 20,
+      fontWeight: car ? 'normal' : 'bold',
+      paddingHorizontal: 50,
+      textAlign: 'center',
+    },
+  });
+
   const navigate = useNavigate();
 
   if (loading) {
     return (
       <BaseContainer>
         <View style={styles.root}>
-          <ActivityIndicator size="large" color={flowColorsRgbaBrandPrimary} />
+          <ActivityIndicator size={70} color={flowColorsRgbaBrandPrimary} />
         </View>
       </BaseContainer>
     );
@@ -55,10 +91,61 @@ export default function PaymentProcessPage() {
       <BaseContainer>
         <View style={styles.root}>
           <View>
-            <ErrorIcon size={60} />
+            <ErrorIcon size={car ? 90 : 60} />
           </View>
           <View>
             <Text style={styles.text}>Internal server error</Text>
+          </View>
+          <View>
+            <StyledButton
+              fontSize={22}
+              title={'Back to checkout'}
+              variant={'secondary'}
+              onPress={() => {
+                navigate(RouteKey.checkout);
+              }}
+            />
+          </View>
+        </View>
+      </BaseContainer>
+    );
+  }
+
+  if (status === 'UNPAID') {
+    return (
+      <BaseContainer>
+        <View style={styles.root}>
+          <View>
+            <ErrorIcon size={60} />
+          </View>
+          <View>
+            <Text style={styles.text}>
+              Something went wrong, please try again
+            </Text>
+          </View>
+          <View>
+            <StyledButton
+              title={'Back to checkout'}
+              variant={'secondary'}
+              onPress={() => {
+                navigate(RouteKey.checkout);
+              }}
+            />
+          </View>
+        </View>
+      </BaseContainer>
+    );
+  }
+
+  if (status === 'PAID') {
+    return (
+      <BaseContainer>
+        <View style={styles.root}>
+          <View>
+            <CheckIcon size={60} />
+          </View>
+          <View>
+            <Text style={styles.text}>Services were successfully renewed</Text>
           </View>
           <View>
             <StyledButton
@@ -74,42 +161,5 @@ export default function PaymentProcessPage() {
     );
   }
 
-  return (
-    <BaseContainer>
-      <View style={styles.root}>
-        <View>
-          <CheckIcon size={60} />
-        </View>
-        <View>
-          <Text style={styles.text}>Services were successfully renewed</Text>
-        </View>
-        <View>
-          <StyledButton
-            title={'Services overview'}
-            variant={'secondary'}
-            onPress={() => {
-              navigate(RouteKey.home);
-            }}
-          />
-        </View>
-      </View>
-    </BaseContainer>
-  );
+  return null;
 }
-
-const styles = StyleSheet.create({
-  root: {
-    alignItems: 'center',
-    gap: 20,
-    justifyContent: 'center',
-    margin: 'auto',
-  },
-  text: {
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: 'SKODA Next',
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingHorizontal: 50,
-    textAlign: 'center',
-  },
-});

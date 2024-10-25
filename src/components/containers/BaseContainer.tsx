@@ -3,31 +3,37 @@ import React, { ReactNode } from 'react';
 import { Navigation } from '../navigation/Navigation';
 import { CarNavigation } from '@/src/components/car-navigation/CarNavigation';
 import useCarState from '@/src/components/carState';
-import {
-  flowColorsRgbaOnSurface900,
-  flowColorsRgbaTransparentPrimary,
-} from '@/src/assets/styles';
+import { flowColorsRgbaOnSurface900 } from '@/src/assets/styles';
 
 export default function BaseContainer({ children }: { children: ReactNode }) {
-  const catState = useCarState();
-  return (
-    <View style={styles.container}>
-      {catState.car && (
-        <View style={styles.menu}>
+  const { car } = useCarState();
+
+  if (car) {
+    return (
+      <View style={styles.carContainer}>
+        <View>
           <CarNavigation />
         </View>
-      )}
+        <View style={styles.children}>{children}</View>
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
       <View style={styles.children}>{children}</View>
-      {!catState.car && (
-        <View style={styles.navigation}>
-          <Navigation />
-        </View>
-      )}
+      <View style={styles.navigation}>
+        <Navigation />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  carContainer: {
+    backgroundColor: 'rgba(22, 23, 24, 1)',
+    position: 'relative',
+  },
   children: {
     height: '100%',
     paddingTop: Platform.OS === 'ios' ? 50 : 0,
@@ -40,9 +46,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
-    width: '100%',
-  },
-  menu: {
     width: '100%',
   },
 });

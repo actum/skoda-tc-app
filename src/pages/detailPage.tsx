@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   TextStyle,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
@@ -30,8 +31,13 @@ import Icon, { IconType } from '@/src/components/icon';
 import PageHeader from '@/src/components/pageHeader';
 import { CardItemsContext } from '@/src/providers/CardItemsProvider';
 import Accordion from '@/src/components/accordion/Accordion';
+import { BackLinkContext } from '@/src/providers/BackLinkProvider';
+import useCarState from '@/src/components/carState';
+import formatPrice from '@/src/helpers/price';
 
 export default function DetailPage() {
+  const { car } = useCarState();
+  const ctxBackLink = useContext(BackLinkContext);
   let iconType: IconType | null = null;
   let iconColor: string = '';
   let isExpired = false;
@@ -46,6 +52,106 @@ export default function DetailPage() {
 
   const ctxCard = useContext(CardItemsContext);
 
+  const styles = StyleSheet.create({
+    bodyContainer: {
+      alignItems: 'center',
+      gap: 16,
+      justifyContent: 'center',
+      paddingHorizontal: 16,
+    },
+    carIconContainer: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      gap: 8,
+      justifyContent: 'flex-start',
+    },
+    card: {
+      marginBottom: 20,
+    },
+    cardFullWidth: {
+      backgroundColor: flowColorsRgbaOnSurface800,
+      marginBottom: 20,
+      width: '100%',
+    },
+    errorText: {
+      color: flowColorsRgbaSemanticAlert,
+      fontSize: 18,
+      textAlign: 'center',
+    },
+    icon: {
+      borderRadius: 50,
+      padding: 0,
+    },
+    iconContainer: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      gap: 8,
+      justifyContent: 'flex-start',
+      paddingHorizontal: 16,
+    },
+    image: {
+      borderRadius: 10,
+      height: '100%',
+      width: '100%',
+    },
+    imageContainer: {
+      height: car ? 300 : 250,
+      position: 'relative',
+      width: '100%', // Musí odpovídat výšce obrázku
+    },
+    imageFullWidth: {
+      width: '100%', // Nastavení šířky na 100%
+      height: '100%',
+      aspectRatio: 16 / 9, // Udržuje poměr stran 16:9
+      borderRadius: 10,
+    },
+    loader: {
+      alignItems: 'center',
+      flex: 1,
+      justifyContent: 'center',
+    },
+    mainWrapper: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 24,
+      paddingBottom: car ? 0 : 30,
+    },
+    text: {
+      color: flowColorsRgbaOnSurface0,
+      fontFamily: flowTypographyLargeBody.fontFamily,
+      fontSize: parseFloat(flowTypographyLargeBody.fontSize),
+      fontWeight: flowTypographyLargeBody.fontWeight as TextStyle['fontWeight'],
+      letterSpacing:
+        parseFloat(flowTypographyLargeBody.letterSpacing) *
+        parseFloat(flowTypographyLargeBody.fontSize),
+      lineHeight: parseFloat(flowTypographyLargeBody.lineHeight),
+      textDecorationLine:
+        flowTypographyLargeBody.textDecoration as TextStyle['textDecorationLine'],
+      textTransform:
+        flowTypographyLargeBody.textTransform as TextStyle['textTransform'],
+    },
+    title: {
+      color: flowColorsRgbaOnSurface0,
+      fontFamily: flowTypographySmallH1.fontFamily,
+      fontSize: parseFloat(flowTypographySmallH1.fontSize),
+      fontWeight: flowTypographySmallH1.fontWeight as TextStyle['fontWeight'],
+      letterSpacing:
+        parseFloat(flowTypographySmallH1.letterSpacing) *
+        parseFloat(flowTypographySmallH1.fontSize),
+      lineHeight: parseFloat(flowTypographySmallH1.lineHeight),
+      textDecorationLine:
+        flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
+      textTransform:
+        flowTypographySmallH1.textTransform as TextStyle['textTransform'],
+    },
+    titleContainer: {
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
+      paddingHorizontal: 16,
+    },
+  });
+
+  // Mock data pro Accordion
   // Dynamické mapování kódů na obrázky
   const mapProductImage: Record<string, number> = {
     PR0001: require('../assets/images/products/infotainment.png'),
@@ -129,6 +235,28 @@ export default function DetailPage() {
     setLoading(false);
   };
 
+  function getImage(product: Licence) {
+    switch (product.code) {
+      case 'PR0001':
+        return require(`../assets/images/products/PR0001.png`);
+      case 'PR0002':
+        return require(`../assets/images/products/PR0002.png`);
+      case 'PR0003':
+        return require(`../assets/images/products/PR0003.png`);
+      case 'PR0004':
+        return require(`../assets/images/products/PR0004.png`);
+      default:
+        return require(`../assets/images/products/1.png`);
+    }
+  }
+
+  function renewService(product: Licence) {
+    ctxCard.setItems([product]);
+    ctxBackLink.setBackLink(RouteKey.detail.replace(':id', product.code));
+    navigate(RouteKey.checkout);
+  }
+
+  // Nastavení ikony a barvy na základě expirace
   if (product && product.purchasedLicense?.endDate) {
     if (new Date(product.purchasedLicense.endDate) > new Date()) {
       iconType = 'check';
@@ -148,7 +276,6 @@ export default function DetailPage() {
   if (loading) {
     return (
       <BaseContainer>
-        <PageHeader title={'Paid services'} backAction={() => {}} />
         <View style={styles.loader}>
           <ActivityIndicator size="large" color={flowColorsRgbaBrandPrimary} />
         </View>
@@ -178,26 +305,151 @@ export default function DetailPage() {
     );
   }
 
-  // Získání obrázku na základě kódu produktu
-  const productImage =
-    mapProductImage[product.code] ||
-    require('../assets/images/products/traffication.png');
+  if (car) {
+    return (
+      <BaseContainer>
+        {/* PageHeader Absolutně Umístěn nad obrázek */}
+        <PageHeader
+          title={car ? product.name : ''} // Prázdný nadpis
+          backAction={() => navigate(RouteKey.home)}
+        />
+        <View style={car ? { height: '44%' } : { flex: 1 }}>
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                gap: 20,
+                paddingHorizontal: 83,
+                paddingTop: 40,
+              }}
+            >
+              <View style={{ flex: 1, flexDirection: 'column', gap: 30 }}>
+                {iconType && product.purchasedLicense && (
+                  <View style={styles.carIconContainer}>
+                    <View style={[styles.icon, { backgroundColor: iconColor }]}>
+                      <Icon
+                        type={iconType as IconType}
+                        size={28}
+                        color={flowColorsRgbaTextPrimary}
+                      />
+                    </View>
+                    {licenceStateText && (
+                      <TextParagraph
+                        style={[styles.text, { fontSize: 26 }]}
+                        text={licenceStateText}
+                      />
+                    )}
+                  </View>
+                )}
+                <View>
+                  {product.description && (
+                    <TextParagraph text={product.description} fontSize={24} />
+                  )}
+                </View>
+              </View>
+              <View style={{ flex: 1 }}>
+                <View style={styles.imageContainer}>
+                  <CustomImage
+                    source={getImage(product)}
+                    placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
+                    errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
+                    style={styles.imageFullWidth}
+                    loadingIndicatorColor={flowColorsRgbaBrandPrimary}
+                  />
+                </View>
+              </View>
+            </View>
+          </ScrollView>
+        </View>
+        <View style={{ height: '20%' }}>
+          <View
+            style={{
+              backgroundColor: '#303132',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              paddingHorizontal: 30,
+              paddingTop: 5,
+              height: 100,
+              paddingVertical: 10,
+            }}
+          >
+            <View style={{ flexDirection: 'row', gap: 25 }}>
+              <TouchableOpacity
+                style={{ paddingTop: 5 }}
+                onPressOut={() => {
+                  navigate(RouteKey.home);
+                }}
+              >
+                <Icon type={'arrow'} size={32} color={'white'} />
+              </TouchableOpacity>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}
+              >
+                <Text
+                  style={{
+                    color: '#fff',
+                    fontSize: 28,
+                  }}
+                >
+                  Price {formatPrice(product.price.toString())} CZK
+                </Text>
+                <Text
+                  style={{
+                    color: '#C4C6C7',
+                    fontFamily: 'SKODA Next',
+                    fontSize: car ? 22 : 16,
+                    paddingLeft: car ? 16 : 0,
+                  }}
+                >
+                  including VAT
+                </Text>
+              </View>
+            </View>
+            <View
+              style={car ? { alignItems: 'center', paddingTop: 10 } : undefined}
+            >
+              <StyledButton
+                fontSize={car ? 24 : undefined}
+                title={'Renew service'}
+                onPress={(e) => {
+                  renewService(product);
+                }}
+              />
+            </View>
+          </View>
+        </View>
+      </BaseContainer>
+    );
+  }
 
   return (
     <BaseContainer>
-      {/* Absolutní umístění PageHeader nad obrázek */}
-      <PageHeader
-        title={''} // Prázdný nadpis
-        backAction={() => navigate(RouteKey.home)}
-      />
+      {/* PageHeader Absolutně Umístěn nad obrázek */}
       <ScrollView style={{ marginBottom: 80 }}>
         <View style={styles.mainWrapper}>
           {/* Container pro obrázek */}
           <View style={styles.imageContainer}>
+            <View
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: 10,
+              }}
+            >
+              <PageHeader
+                title={car ? product.name : ''}
+                backAction={() => navigate(RouteKey.home)}
+              />
+            </View>
             <CustomImage
-              source={productImage}
-              placeholder={require('../assets/images/placeholder.webp')}
-              errorPlaceholder={require('../assets/images/missing-image.webp')}
+              source={getImage(product)}
+              placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
+              errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
               style={styles.imageFullWidth}
               loadingIndicatorColor={flowColorsRgbaBrandPrimary}
             />
@@ -230,14 +482,12 @@ export default function DetailPage() {
                   <StyledButton
                     title="Renew service"
                     onPress={() => {
-                      ctxCard.setItems([product]);
-                      navigate(RouteKey.checkout);
+                      renewService(product);
                     }}
                     style={{ width: '100%' }}
                   />
                 )
               }
-              onPress={() => console.log('Karta stisknuta!')}
               style={styles.cardFullWidth}
             />
             {product.description && (
@@ -252,107 +502,9 @@ export default function DetailPage() {
                 <TextParagraph text={item.content} />
               </Accordion>
             ))}
-            <StyledButton
-              title={'HOME'}
-              onPress={() => {
-                navigate(RouteKey.home);
-              }}
-            />
           </View>
         </View>
       </ScrollView>
     </BaseContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  imageContainer: {
-    position: 'relative',
-    width: '100%',
-    height: 250, // Musí odpovídat výšce obrázku
-  },
-  mainWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 24,
-  },
-  titleContainer: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    paddingHorizontal: 16,
-  },
-  title: {
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: flowTypographySmallH1.fontFamily,
-    fontSize: parseFloat(flowTypographySmallH1.fontSize),
-    fontWeight: flowTypographySmallH1.fontWeight as TextStyle['fontWeight'],
-    letterSpacing:
-      parseFloat(flowTypographySmallH1.letterSpacing) *
-      parseFloat(flowTypographySmallH1.fontSize),
-    lineHeight: parseFloat(flowTypographySmallH1.lineHeight),
-    textDecorationLine:
-      flowTypographySmallH1.textDecoration as TextStyle['textDecorationLine'],
-    textTransform:
-      flowTypographySmallH1.textTransform as TextStyle['textTransform'],
-  },
-  iconContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 8,
-    justifyContent: 'flex-start',
-    paddingHorizontal: 16,
-  },
-  icon: {
-    borderRadius: 50,
-    padding: 0,
-  },
-  bodyContainer: {
-    alignItems: 'center',
-    gap: 16,
-    justifyContent: 'center',
-    paddingHorizontal: 16,
-  },
-  card: {
-    marginBottom: 20,
-  },
-  cardFullWidth: {
-    backgroundColor: flowColorsRgbaOnSurface800,
-    marginBottom: 20,
-    width: '100%',
-  },
-  errorText: {
-    color: flowColorsRgbaSemanticAlert,
-    fontSize: 18,
-    textAlign: 'center',
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 10,
-  },
-  imageFullWidth: {
-    width: '100%', // Nastavení šířky na 100%
-    height: '100%',
-    aspectRatio: 16 / 9, // Udržuje poměr stran 16:9
-    borderRadius: 10,
-  },
-  loader: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  text: {
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: flowTypographyLargeBody.fontFamily,
-    fontSize: parseFloat(flowTypographyLargeBody.fontSize),
-    fontWeight: flowTypographyLargeBody.fontWeight as TextStyle['fontWeight'],
-    letterSpacing:
-      parseFloat(flowTypographyLargeBody.letterSpacing) *
-      parseFloat(flowTypographyLargeBody.fontSize),
-    lineHeight: parseFloat(flowTypographyLargeBody.lineHeight),
-    textDecorationLine:
-      flowTypographyLargeBody.textDecoration as TextStyle['textDecorationLine'],
-    textTransform:
-      flowTypographyLargeBody.textTransform as TextStyle['textTransform'],
-  },
-});

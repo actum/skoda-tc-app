@@ -31,13 +31,41 @@ export default function LicenceItem(props: ILicenceItem) {
 
   const isLarge = props.size === 'large';
 
+  const styles = StyleSheet.create({
+    action: {
+      justifyContent: 'center',
+      paddingLeft: 10,
+    },
+    description: {
+      color: '#aaa',
+      fontSize: 14,
+      paddingRight: isLarge ? 30 : 0,
+    },
+    icon: {
+      paddingRight: 10,
+      paddingTop: isLarge ? 8 : 5,
+    },
+    root: {
+      flexDirection: 'row',
+      paddingVertical: 20,
+    },
+    textContainer: {
+      alignItems: isLarge ? 'center' : 'flex-start',
+      flexDirection: isLarge ? 'row' : 'column',
+      flex: 1,
+      justifyContent: isLarge ? 'space-between' : 'flex-start',
+    },
+    title: {
+      color: flowColorsRgbaOnSurface0,
+      fontFamily: 'SKODANext-Regular',
+      fontSize: 18,
+    },
+  });
+
   return (
     <TouchableOpacity
       onPress={props.action}
-      style={[
-        styles.root,
-        isLarge && { paddingVertical: 40, paddingHorizontal: 20 },
-      ]}
+      style={[styles.root, isLarge && { paddingHorizontal: 77 }]}
     >
       <View style={[styles.icon, isLarge && { paddingRight: 20 }]}>
         <View
@@ -49,7 +77,7 @@ export default function LicenceItem(props: ILicenceItem) {
         >
           <Icon
             type={type}
-            size={isLarge ? 42 : 18}
+            size={isLarge ? 32 : 18}
             color={
               props.icon === 'normal'
                 ? flowColorsRgbaOnSurface0
@@ -59,48 +87,20 @@ export default function LicenceItem(props: ILicenceItem) {
         </View>
       </View>
       <View style={styles.textContainer}>
-        <Text style={[styles.title, isLarge && { fontSize: 32 }]}>
+        <Text style={[styles.title, isLarge && { fontSize: 24 }]}>
           {props.text.title}
         </Text>
-        <Text style={[styles.description, isLarge && { fontSize: 24 }]}>
+        <Text style={[styles.description, isLarge && { fontSize: 20 }]}>
           {props.text.description}
         </Text>
       </View>
       <View style={styles.action}>
         <Icon
           type="chevron-right"
-          size={isLarge ? 64 : 24}
+          size={isLarge ? 50 : 24}
           color={flowColorsRgbaOnSurface0}
         />
       </View>
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  action: {
-    justifyContent: 'center',
-    paddingLeft: 10,
-  },
-  description: {
-    color: '#aaa',
-    fontSize: 14,
-  },
-  icon: {
-    paddingRight: 10,
-    paddingTop: 5,
-  },
-  root: {
-    flexDirection: 'row',
-    paddingHorizontal: 10,
-    paddingVertical: 15,
-  },
-  textContainer: {
-    flex: 1,
-  },
-  title: {
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: 'SKODANext-Regular',
-    fontSize: 18,
-  },
-});

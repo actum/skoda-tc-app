@@ -2,8 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Checkbox from '@/src/components/forms/Checkbox';
 import { Control, FieldPath } from 'react-hook-form';
-import { flowColorsRgbaOnSurface0 } from '@/src/assets/styles';
-import { RenewFormData } from '@/src/components/RenewComponent/index';
+import { RenewFormData } from '@/src/components/renewComponent/index';
 
 interface IRenewItem {
   identifier: string;
@@ -19,11 +18,48 @@ interface IRenewItem {
 export default function RenewItem(props: IRenewItem) {
   const isLarge = props.size === 'large';
 
+  const styles = StyleSheet.create({
+    action: {
+      justifyContent: 'center',
+      paddingLeft: 10,
+    },
+    description: {
+      color: '#aaa', // Šedý text pro popis
+      fontSize: 14,
+      fontFamily: 'SKODA Next',
+    },
+    icon: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: 5,
+    },
+    price: {
+      color: '#fff',
+      fontFamily: 'SKODA Next',
+      fontSize: isLarge ? 24 : 16,
+      fontWeight: isLarge ? 'normal' : 'bold',
+    },
+    root: {
+      flexDirection: 'row',
+      gap: 20,
+      paddingHorizontal: 20,
+      paddingVertical: 15,
+    },
+    textContainer: {
+      flex: 1,
+    },
+    title: {
+      color: '#ffffff',
+      fontFamily: 'SKODA Next',
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
+  });
   return (
     <View
       style={[
         styles.root,
-        isLarge && { paddingVertical: 40, paddingHorizontal: 20 },
+        isLarge && { paddingVertical: 10, paddingHorizontal: 85 },
       ]}
     >
       <View style={[styles.icon, isLarge && { paddingRight: 20 }]}>
@@ -47,42 +83,3 @@ export default function RenewItem(props: IRenewItem) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  action: {
-    justifyContent: 'center',
-    paddingLeft: 10,
-  },
-  description: {
-    color: '#aaa', // Šedý text pro popis
-    fontSize: 14,
-    fontFamily: 'SKODA Next',
-  },
-  icon: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    // paddingRight: 10,
-    paddingTop: 5,
-  },
-  price: {
-    fontFamily: 'SKODA Next',
-    color: '#fff', // Šedý text pro popis
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  root: {
-    flexDirection: 'row',
-    gap: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-  },
-  textContainer: {
-    flex: 1,
-  },
-  title: {
-    color: flowColorsRgbaOnSurface0,
-    fontFamily: 'SKODA Next',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});

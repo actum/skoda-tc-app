@@ -14,6 +14,7 @@ import {
   flowColorsRgbaTextTertiary,
 } from '@/src/assets/styles';
 import { TextInputProps } from 'react-native/Libraries/Components/TextInput/TextInput';
+import useCarState from '@/src/components/carState';
 
 export type Value = Record<string, unknown>;
 
@@ -28,7 +29,8 @@ interface Props<T extends Value> extends TextInputProps {
 }
 
 export function Input<T extends Value>(props: Props<T>) {
-  const styles = inputStyles(props);
+  const { car } = useCarState();
+  const styles = inputStyles({ car: car, editable: props.editable });
   const { field, fieldState } = useController({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
@@ -59,7 +61,7 @@ export function Input<T extends Value>(props: Props<T>) {
   );
 }
 
-const inputStyles = <T extends Value>(props: Props<T>) =>
+const inputStyles = (props: { car: boolean; editable?: boolean }) =>
   StyleSheet.create({
     errorText: {
       color: flowColorsRgbaSemanticAlert,
@@ -79,7 +81,7 @@ const inputStyles = <T extends Value>(props: Props<T>) =>
           ? flowColorsRgbaTextQuaternary
           : flowColorsRgbaTextSecondary,
       fontFamily: 'SKODA Next',
-      fontSize: 14,
+      fontSize: props.car ? 22 : 14,
       paddingLeft: 10,
       paddingRight: 10,
       paddingTop: 7,
@@ -99,7 +101,8 @@ const inputStyles = <T extends Value>(props: Props<T>) =>
           ? flowColorsRgbaTextTertiary
           : flowColorsRgbaOnSurface0,
       fontFamily: 'SKODANext-Light',
-      fontWeight: '700',
+      fontSize: props.car ? 22 : 14,
+      fontWeight: props.car ? '300' : '700',
       paddingBottom: 7,
       paddingLeft: 10,
       paddingRight: 10,

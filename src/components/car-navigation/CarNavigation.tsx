@@ -2,8 +2,12 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import NavigationButton from '@/src/components/navigation/NavigationButton';
 import CustomImage from '@/src/components/image/Image';
+import { RouteKey } from '@/src/components/navigation/Navigation';
+import { useNavigate } from 'react-router-native';
 
 export function CarNavigation() {
+  const navigate = useNavigate();
+
   return (
     <View style={styles.root}>
       <View style={styles.logo}>
@@ -34,6 +38,7 @@ export function CarNavigation() {
         </View>
         <View style={styles.item}>
           <NavigationButton
+            onPress={() => navigate(RouteKey.home)}
             size={'large'}
             title={'Profile'}
             icon={'profile'}
@@ -54,37 +59,37 @@ export function CarNavigation() {
 }
 
 const styles = StyleSheet.create({
-  root: {
-    display: 'flex',
-    flexDirection: 'row',
-    paddingVertical: 20,
-    paddingHorizontal: 10,
+  customLogo: {
+    alignItems: 'center',
+    borderRadius: 29,
+    height: 58,
+    overflow: 'hidden',
+    width: 58,
   },
   item: {
     flex: 1,
   },
   logo: {
+    alignItems: 'center',
     paddingTop: 4,
     width: 100,
-    alignItems: 'center',
   },
   navigation: {
-    width: '40%',
     flexDirection: 'row',
     flex: 1,
+    width: '40%',
+  },
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    paddingVertical: 20,
   },
   settings: {
-    width: 450,
-    justifyContent: 'flex-end',
     alignItems: 'center',
     flexDirection: 'row',
-  },
-  customLogo: {
-    width: 58,
-    height: 58,
-    borderRadius: 29,
-    alignItems: 'center',
-    overflow: 'hidden',
+    justifyContent: 'flex-end',
+    width: 450,
   },
   settingsItem: {
     paddingRight: 35,

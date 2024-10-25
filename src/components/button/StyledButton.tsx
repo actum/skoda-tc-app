@@ -12,25 +12,62 @@ import {
   flowColorsRgbaOnSurface0,
   flowColorsRgbaTextPrimary,
 } from '@/src/assets/styles';
+import useCarState from '@/src/components/carState';
 
 interface IButton extends TouchableOpacityProps {
   title: string;
   variant?: 'primary' | 'secondary'; // Přidání varianty pro různé barvy tlačítka
+  fontSize?: number;
   style?: StyleProp<ViewStyle>;
 }
 
 export default function StyledButton(props: IButton) {
+  const { car } = useCarState();
+
   const [isHovered, setIsHovered] = useState(false);
 
   const variant = props.variant == 'secondary' ? 'secondary' : 'primary';
 
+  const styles = StyleSheet.create({
+    hover: {
+      opacity: 0.5, // Mírné snížení opacity při stisknutí
+    },
+    primary: {
+      alignItems: 'center',
+      backgroundColor: flowColorsRgbaBrandSecondary,
+    },
+    root: {
+      alignItems: 'center',
+      borderRadius: 50,
+      justifyContent: 'center',
+      marginBottom: 10,
+      paddingBottom: 12,
+      paddingHorizontal: 30,
+      paddingTop: 12,
+    },
+    secondary: {
+      alignItems: 'center',
+      backgroundColor: 'rgba(35, 36, 37, 1)',
+      borderColor: 'rgba(70, 71, 72, 1)',
+      borderWidth: 1,
+    },
+    text: {
+      color: '#fff',
+      fontFamily: 'SKODANext-Bold',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    textPrimary: {
+      color: flowColorsRgbaTextPrimary,
+    },
+  });
   const buttonStyle =
     variant === 'secondary' ? styles.secondary : styles.primary;
 
   return (
     <TouchableOpacity
       {...props}
-      style={[props.style, buttonStyle, isHovered && styles.hover]}
+      style={[styles.root, props.style, buttonStyle, isHovered && styles.hover]}
       onPressIn={() => setIsHovered(true)}
       onPressOut={() => setIsHovered(false)}
     >
