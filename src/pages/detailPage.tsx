@@ -151,53 +151,41 @@ export default function DetailPage() {
     },
   });
 
-  // Mock data pro Accordion
-  // Dynamické mapování kódů na obrázky
-  const mapProductImage: Record<string, number> = {
-    PR0001: require('../assets/images/products/infotainment.png'),
-    PR0002: require('../assets/images/products/remote-access.png'),
-    PR0003: require('../assets/images/products/online-data.png'),
-    PR0004: require('../assets/images/products/online-data.png'),
-    PR0005: require('../assets/images/products/mediastreaming.png'),
-    PR0006: require('../assets/images/products/traffication.png'),
-    PR0007: require('../assets/images/products/online-data.png'),
-  };
-
   const mockAccordionData = [
-    {
-      id: 1,
-      title: 'Informace o produktu',
-      content:
-        'Toto je podrobný popis produktu, který obsahuje všechny důležité informace a specifikace.',
-    },
-    {
-      id: 2,
-      title: 'Recenze zákazníků',
-      content:
-        'Zde najdete recenze a hodnocení od našich spokojených zákazníků.',
-    },
-    {
-      id: 3,
-      title: 'Specifikace',
-      content:
-        'Detailní technické specifikace produktu, včetně materiálů a rozměrů.',
-    },
-    {
-      id: 4,
-      title: 'Často kladené otázky',
-      content: 'Odpovědi na nejčastější otázky týkající se našeho produktu.',
-    },
-    {
-      id: 5,
-      title: 'Záruka a podpora',
-      content: 'Informace o zárukách, servisu a podpoře pro náš produkt.',
-    },
-    {
-      id: 6,
-      title: 'Návody a příručky',
-      content:
-        'Přístup k návodům a uživatelským příručkám pro efektivní využití produktu.',
-    },
+      {
+          id: 1,
+          title: 'Product Information',
+          content:
+              'This is a detailed description of the product, containing all the important information and specifications.',
+      },
+      {
+          id: 2,
+          title: 'Customer Reviews',
+          content:
+              'Here you will find reviews and ratings from our satisfied customers.',
+      },
+      {
+          id: 3,
+          title: 'Specifications',
+          content:
+              'Detailed technical specifications of the product, including materials and dimensions.',
+      },
+      {
+          id: 4,
+          title: 'Frequently Asked Questions',
+          content: 'Answers to the most common questions regarding our product.',
+      },
+      {
+          id: 5,
+          title: 'Warranty and Support',
+          content: 'Information about warranties, service, and support for our product.',
+      },
+      {
+          id: 6,
+          title: 'Guides and Manuals',
+          content:
+              'Access to guides and user manuals for the effective use of the product.',
+      },
   ];
 
   function formatDate(date: string): string {
@@ -246,7 +234,7 @@ export default function DetailPage() {
       case 'PR0004':
         return require(`../assets/images/products/PR0004.png`);
       default:
-        return require(`../assets/images/products/1.png`);
+        return require(`../assets/images/products/traffication.png`);
     }
   }
 
