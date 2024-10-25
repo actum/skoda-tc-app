@@ -74,7 +74,7 @@ export default function ChangeBillingAddressComponent() {
     try {
       const requestData = {
         id: userCtx.userData?.address?.id,
-        houseNumber: data.houseNumber,
+        houseNumber: Number(data.houseNumber),
         street: data.street,
         city: data.city,
         postalCode: data.zipCode,
@@ -84,8 +84,8 @@ export default function ChangeBillingAddressComponent() {
         phoneNumber: data.phoneNumber,
         firstName: data.firstName,
         lastName: data.lastName,
-        companyName: data.companyName,
-        VAT: data.VAT,
+        companyName: data.companyName ?? '',
+        VAT: data.VAT ?? '',
       };
       const response = await asyncFetch<Category[]>(
         '/api/v1/users/current/addresses/' + userCtx.userData?.address?.id,

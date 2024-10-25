@@ -25,7 +25,8 @@ export interface RenewFormData extends Record<string, boolean> {
 export default function RenewComponent() {
   const [data, setData] = useState<Licence[]>([]);
   const navigate = useNavigate();
-  const { control, handleSubmit, watch, reset } = useForm<RenewFormData>();
+  const { control, handleSubmit, watch, reset, setValue } =
+    useForm<RenewFormData>();
   async function loadData() {
     try {
       const response = await asyncFetch<Licence[]>('/api/v1/products/expired', {
@@ -151,6 +152,8 @@ export default function RenewComponent() {
             return (
               <View key={index}>
                 <RenewItem
+                  setChecked={(val) => setValue(value.code, val)}
+                  value={!!formValues[value.code]}
                   identifier={value.code}
                   control={control}
                   price={value.price}
