@@ -74,7 +74,7 @@ export default function ChangeBillingAddressComponent() {
     try {
       const requestData = {
         id: userCtx.userData?.address?.id,
-        houseNumber: data.houseNumber,
+        houseNumber: Number(data.houseNumber),
         street: data.street,
         city: data.city,
         postalCode: data.zipCode,
@@ -82,10 +82,10 @@ export default function ChangeBillingAddressComponent() {
         country: data.country,
         email: data.email,
         phoneNumber: data.phoneNumber,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        companyName: data.companyName,
-        VAT: data.VAT,
+        firstname: data.firstName,
+        lastname: data.lastName,
+        companyName: data.companyName ?? '',
+        VAT: data.VAT ?? '',
       };
       const response = await asyncFetch<Category[]>(
         '/api/v1/users/current/addresses/' + userCtx.userData?.address?.id,
@@ -206,7 +206,6 @@ export default function ChangeBillingAddressComponent() {
             label={'Country'}
             name={'country'}
             control={control}
-            rules={{ required: 'Required' }}
             editable={false}
             defaultValue={'Czechia'}
           />
@@ -214,6 +213,7 @@ export default function ChangeBillingAddressComponent() {
             label={'E-mail *'}
             name={'email'}
             control={control}
+            editable={false}
             rules={{ required: 'Required' }}
           />
           <Input

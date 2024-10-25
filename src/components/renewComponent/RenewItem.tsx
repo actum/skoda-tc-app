@@ -1,12 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Checkbox from '@/src/components/forms/Checkbox';
 import { Control, FieldPath } from 'react-hook-form';
 import { RenewFormData } from '@/src/components/renewComponent/index';
+import { RouteKey } from '@/src/components/navigation/Navigation';
+import { UseFormWatch } from 'react-hook-form/dist/types/form';
 
 interface IRenewItem {
   identifier: string;
   control: Control<RenewFormData>;
+  setChecked: (val: boolean) => void;
+  value: boolean;
   size: 'large' | 'normal';
   text: {
     title: string;
@@ -50,13 +54,17 @@ export default function RenewItem(props: IRenewItem) {
     },
     title: {
       color: '#ffffff',
-      fontFamily: 'SKODA Next',
+      fontFamily: 'Roboto',
       fontSize: 18,
       fontWeight: 'bold',
     },
   });
+
   return (
-    <View
+    <TouchableOpacity
+      onPressOut={() => {
+        props.setChecked(!props.value);
+      }}
       style={[
         styles.root,
         isLarge && { paddingVertical: 10, paddingHorizontal: 85 },
@@ -80,6 +88,6 @@ export default function RenewItem(props: IRenewItem) {
       <View style={styles.action}>
         <Text style={styles.price}>{props.price} CZK</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

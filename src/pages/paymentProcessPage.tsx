@@ -34,13 +34,18 @@ export default function PaymentProcessPage() {
   async function processPayment() {
     try {
       setLoading(true);
+
+      const body = JSON.stringify(
+        cardCtx.items.map((value) => ({
+          code: value.code,
+        })),
+      );
+
+      console.log('body', body);
+
       const response = await asyncFetch<PaymentResponse>('/api/v1/orders', {
         method: 'POST',
-        body: JSON.stringify(
-          cardCtx.items.map((value) => ({
-            code: value.code,
-          })),
-        ),
+        body,
       });
 
       setStatus(response.paymentStatus);
