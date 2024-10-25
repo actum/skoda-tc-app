@@ -16,7 +16,7 @@ import HttpApiCallError from '@/src/connections/fetch/HttpApiCallError';
 import { useNavigate } from 'react-router-native';
 import { RouteKey } from '@/src/components/navigation/Navigation';
 import Icon from '@/src/components/icon';
-import RenewItem from '@/src/components/renewComponent/RenewItem';
+import RenewItem from "@/src/components/RenewComponent/RenewItem";
 
 export interface RenewFormData extends Record<string, boolean> {
   // agreeToTerms: string;

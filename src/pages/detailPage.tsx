@@ -42,9 +42,9 @@ export default function DetailPage() {
   let iconColor: string = '';
   let isExpired = false;
   let licenceStateText = '';
+
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-
   const { getProductById } = useContext(ProductContext);
   const [product, setProduct] = useState<Licence | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -151,45 +151,43 @@ export default function DetailPage() {
     },
   });
 
-  // Mock data pro Accordion
   const mockAccordionData = [
-    {
-      id: 1,
-      title: 'Informace o produktu',
-      content:
-        'Toto je podrobný popis produktu, který obsahuje všechny důležité informace a specifikace.',
-    },
-    {
-      id: 2,
-      title: 'Recenze zákazníků',
-      content:
-        'Zde najdete recenze a hodnocení od našich spokojených zákazníků.',
-    },
-    {
-      id: 3,
-      title: 'Specifikace',
-      content:
-        'Detailní technické specifikace produktu, včetně materiálů a rozměrů.',
-    },
-    {
-      id: 4,
-      title: 'Často kladené otázky',
-      content: 'Odpovědi na nejčastější otázky týkající se našeho produktu.',
-    },
-    {
-      id: 5,
-      title: 'Záruka a podpora',
-      content: 'Informace o zárukách, servisu a podpoře pro náš produkt.',
-    },
-    {
-      id: 6,
-      title: 'Návody a příručky',
-      content:
-        'Přístup k návodům a uživatelským příručkám pro efektivní využití produktu.',
-    },
+      {
+          id: 1,
+          title: 'Product Information',
+          content:
+              'This is a detailed description of the product, containing all the important information and specifications.',
+      },
+      {
+          id: 2,
+          title: 'Customer Reviews',
+          content:
+              'Here you will find reviews and ratings from our satisfied customers.',
+      },
+      {
+          id: 3,
+          title: 'Specifications',
+          content:
+              'Detailed technical specifications of the product, including materials and dimensions.',
+      },
+      {
+          id: 4,
+          title: 'Frequently Asked Questions',
+          content: 'Answers to the most common questions regarding our product.',
+      },
+      {
+          id: 5,
+          title: 'Warranty and Support',
+          content: 'Information about warranties, service, and support for our product.',
+      },
+      {
+          id: 6,
+          title: 'Guides and Manuals',
+          content:
+              'Access to guides and user manuals for the effective use of the product.',
+      },
   ];
 
-  // Formátování data
   function formatDate(date: string): string {
     return new Date(date).toLocaleDateString('cs-CZ', {
       year: 'numeric',
@@ -236,7 +234,7 @@ export default function DetailPage() {
       case 'PR0004':
         return require(`../assets/images/products/PR0004.png`);
       default:
-        return require(`../assets/images/products/1.png`);
+        return require(`../assets/images/products/traffication.png`);
     }
   }
 
@@ -273,7 +271,6 @@ export default function DetailPage() {
     );
   }
 
-  // Zobrazit Chybu
   if (error || !product || !id) {
     return (
       <BaseContainer>
@@ -281,8 +278,8 @@ export default function DetailPage() {
         <View style={styles.mainWrapper}>
           <CustomImage
             source={require('../assets/images/404.png')}
-            placeholder={require('../assets/images/placeholder.webp')} // Lokální obrázek jako placeholder
-            errorPlaceholder={require('../assets/images/missing-image.webp')} // Lokální obrázek jako chybový placeholder
+            placeholder={require('../assets/images/placeholder.webp')}
+            errorPlaceholder={require('../assets/images/missing-image.webp')}
             style={styles.image}
             loadingIndicatorColor={flowColorsRgbaBrandPrimary}
           />
@@ -484,7 +481,6 @@ export default function DetailPage() {
             {product.description && (
               <TextParagraph text={product.description} />
             )}
-            {/* Dynamické vykreslení Accordion sekcí z mock dat */}
             {mockAccordionData.map((item) => (
               <Accordion
                 key={item.id}
